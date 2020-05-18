@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Flaming Space</title>
+    <link type="text/css" rel="stylesheet" href='/css/global.css'>
+</head>
+
+<body>
+    <div className="topheader">
+        <img className="topheader__logo" alt="Площадка проектов лого" src="/img/logo.jpg" />
+        <a className="topheader__link" href='/'>Главная</a>
+        <a className="topheader__link" href='/users'>Участники</a>
+        <a className="topheader__link" href='/projects'>Проекты</a>
+        <a className="topheader__link" href='/mobileapp'>Мобильное приложение</a>
+        <a className="topheader__link" href='/about'>О сервисе</a>
+        <a className="topheader__link" href='/help'>Помощь</a>
+        <a className="topheader__auth-button" href='/auth'>Авторизация</a>
+        <% if(userID) {%>
+        <a class="topheader__link" href="/account/${userID}">
+            <div class="topheader__user-preview"></div>
+        </a>
+
+        <h1> иконка и кнопка выхода</h1>
+        <% }else {%>
+        <a className="topheader__auth-button" href='/auth'>Авторизация</a>
+        <%} %>
+    </div>
+    <div id="root"><%- reactApp%></div>
+</body>
+
+</html>
