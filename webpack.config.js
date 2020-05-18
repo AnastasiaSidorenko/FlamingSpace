@@ -48,10 +48,12 @@ const config = [{
                     }
                 },
                 exclude: [/node_modules/, /static/]
-            }, {
+            },
+            {
                 test: /\.ejs$/,
                 loader: 'raw-loader'
-            }, {
+            },
+            {
                 test: /\.(css)$/,
                 use: [{
                     loader: MiniCssExtractPlugin.loader,
@@ -60,7 +62,8 @@ const config = [{
                     }
 
                 }, 'css-loader']
-            }, {
+            },
+            {
                 test: /\.(jpg|jpeg|png|svg|gif)$/,
                 use: [{
                     loader: 'file-loader',
@@ -99,6 +102,7 @@ const config = [{
         // Ejs pages
         ...generateHtml(pages)
     ]
-}]
+}
+]
 
 module.exports = config

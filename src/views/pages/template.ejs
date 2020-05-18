@@ -3,7 +3,6 @@
 
 <head>
     <title>Flaming Space</title>
-    <link type="text/css" rel="stylesheet" href='/css/global.css'>
 </head>
 
 <body>
@@ -15,13 +14,11 @@
         <a className="topheader__link" href='/mobileapp'>Мобильное приложение</a>
         <a className="topheader__link" href='/about'>О сервисе</a>
         <a className="topheader__link" href='/help'>Помощь</a>
-        <a className="topheader__auth-button" href='/auth'>Авторизация</a>
         <% if(userID) {%>
         <a class="topheader__link" href="/account/${userID}">
             <div class="topheader__user-preview"></div>
+            <a className="topheader__auth-button" href='/auth'>Выйти</a>
         </a>
-
-        <h1> иконка и кнопка выхода</h1>
         <% }else {%>
         <a className="topheader__auth-button" href='/auth'>Авторизация</a>
         <%} %>
