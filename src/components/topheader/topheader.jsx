@@ -23,7 +23,7 @@ export class TopHeader extends React.Component {
                 <a className="topheader__link topheader__item" href='/help'>Помощь</a>
                 {this.state.cookie_userID ?
                     < div className="topheader__loggedInDiv" >
-                        <a className="topheader__link topheader__item" href={"/account/" + this.state.user_ID} >
+                        <a className="topheader__link topheader__item" href={"/account/" + this.state.cookie_userID} >
                             <div className="topheader__user-preview topheader__item"></div>
                         </a>
                         <a className="topheader__auth-button topheader__item" href='/auth/logout'>Выйти</a>

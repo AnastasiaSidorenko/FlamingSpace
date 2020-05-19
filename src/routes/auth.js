@@ -9,7 +9,8 @@ const router = express.Router();
 //APP Keys for Leader_ID
 const appID = '031140a5c46d6e46b49e5a7c2c35c3c2'
 const appSecret = 'ab37e3db90e513e1dcfee27312455c18'
-let userID;
+
+let userID = '';
 let access_token = ''
 let _indexURL = "http://localhost:3000/"
 let _redirectURL = "http://localhost:3000/auth/redirect"
@@ -25,13 +26,14 @@ router.get('/redirect', async (req, res) => {
         url: `https://leader-id.ru/api/oauth/access_token?grant_type=authorization_code&code=${auth_code}&client_id=${appID}&client_secret=${appSecret}&redirect_uri=${_redirectURL}`,
     })
         .then((response) => {
-            userID = response.data.user_id;
+            let userID = response.data.user_id;
             access_token = response.data.access_token;
             console.log(response);
             console.log(userID);
             console.log(access_token)
             res.cookie("userIdFS", userID)
             res.redirect(_indexURL)
+            exports.userID = userID;
         })
         .catch(error => {
             console.log(error)
@@ -41,12 +43,12 @@ router.get('/redirect', async (req, res) => {
 router.get('/logout', async (req, res) => {
     access_token = '';
     userID = '';
+    exports.userID = '';
     res.clearCookie("userIdFS")
-    res.send("<h2>Вы вышли!!!</h2>");
+    res.redirect(_indexURL)
     // const reactComp = renderToString(< Auth />); // So that program doesn't break
     //res.status(200).render('pages/index', { reactApp: reactComp });
     //const requestToken = req.query.code
 });
 
 export default router;
-export { userID, access_token };

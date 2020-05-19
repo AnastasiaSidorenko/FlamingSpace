@@ -15,17 +15,20 @@ import path from "path";
 
 // Server var
 const app = express();
+const cookieParser = require('cookie-parser')
 
 // View engine setup
 app.set("views", path.join(__dirname, 'static', "views"));
 app.set("view engine", "ejs");
 
 // Middleware
-app.use(compression());
+app.use(compression())
+app.use(cookieParser())
 app.use('/public', express.static(path.join(__dirname, 'static', 'public')));
 //app.use('/styles', express.static(path.join(__dirname + 'styles')))
 //app.use(express.static(path.join(__dirname, 'public')));
 
+var userID;
 //Routes
 app.use("/", index);
 app.use("/users", users);
