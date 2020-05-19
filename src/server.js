@@ -23,7 +23,8 @@ app.set("view engine", "ejs");
 // Middleware
 app.use(compression());
 app.use('/public', express.static(path.join(__dirname, 'static', 'public')));
-app.use('/styles', express.static(path.join(__dirname + 'styles')))
+//app.use('/styles', express.static(path.join(__dirname + 'styles')))
+//app.use(express.static(path.join(__dirname, 'public')));
 
 //Routes
 app.use("/", index);

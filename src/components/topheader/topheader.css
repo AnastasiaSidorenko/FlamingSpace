@@ -99,3 +99,19 @@ html, body, #root {
     padding: 0;
     background-color: purple;
 }
+
+.topheader__loggedInDiv{
+    margin-left:20px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+@media (max-width: 768px){
+    .topheader {
+        height:120px;
+    }
+    .topheader__item{
+        padding:5px 10px;
+    }
+}

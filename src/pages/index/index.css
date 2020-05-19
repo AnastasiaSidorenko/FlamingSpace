@@ -1,8 +1,8 @@
 h1 {
-    color:purple;
+    color:red;
 }
 
-/*html, body, #root {
+html, body, #root {
     font-family: 'Roboto', sans-serif, Tahoma, Verdana, sans-serif;
     font-size: 14px;
     margin:0;
@@ -103,5 +103,5 @@ h1 {
     padding: 0;
     background-color: purple;
 }
-*/
+
 
