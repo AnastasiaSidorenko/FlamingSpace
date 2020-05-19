@@ -2,7 +2,6 @@ import express from "express";
 import React from "react";
 import { renderToString } from "react-dom/server"
 import Projects from "../pages/projects/projects"
-import { userID } from "./auth";
 
 const router = express.Router();
 

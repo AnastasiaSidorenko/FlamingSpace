@@ -31,7 +31,7 @@ router.get('/redirect', async (req, res) => {
             console.log(response);
             console.log(userID);
             console.log(access_token)
-            res.cookie("userIdFS", userID)
+            res.cookie("userIdCookie", userID)
             res.redirect(_indexURL)
             exports.userID = userID;
         })

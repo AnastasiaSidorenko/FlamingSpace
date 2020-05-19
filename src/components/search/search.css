@@ -1,0 +1,12 @@
+.search {
+    height: 39px;
+    width: 263px;
+    border: 1px solid #C4C4C4;
+    border-radius: 2.5px;
+    padding: 0 15px;
+}
+
+.search__field {
+    width: 243px;
+    border: 0; 
+}

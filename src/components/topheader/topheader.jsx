@@ -8,7 +8,7 @@ import componentCSS from "./topheader.css"
 export class TopHeader extends React.Component {
     constructor() {
         super()
-        this.state = { cookie_userID: cookie.load("userIdFS") }
+        this.state = { cookie_userID: cookie.load("userIdCookie") }
     }
 
     render() {
