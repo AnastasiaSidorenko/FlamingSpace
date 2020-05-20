@@ -1,0 +1,19 @@
+.project_card {
+    max-width: 1140px;
+    border: 2px solid #E8E8E8;
+    padding: 18px 26px;
+}
+.project-card__block{
+    height: 187px;
+}
+.project-card__block-title {
+    font-size: 16px;
+    color: #648FFF;
+}
+.project_card__title-delimiter {
+    padding: 0 20px;
+}
+.project_card__block-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

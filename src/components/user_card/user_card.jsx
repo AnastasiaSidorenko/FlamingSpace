@@ -2,6 +2,7 @@ import React from 'react'
 
 import img from "./user.png"
 import componentCSS from "./user_card.css"
+import { Button_show_more } from '../button/button_show_more'
 
 export class User_Card extends React.Component {
     constructor() {
@@ -24,7 +25,7 @@ export class User_Card extends React.Component {
                 <p className="user-card__skill">Разработчик Java</p>
                 <p className="user-card__skill">Менеджер проекта</p>
                 <p className="user-card__skill">Дизайнер</p>
-                <a className="user-card__button">Подробнее</a>
+                <Button_Show_More link="#" />
             </div >
         )
     }
