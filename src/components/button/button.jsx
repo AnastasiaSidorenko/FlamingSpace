@@ -1,5 +1,5 @@
 import React from 'react'
-import componentCSS from "./standard_style"
+import componentCSS from "./standard_style.css"
 
 export function Button(props) {
     // render() {

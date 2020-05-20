@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const reactComp = renderToString(< MobileApp />); // So that program doesn't break
-    res.status(200).render('pages/index', { reactApp: reactComp });
+    res.status(200).render('pages/mobileapp', { reactApp: reactComp });
 });
 
 export default router;

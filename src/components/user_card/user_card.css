@@ -1,0 +1,79 @@
+.user-card {
+    width: 210px;
+    height: 411px;
+    padding: 0 22px 10px 22px;
+    border : 2px solid #E8E8E8;
+    margin: 7px;
+    border-radius: 2px;
+}
+
+.user-card__full-name {
+    color: #648FFF;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+	margin: 0 5px;
+    padding: 0;
+}
+
+.user-card__status {
+    display:flex;
+	align-items: center;
+	justify-content:center;
+    margin: 0;
+    padding: 7px 0;
+}
+
+.user-card__indicator {
+    width:10px;
+    height:10px;
+    border-radius: 50%;
+    margin-right:6px;
+    padding: 0;
+}
+
+.user-card__indicator_search-team {
+    background-color: #4BD30B;
+}
+
+user-card__img-container {
+    width: 165px;
+    height: 165px;
+    margin:0;
+    padding:0;
+}
+
+.user-card__img {
+    object-fit: cover;
+    width: 165px;
+    height: 165px;
+}
+
+.user-card__nickname {
+    color : #648FFF;
+    margin: 0;
+    padding: 0;
+}
+
+.user-card__hr {
+    border-top: 2px solid #E8E8E8;
+}
+
+.user-card__skill {
+    margin:0;
+    padding:4px 0;
+}
+
+.user-card__button {
+    display:block;
+    width: 158px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 7px;
+    color: white;
+    background-color: #648FFF;
+    font-weight: 500;
+    font-size: 14px;
+	margin-top: 7px;
+}

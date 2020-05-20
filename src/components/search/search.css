@@ -1,12 +1,19 @@
 .search {
+    display:flex;
     height: 39px;
     width: 263px;
     border: 1px solid #C4C4C4;
     border-radius: 2.5px;
-    padding: 0 15px;
+    margin: 0 15px;
 }
 
 .search__field {
     width: 243px;
     border: 0; 
+}
+
+.search__icon {
+    width:16px;
+    height:16px;
+    
 }

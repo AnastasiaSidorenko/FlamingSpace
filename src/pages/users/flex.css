@@ -1,0 +1,11 @@
+.flex {
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 17px 0;
+}
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
