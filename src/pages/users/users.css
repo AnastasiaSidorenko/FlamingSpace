@@ -1,0 +1,18 @@
+.flex {
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: 17px 0;
+}
+
+.grid {
+    display: grid;
+    grid-gap: 20px 7px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
+}
+.flex__space-between {
+    display: flex;
+    justify-content: space-between;
+    justify-items: start;
+}

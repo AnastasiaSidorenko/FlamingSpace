@@ -9,3 +9,8 @@
     width: 1200px;
     margin: 0 auto;
 }
+.flex__space-between {
+    display: flex;
+    justify-content: space-between;
+    justify-items: start;
+}

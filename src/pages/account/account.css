@@ -1,0 +1,41 @@
+.user__img-container {
+    width: 200px;
+    height: 200px;
+    padding:0;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.user__img {
+    object-fit: cover;
+    height:100%;
+    width:100%
+}
+
+.user__nickname {
+    color : #648FFF;
+    margin: 0;
+    padding: 0;
+}
+
+.user__param {
+    width: 120px;;
+}
+
+.slider {
+    box-sizing: border-box;
+}
+
+
+.slider__titles > div {
+    width: 370px;
+    border-bottom: 2px solid #E8E8E8;
+    margin:0;
+}
+
+.slider__title-elem {
+    font-size:24px;
+}
+
+.slider__title-active {
+    border-bottom: 2px solid #D3170B;;
+}

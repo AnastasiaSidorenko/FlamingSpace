@@ -27,39 +27,42 @@ export class Project_Card extends React.Component {
                             безусловно открывает новые горизонты для поэтапного и последовательного развития общества.
                             Следует отметить, что базовый вектор развития однозначно определяет каждого участника как
                             способного принимать собственные решения касаемо прогресса профессионального сообщества.
+                            блааааааааааааааааааааааааааааааааааааааааааааааааааааааааа
                         </p>
                     </div>
                     <div className="project-card__block">
                         <div className="project-card__block-title">Вакансии</div>
                         <div className="project-card__block-vacancies">
-                            <p className="">Разработчик С++</p>
-                            <p className="">Разработчик Java</p>
-                            <p className="">Менеджер проекта</p>
-                            <p className="">Дизайнер</p>
+                            <p className="project-card__block-vacancy">Разработчик С++</p>
+                            <p className="project-card__block-vacancy">Разработчик Java</p>
+                            <p className="project-card__block-vacancy">Менеджер проекта</p>
+                            <p className="project-card__block-vacancy">Дизайнер</p>
                         </div>
                     </div>
                     <div className="project-card__block">
                         <div className="project-card__block-title">Статус</div>
                         <div className="project-card__block-status">
-                            <Indicator color="red" />
+                            <Indicator color="red" className="project-card__status-indicator" />
                             <span>набор команды</span>
                         </div>
                     </div>
                     <div className="project-card__block">
                         <div className="project-card__block-title">Важные даты</div>
                         <div className="project-card__block-events">
-                            <div>
+                            <div className="project-card__event-group">
                                 <p className="project-card__event-p project-card__event-title">Начало проекта:</p>
-                                <p className="project-card__event-p"></p>
+                                <p className="project-card__event-p">01/01/2020</p>
                             </div>
                             <div>
                                 <p className="project-card__event-p project-card__event-title">Завершение проекта:</p>
-                                <p className="project-card__event-p"></p>
+                                <p className="project-card__event-p">01/06/2020</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <Button_Show_Details link="#" />
+                <div className="flex__centered">
+                    <Button_Show_Details link="#" className="project-card__button" />
+                </div>
             </div >
         )
     }

@@ -1,4 +1,4 @@
-.button_show_more {
+.button_show_details {
     display:block;
     width: 158px;
     height: 40px;
@@ -10,4 +10,5 @@
     font-weight: 500;
     font-size: 14px;
     margin-top: 7px;
+    text-decoration: none;
 }

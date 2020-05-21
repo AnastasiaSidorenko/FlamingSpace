@@ -7,8 +7,13 @@
   
   /* Отображение элементов списка бок о бок */
   .breadcrumb {
-    display: inline;
+    display: inline-block;
     font-size: 16px;
+  }
+
+  .breadcrumb__a {
+    color: #929292;
+    text-decoration: none;
   }
   
   /* Добавить символ косой черты (/) перед/за каждым элементом списка */
@@ -17,13 +22,7 @@
     color: #929292;
     content: "/\00a0";
   }
-  
-  /* Добавить цвет для всех ссылок внутри списка */
-  .breadcrumb {
-    color: #929292;
-    text-decoration: none;
-  }
-  
+ 
   /* Добавить цвет на наведении курсора мыши */
   .breadcrumb:hover {
     color: #D3170B;

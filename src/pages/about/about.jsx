@@ -12,8 +12,10 @@ class About extends React.Component {
         return (
             <div>
                 <TopHeader />
-                <BreadCrumbs pages={this.breadcrumbs} />
-                <h1>ABOUT</h1>
+                <div className="container">
+                    <BreadCrumbs pages={this.breadcrumbs} />
+                    <h1>ABOUT</h1>
+                </div>
             </div>
         )
     }
