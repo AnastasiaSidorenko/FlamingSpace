@@ -2,12 +2,16 @@
     max-width: 1140px;
     border: 2px solid #E8E8E8;
     padding: 18px 26px;
+    font-size: 14px;
+    border: 1px solid #C4C4C4;
 }
 .project-card__block{
     height: 187px;
+    margin-right: 26px;
 }
 .project-card__block-title {
     font-size: 16px;
+    line-height: 19px;
     color: #648FFF;
 }
 .project_card__title-delimiter {
@@ -17,3 +21,48 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+.project-card__block-vacancies {
+    height: 177px;
+    width:113px;
+    padding: 10px;
+    border-left: 2px solid rgba(196, 196, 196, 0.5);
+    border-right: 2px solid rgba(196, 196, 196, 0.5);
+}
+
+.project-card__block-status {
+    display:flex;
+	align-items: center;
+	justify-content:center;
+    margin: 0;
+    padding: 7px 0;
+    border-right: 2px solid rgba(196, 196, 196, 0.5);
+}
+
+.project-card__block-events {
+    display:flex;
+	align-items: center;
+	justify-content:center;
+    margin: 0;
+    padding: 7px 0;
+}
+
+.project-card__event-p {
+    margin:0;
+    padding:0;
+}
+
+.project-card__event-title {
+    font-weight: 500;
+}
+/*.user-card__indicator {
+    width:10px;
+    height:10px;
+    border-radius: 50%;
+    margin-right:6px;
+    padding: 0;
+}
+
+.user-card__indicator_search-team {
+    background-color: #4BD30B;
+}*/

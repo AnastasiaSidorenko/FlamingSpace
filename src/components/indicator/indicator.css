@@ -1,0 +1,16 @@
+.indicator {
+    width:10px;
+    height:10px;
+    border-radius: 50%;
+    margin-right:6px;
+    padding: 0;
+}
+
+.indicator-green {
+    background-color: #4BD30B;
+}
+
+.indicator-red {
+    background-color: #D3170B;
+}
+

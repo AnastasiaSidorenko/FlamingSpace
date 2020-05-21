@@ -1,7 +1,8 @@
 import React from 'react'
 
 import componentCSS from "./project_card.css"
-import { Button_show_more } from '../button/button_show_more'
+import { Button_Show_Details } from '../button/button_show_details'
+import { Indicator } from '../indicator/indicator'
 
 export class Project_Card extends React.Component {
     constructor() {
@@ -28,9 +29,37 @@ export class Project_Card extends React.Component {
                             способного принимать собственные решения касаемо прогресса профессионального сообщества.
                         </p>
                     </div>
-
+                    <div className="project-card__block">
+                        <div className="project-card__block-title">Вакансии</div>
+                        <div className="project-card__block-vacancies">
+                            <p className="">Разработчик С++</p>
+                            <p className="">Разработчик Java</p>
+                            <p className="">Менеджер проекта</p>
+                            <p className="">Дизайнер</p>
+                        </div>
+                    </div>
+                    <div className="project-card__block">
+                        <div className="project-card__block-title">Статус</div>
+                        <div className="project-card__block-status">
+                            <Indicator color="red" />
+                            <span>набор команды</span>
+                        </div>
+                    </div>
+                    <div className="project-card__block">
+                        <div className="project-card__block-title">Важные даты</div>
+                        <div className="project-card__block-events">
+                            <div>
+                                <p className="project-card__event-p project-card__event-title">Начало проекта:</p>
+                                <p className="project-card__event-p"></p>
+                            </div>
+                            <div>
+                                <p className="project-card__event-p project-card__event-title">Завершение проекта:</p>
+                                <p className="project-card__event-p"></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <Button_show_more />
+                <Button_Show_Details link="#" />
             </div >
         )
     }

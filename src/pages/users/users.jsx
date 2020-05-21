@@ -10,7 +10,7 @@ import { Page_Title } from "../../components/page_title/page_title";
 class Users extends React.Component {
     constructor() {
         super()
-        this.state = { breadcrumbs: [{ link: "/users", title: "Участники" }] }
+        this.state = { breadcrumbs: [{ link: "#", title: "Участники" }] }
     }
 
     render() {

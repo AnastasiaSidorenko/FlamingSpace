@@ -24,7 +24,7 @@
     padding: 7px 0;
 }
 
-.user-card__indicator {
+/*.user-card__indicator {
     width:10px;
     height:10px;
     border-radius: 50%;
@@ -34,7 +34,7 @@
 
 .user-card__indicator_search-team {
     background-color: #4BD30B;
-}
+}*/
 
 user-card__img-container {
     width: 165px;

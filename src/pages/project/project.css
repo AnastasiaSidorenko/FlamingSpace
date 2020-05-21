@@ -1,0 +1,47 @@
+.flex {
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 17px 0;
+}
+
+.project__heading{
+    display:flex;
+}
+
+.project-category {
+    font-size: 18px;
+    color: #7C7C7C;
+}
+
+.events__title {
+    text-align: center;
+    color: #648FFF;
+}
+.subtitle {
+    font-size:20px;
+}
+.main-info__block-title {
+    color: #648FFF;
+}
+
+.members {
+    display:flex;
+    flex-direction: column;
+}
+
+.member-card__img-container {
+    width:70px;
+    height:70px;
+    padding:0;
+}
+.member-card__img {
+    height:100%;
+    width:100%;
+    object-fit: cover;
+}
+.member-card__name-position-delimiter{
+    border-top: 2px solid #D3170B;
+    padding-left:10px;
+    width: 69px;
+}
