@@ -7,6 +7,10 @@ const router = express.Router();
 let userID
 let _redirectURL = "http://localhost:3000/auth/logout"
 
+router.get('/', async (req, res) => {
+    const reactComp = renderToString(< Account />);
+    res.status(200).render('pages/account', { reactApp: reactComp });
+});
 
 router.get("/:ID", async (req, res) => {
     userID = require('./auth').userID;
@@ -18,13 +22,13 @@ router.get("/:ID", async (req, res) => {
         res.redirect(_redirectURL)
     }
     if ((req.cookies.userIdCookie == userID) && (req.params.ID == userID)) {
-        const reactComp = renderToString(< Account />); // So that program doesn't break
+        const reactComp = renderToString(< Account />);
         res.status(200).render('pages/account', { reactApp: reactComp });
     }
     else {
         res.send("<h2>Это не ваш аккаунт!</h2>");
     }
-    // const reactComp = renderToString(< Index />); // So that program doesn't break
+    // const reactComp = renderToString(< Index />); 
     //res.status(200).render('pages/index', { reactApp: reactComp, user: 'admin' });
 });
 

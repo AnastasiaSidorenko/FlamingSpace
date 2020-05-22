@@ -6,7 +6,7 @@ import Help from "../pages/help/help"
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const reactComp = renderToString(< Help />); // So that program doesn't break
+    const reactComp = renderToString(< Help />);
     res.status(200).render('pages/help', { reactApp: reactComp });
 });
 

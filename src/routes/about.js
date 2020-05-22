@@ -6,7 +6,7 @@ import About from "../pages/about/about"
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const reactComp = renderToString(< About />); // So that program doesn't break
+    const reactComp = renderToString(< About />);
     res.status(200).render('pages/about', { reactApp: reactComp });
 });
 

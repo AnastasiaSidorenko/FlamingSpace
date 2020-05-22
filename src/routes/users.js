@@ -7,7 +7,7 @@ import Users from "../pages/users/users"
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const reactComp = renderToString(< Users />); // So that program doesn't break
+    const reactComp = renderToString(< Users />);
     res.status(200).render('pages/users', { reactApp: reactComp });
 });
 

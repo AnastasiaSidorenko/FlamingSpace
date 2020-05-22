@@ -6,7 +6,7 @@ import MobileApp from "../pages/mobileapp/mobileapp"
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const reactComp = renderToString(< MobileApp />); // So that program doesn't break
+    const reactComp = renderToString(< MobileApp />);
     res.status(200).render('pages/mobileapp', { reactApp: reactComp });
 });
 

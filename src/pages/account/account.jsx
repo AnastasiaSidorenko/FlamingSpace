@@ -1,87 +1,142 @@
 import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
 import pageCSS from "./account.css"
-import img from "./user.png"
+import user from "./user.png"
+import img from "./img.png"
 import { Indicator } from "../../components/indicator/indicator";
+import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
+import { Page_Title } from "../../components/page_title/page_title";
+import { Event_Card } from "../../components/event_card/event_card";
 
 class Account extends React.Component {
     constructor() {
         super()
         this.state = {
-            breadcrumbs: [{ link: "#", title: "Аккаунт", link: "#", title: "nickname" }],
+            breadcrumbs: [{ link: "#", title: "Аккаунт" }, { link: "#", title: "nickname" }],
             whichComponentToShow: "Information"
         }
     }
+
     render() {
-        const slider = this.state.whichComponentToShow == "Info"
-            ?
-            (
-                <div>
-                    <div className="user__param_value">
-                        <p className="user__param">Статус:</p>
-                        <div className="user__value"><Indicator color="green" />ищу команду</div>
+        let Slider = () => {
+            if (this.state.whichComponentToShow == "Information") {
+                return (
+                    <div>
+                        <div className="user__params_values">
+                            <p className="user__param">Статус:</p>
+                            <div className="user__value"><Indicator color="green" />ищу команду</div>
+                        </div>
+                        <div className="user__params_values">
+                            <p className="user__param">Должность:</p>
+                            <div className="user__value">студент кафедры ИС, 4 курс</div>
+                        </div>
+                        <div className="user__params_values">
+                            <p className="user__param">Контакты:</p>
+                            <div className="user__value"></div>
+                        </div>
+                        <div className="user__params_values">
+                            <p className="user__param">Компетенции:</p>
+                            <div className="user__value"><span>UI/UX разработка - 1, Javascript разработка - 2</span></div>
+                        </div>
                     </div>
-                    <div className="user__param_value">
-                        <p className="user__param">Должность:</p>
-                        <div className="user__value">студент кафедры ИС, 4 курс</div>
+                );
+            }
+            else {
+                return (
+                    <div className="project-slider-content">
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
+                        <div className="project-slider-content__item">
+                            <Indicator className="project-slider-content__indicator" color="red" />
+                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                        </div>
                     </div>
-                    <div className="user__param_value">
-                        <p className="user__param">Контакты:</p>
-                        <div className="user__value"></div>
-                    </div>
-                    <div className="user__param_value">
-                        <p className="user__param">Компетенции:</p>
-                        <div className="user__value">UI/UX разработка - 1, Javascript разработка - 2</div>
-                    </div>
-                </div>
-            )
-            :
-            (
-                <div>
-                    <div><Indicator color="red" /> Какой-то проект</div>
-                    <div><Indicator color="red" /> Какой-то проект</div>
-                </div>
-            );
+                );
+            }
+        }
+
 
         return (
             <div>
                 <TopHeader />
                 <div className="container">
-                    <BreadCrumbs pages={this.breadcrumbs} />
+                    <BreadCrumbs pages={this.state.breadcrumbs} />
                     <div className="user">
-                        <div>
+                        <div className="user__name-img">
                             <Page_Title title="Елисеев Юлий" className="user__name" />
-                            <div className="user__img-container">
-                                <img className="user__img" alt="Изображение пользователя" src={img} />
-                            </div>
+                            <div className="user__img-container"><img className="user__img" alt="Изображение пользователя" src={user} /></div>
                             <p className="user__nickname">@eliseev</p>
                         </div>
 
                         <div className="slider">
                             <div className="slider__titles">
-                                <div className={this.state.whichComponentToShow == "info" ? "slider__title-active" : ""}
+                                <div className={this.state.whichComponentToShow == "Information" ? "slider__title-active" : "slider__title-passive"}
                                     onClick={() => this.setState({ whichComponentToShow: "Information" })}>
-                                    <h4 className="slider__title-elem">Информация</h4>
+                                    <p className="slider__title-elem">Информация</p>
                                 </div>
-                                <div className={this.state.whichComponentToShow == "Projects" ? "slider__title-active" : ""}
+                                <div className={this.state.whichComponentToShow == "Projects" ? "slider__title-active" : "slider__title-passive"}
                                     onClick={() => this.setState({ whichComponentToShow: "Projects" })}>
-                                    <h4 className="slider__title-elem">Проекты</h4>
+                                    <p className="slider__title-elem">Проекты</p>
                                 </div>
                             </div>
-                            <slider />
+                            <Slider />
                         </div>
-
                     </div>
 
-                    <div className="events flex">
-                        <p className="events__title">Мои мероприятия</p>
+                    <div className="events">
+                        <p className="events__title">Мероприятия проектной группы</p>
                         <div className="events__items">
-                            <Event_Card title="Окрестности Тулы оросил боевой клич героев" link="#" />
-                            <Event_Card title="Частокол на границе развеял последние сомнения" link="#" />
-                            <Event_Card />
+                            <Event_Card className="events__event" img={img} title="Окрестности Тулы оросил боевой клич героев" link="#" />
+                            <Event_Card className="events__event" img={img} title="Частокол на границе развеял последние сомнения" link="#" />
+                            <Event_Card className="events__event" title="Частокол на границе развеял последние сомнения ааааааааа аааааа ааааа ааааааа ааааа " link="#" />
                         </div>
                     </div>
-                    <h1> Это аккаунт пользователя! </h1>
                 </div >
             </div>
         )

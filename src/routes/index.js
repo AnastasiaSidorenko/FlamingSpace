@@ -7,7 +7,7 @@ import { userID } from "./auth";
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const reactComp = renderToString(< Index />); // So that program doesn't break
+    const reactComp = renderToString(< Index />);
 
     res.status(200).render('pages/index', { reactApp: reactComp });
 });

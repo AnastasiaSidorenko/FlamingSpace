@@ -4,13 +4,12 @@
     justify-content: center;
     margin: 17px 0;
 }
-.container {
-    /*width: 100%;*/
-    width: 1200px;
-    margin: 0 auto;
-}
 .flex__space-between {
     display: flex;
     justify-content: space-between;
     justify-items: start;
+}
+.flex__centered{
+    display: flex;
+    justify-content: center;
 }

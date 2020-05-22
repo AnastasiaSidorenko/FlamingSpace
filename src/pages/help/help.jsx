@@ -1,5 +1,6 @@
 import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
+import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 //import TopHeader from "../../topheader/topheader";
 
 class Help extends React.Component {
@@ -12,7 +13,7 @@ class Help extends React.Component {
         return (
             <div>
                 <TopHeader />
-                <BreadCrumbs pages={this.breadcrumbs} />
+                <BreadCrumbs pages={this.state.breadcrumbs} />
                 <h1>HELP</h1>
             </div>
         )

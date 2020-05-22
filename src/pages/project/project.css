@@ -5,43 +5,111 @@
     margin: 17px 0;
 }
 
-.project__heading{
-    display:flex;
+.container{
+    font-size:18px;
+    line-height: 21px;
 }
 
-.project-category {
+.project__heading {
+    display:flex;
+    align-items: center;
+}
+
+.project__category {
     font-size: 18px;
     color: #7C7C7C;
+}
+
+.project__strip {
+    display:inline-block;
+    border-top: 1px solid #E8E8E8;
+    width:453px;
+    /*margin-top: 20px;*/
+}
+
+.flex__2-columns{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.info {
+    width:850px;
+    display:inline-block; /**/
+    margin:0;
+}
+
+.main-info__description {
+    width: 780px;
+}
+
+.events {
+    margin-top:60px;
+    width:840px;
+    margin-right:10px;
+}
+
+.events__items{
+    display: flex;
+    justify-content: space-around;
 }
 
 .events__title {
     text-align: center;
     color: #648FFF;
+    font-size:28px
 }
-.subtitle {
-    font-size:20px;
-}
+
 .main-info__block-title {
     color: #648FFF;
+    font-weight: normal;
+    font-size:20px;
+}
+
+.main-info__recruitment_item{
+    margin-bottom: 15px;
 }
 
 .members {
-    display:flex;
-    flex-direction: column;
+    /*width: 290px;*/
+    padding:0;
+    margin:0;
+    /*flex-direction: column;*/
+}
+
+.member-card {
+    display: flex;
+    align-items:center;
+    height:80px;
+    font-size: 16px;
+    line-height: 19px;
 }
 
 .member-card__img-container {
     width:70px;
     height:70px;
-    padding:0;
+    margin-right: 24px;
 }
+
 .member-card__img {
-    height:100%;
-    width:100%;
     object-fit: cover;
+    height:70px;
+    width:70px;
 }
+
+.member-card__name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.member-card__position{
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .member-card__name-position-delimiter{
+    border:0;
     border-top: 2px solid #D3170B;
-    padding-left:10px;
+    margin-left:10px;
     width: 69px;
 }

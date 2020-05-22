@@ -2,9 +2,11 @@
     width: 1140px;
     height: 244px;
     border: 2px solid #E8E8E8;
-    /*padding: 18px 26px;*/
+    padding: 18px 26px;
     font-size: 14px;
     border: 1px solid #C4C4C4;
+    margin-bottom:19px;
+    border-radius: 5px;
 }
 .project-card__info{
     display:grid;
@@ -19,17 +21,25 @@
     font-size: 16px;
     line-height: 19px;
     color: #648FFF;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    font-weight:500;
 }
+
+.project-card__block-title_left-padded{
+    padding-left:16px;
+}
+
 .project-card__title-delimiter {
     margin: 0 20px;
 }
-.project_card__block-text {
-    height: 150px;
-    width: 550px;
+.project-card__block-text {
+    height: 137px;
+    width: 550px;  
     text-overflow: ellipsis;
-    overflow: hidden;
+    overflow: hidden; 
+    line-height:17px;
     margin:0;
+    padding: 0;
 }
 
 .project-card__block-vacancies {
@@ -83,10 +93,6 @@
     font-weight: bolder;
 }
 
-.project-card__button {
-    margin: 0 auto;
-    display: block;
-}
 .flex__centered{
     display: flex;
     justify-content: center;

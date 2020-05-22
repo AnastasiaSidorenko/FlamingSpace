@@ -32,12 +32,14 @@ class Projects extends React.Component {
                     <div className="flex">
                         <Button_apply_filter />
                     </div>
-                    <Project_Card />
-                    <Project_Card />
-                    <Project_Card />
-                    <Project_Card />
-                    <Project_Card />
-                    <Button_Functional text="Показать больше" />
+                    <Project_Card link="/projects/1234" />
+                    <Project_Card link="/projects/1234" />
+                    <Project_Card link="/projects/1234" />
+                    <Project_Card link="/projects/1234" />
+                    <Project_Card link="/projects/1234" />
+                    <div className="flex__centered">
+                        <Button_Functional text="Показать больше" />
+                    </div>
                 </div>
             </div>
         )

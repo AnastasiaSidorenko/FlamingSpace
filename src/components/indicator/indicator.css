@@ -4,6 +4,7 @@
     border-radius: 50%;
     margin-right:6px;
     padding: 0;
+    display: inline-block;
 }
 
 .indicator-green {

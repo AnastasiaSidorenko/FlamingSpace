@@ -5,7 +5,7 @@ class Auth extends React.Component {
     render() {
         return (
             <div>
-                <h1>AUTH</h1>
+                <h1>AUTH</h1> <h2>СТРАНИЦА НЕ НУЖНА</h2>
             </div>
         )
     }

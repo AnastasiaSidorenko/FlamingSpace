@@ -1,5 +1,6 @@
 import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
+import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 //import TopHeader from "../../topheader/topheader";
 
 class MobileApp extends React.Component {
@@ -13,7 +14,7 @@ class MobileApp extends React.Component {
             <div>
                 <TopHeader />
                 <div className="container">
-                    <BreadCrumbs pages={this.breadcrumbs} />
+                    <BreadCrumbs pages={this.state.breadcrumbs} />
                     <h1>MOBILE APP</h1>
                 </div>
             </div>
