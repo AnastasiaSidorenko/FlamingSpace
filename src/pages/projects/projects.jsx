@@ -19,10 +19,13 @@ class Projects extends React.Component {
     render() {
         return (
             <div>
-                <TopHeader />
+                <TopHeader section="Проекты" />
                 <div className="container">
                     <BreadCrumbs pages={this.state.breadcrumbs} />
-                    <Page_Title title="Проекты" />
+                    <div className="flex__space-between">
+                        <Page_Title title="Проекты" />
+                        <Button_Functional text="Подать заявку" link="create" />
+                    </div>
                     <div className="flex__space-between">
                         <Search placeholder="Поиск по ФИО..." />
                         <Search placeholder="Выберите сферу деятельности..." />
@@ -38,7 +41,7 @@ class Projects extends React.Component {
                     <Project_Card link="/projects/1234" />
                     <Project_Card link="/projects/1234" />
                     <div className="flex__centered">
-                        <Button_Functional text="Показать больше" />
+                        <Button_Functional link="#" text="Показать больше" />
                     </div>
                 </div>
             </div>

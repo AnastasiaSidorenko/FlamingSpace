@@ -12,7 +12,7 @@ class MobileApp extends React.Component {
     render() {
         return (
             <div>
-                <TopHeader />
+                <TopHeader section="Мобильное приложение" />
                 <div className="container">
                     <BreadCrumbs pages={this.state.breadcrumbs} />
                     <h1>MOBILE APP</h1>

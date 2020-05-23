@@ -1,0 +1,91 @@
+.flex__2-columns{
+    margin-top:50px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.sections-titles {
+    color: darkslategray;
+    font-size:20px;
+    width: 240px;
+    margin-right:30px;
+}
+
+.section-titles__delimiter {
+    border-top: 1px solid #E8E8E8;
+}
+
+.main-section__title {
+    height: 80px;
+}
+
+.contact-section__title {
+    height:150px;
+}
+
+.section-content {
+    margin-bottom: 40px;
+}
+
+.form {
+    width: 870px;
+    font-size: 16px;
+}
+
+.form__item {
+    display: inline-block;
+    margin: 10px;
+}
+
+.form__item-field {
+    font-size:16px;
+    text-indent: 10px;
+    height: 35px;
+    border: 1px solid #C4C4C4;
+    border-radius: 2.5px;
+}
+
+.form__item-label{
+    display:block;
+    margin-bottom: 10px;
+}
+
+.select-list__status {
+    height: 35px;
+    width: 200px;
+}
+
+/*.main-section{
+    display:flex;
+    justify-content: space-between;
+}*/
+
+.main-section__item-field{
+    width: 230px;
+}
+
+/*.contact-section__item-label {
+    width: 80px;
+}*/
+
+.contact-section__item-field{
+    width: 600px;
+}
+
+.skills-section__add-competency-button {
+   /* display:block;
+    width: 158px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 7px;
+    color: white;*/
+    font-size:18px;
+    font-weight:500px;
+    color: #648FFF;
+    cursor: pointer;
+    /*font-weight: 500;
+    font-size: 14px;
+    margin-top: 7px;
+    text-decoration: none;*/
+}

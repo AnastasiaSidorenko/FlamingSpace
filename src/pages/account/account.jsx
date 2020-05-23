@@ -3,6 +3,8 @@ import { TopHeader } from "../../components/topheader/topheader";
 import pageCSS from "./account.css"
 import user from "./user.png"
 import img from "./img.png"
+import icon__leader from "./icon__leader-id.svg"
+import icon__vk from "./icon__vk.svg"
 import { Indicator } from "../../components/indicator/indicator";
 import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 import { Page_Title } from "../../components/page_title/page_title";
@@ -32,7 +34,10 @@ class Account extends React.Component {
                         </div>
                         <div className="user__params_values">
                             <p className="user__param">Контакты:</p>
-                            <div className="user__value"></div>
+                            <div>
+                                <a src="link to account"><img src={icon__leader} className="contact__icon" /></a>
+                                <a src="link to account"><img src={icon__vk} className="contact__icon" /></a>
+                            </div>
                         </div>
                         <div className="user__params_values">
                             <p className="user__param">Компетенции:</p>
@@ -112,6 +117,7 @@ class Account extends React.Component {
                             <Page_Title title="Елисеев Юлий" className="user__name" />
                             <div className="user__img-container"><img className="user__img" alt="Изображение пользователя" src={user} /></div>
                             <p className="user__nickname">@eliseev</p>
+                            <a className="user__edit-profile-button" href="edit">Редактировать профиль</a>
                         </div>
 
                         <div className="slider">

@@ -87,6 +87,23 @@ html, body, #root {
     transition: opacity .1s linear;
 }
 
+.topheader__current-section {
+    font-size:18px;
+    color: #D3170B;
+}
+
+.topheader__current-section:after {
+    content:"";
+    width: 50%;
+    height: 2px;
+    background-color:#D3170B;
+    position:absolute;
+    top:100%;
+    left:25%;
+    z-index:1;
+    transition: opacity .1s linear;
+}
+
 .topheader__auth-button {
     display: block;
     text-decoration: none;

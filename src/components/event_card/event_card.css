@@ -8,16 +8,17 @@
     font-size: 16px;
 }
 
-.event-card__title{
+/*.event-card__title{
     width:100%;
     font-size:16px;
     line-height: 19px;
     padding:4px;
     height:50px;
+    white-space: nowrap; 
     text-overflow: ellipsis;
     overflow: hidden;
     margin:0;
-}
+}*/
 
 .event-card__img-container {
     width: 262px;
@@ -42,3 +43,52 @@
 .event-card__date{
     font-size: 14px;
 }
+
+.event-card__title {
+    width:100%;
+    font-size:16px;
+    line-height: 19px;
+    padding:4px;
+    height:50px;
+    overflow: hidden;
+    margin:0;
+
+    /* hide text if it more than N lines  */
+    overflow: hidden;
+    /* for set '...' in absolute position */
+    position: relative; 
+    /* use this value to count block height */
+    /*line-height: 1.2em;*/
+    /* max-height = line-height (1.2) * lines max number (3) */
+    max-height: 50px; 
+    /* fix problem when last visible word doesn't adjoin right side  */
+    text-align: justify;  
+    /* place for '...' */
+    margin-right: -1em;
+    padding-right: 1em;
+  }
+  /* create the ... */
+  .event-card__title:before {
+    /* points in the end */
+    content: '...';
+    /* absolute position */
+    position: absolute;
+    /* set position to right bottom corner of block */
+    right: 0;
+    bottom: 0;
+  }
+  /* hide ... if we have text, which is less than or equal to max lines */
+  .event-card__title:after {
+    /* points in the end */
+    content: '';
+    /* absolute position */
+    position: absolute;
+    /* set position to right bottom corner of text */
+    right: 0;
+    /* set width and height */
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    /* bg color = bg color under block */
+    background: white;
+  }

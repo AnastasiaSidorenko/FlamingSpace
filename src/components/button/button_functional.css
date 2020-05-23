@@ -1,4 +1,5 @@
 .button_functional {
+    display:block;
     background-color: #D3170B;
     width: 262px;
     height: 39px;

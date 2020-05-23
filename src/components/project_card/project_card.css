@@ -36,6 +36,7 @@
     height: 137px;
     width: 550px;  
     text-overflow: ellipsis;
+    white-space: nowrap; 
     overflow: hidden; 
     line-height:17px;
     margin:0;

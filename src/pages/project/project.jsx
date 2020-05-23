@@ -20,7 +20,7 @@ class Project extends React.Component {
     render() {
         return (
             <div>
-                <TopHeader />
+                <TopHeader section="Проекты" />
                 <div className="container">
                     <BreadCrumbs pages={this.state.breadcrumbs} />
                     <div className="project__heading">
@@ -29,7 +29,7 @@ class Project extends React.Component {
                             <p className="project__category">Категория: Информационные системы</p>
                         </div>
                         <hr className="project__strip" />
-                        <Button_Functional text="Подать заявку" />
+                        <Button_Functional text="Подать заявку" link="#" />
                     </div>
 
                     <div className="flex__2-columns">
