@@ -1,5 +1,5 @@
 .search {
-    display:flex;
+    display:inline-block;
     height: 39px;
     width: 263px;
     border: 1px solid #C4C4C4;
@@ -9,8 +9,8 @@
 .search__field {
     width: 243px;
     padding-left:20px;
-    border: 1px solid #C4C4C4;
-    border-right:0;
+    /*border: 1px solid #C4C4C4;*/
+    border:0;
 }
 
 .search__icon {

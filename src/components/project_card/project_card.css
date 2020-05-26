@@ -32,7 +32,7 @@
 .project-card__title-delimiter {
     margin: 0 20px;
 }
-.project-card__block-text {
+/*.project-card__block-text {
     height: 137px;
     width: 550px;  
     text-overflow: ellipsis;
@@ -41,7 +41,56 @@
     line-height:17px;
     margin:0;
     padding: 0;
-}
+}*/
+
+.project-card__block-text {
+    width: 550px; 
+    line-height:17px;
+    /*height: 137px;*/
+    overflow: hidden;
+    margin:0;
+    padding: 0;
+
+    /* hide text if it more than N lines  */
+    overflow: hidden;
+    /* for set '...' in absolute position */
+    position: relative; 
+    /* use this value to count block height */
+    /*line-height: 1.2em;*/
+    /* max-height = line-height (1.2) * lines max number (3) */
+    max-height: 137px; 
+    /* fix problem when last visible word doesn't adjoin right side  */
+    text-align: justify;  
+    /* place for '...' */
+    margin-right: -1em;
+    padding-right: 1em;
+  }
+  /* create the ... */
+  .project-card__block-text:before {
+    /* points in the end */
+    content: '...';
+    /* absolute position */
+    position: absolute;
+    /* set position to right bottom corner of block */
+    right: 0;
+    bottom: 0;
+  }
+  /* hide ... if we have text, which is less than or equal to max lines */
+  .event-card__title:after {
+    /* points in the end */
+    content: '';
+    /* absolute position */
+    position: absolute;
+    /* set position to right bottom corner of text */
+    right: 0;
+    /* set width and height */
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    /* bg color = bg color under block */
+    background: white;
+  }
+
 
 .project-card__block-vacancies {
     height: 120px;

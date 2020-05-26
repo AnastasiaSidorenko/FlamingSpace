@@ -38,14 +38,11 @@ class Project_Create extends React.Component {
                         </div>
                         <div className="form__item">
                             <label className="form__item-label">Дата начала</label>
-                            <input type="text" name="input" placeholder="YYYY-MM-DD" required
-                                pattern="(?:19|20)\[0-9\]{2}-(?:(?:0\[1-9\]|1\[0-2\])-(?:0\[1-9\]|1\[0-9\]|2\[0-9\])|(?:(?!02)(?:0\[1-9\]|1\[0-2\])-(?:30))|(?:(?:0\[13578\]|1\[02\])-31))"
-                                title="Enter a date in this format YYYY-MM-DD" />
-                            <input type="date" className="form__item-field"></input>
+                            <input type="text" name="input" placeholder="ДД.ММ.ГГГГ" />
                         </div>
                         <div className="form__item">
                             <label className="form__item-label">Дата окончания</label>
-                            <input type="date" className="form__item-field"></input>
+                            <input type="text" name="input" placeholder="ДД.ММ.ГГГГ" />
                         </div>
                     </form>
                 </div>

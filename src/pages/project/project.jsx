@@ -12,17 +12,15 @@ import { Button_Functional } from "../../components/button/button_functional";
 import pageCSS from "./project.css"
 
 class Project extends React.Component {
-    constructor() {
-        super()
-        this.state = { breadcrumbs: [{ link: "/projects", title: "Проекты" }, { link: "#", title: "Проект тыры ты" }] }
-    }
+
+    breadcrumbs = [{ link: "/projects", title: "Проекты" }, { link: "#", title: "Проект тыры ты" }];
 
     render() {
         return (
             <div>
                 <TopHeader section="Проекты" />
                 <div className="container">
-                    <BreadCrumbs pages={this.state.breadcrumbs} />
+                    <BreadCrumbs pages={this.breadcrumbs} />
                     <div className="project__heading">
                         <div>
                             <Page_Title title="Проект такой-то" className="project__title" />

@@ -11,17 +11,14 @@ import { Page_Title } from "../../components/page_title/page_title";
 //import TopHeader from "../../topheader/topheader";
 
 class Projects extends React.Component {
-    constructor() {
-        super()
-        this.state = { breadcrumbs: [{ link: "№", title: "Проекты" }] }
-    }
+    breadcrumbs = [{ link: "№", title: "Проекты" }];
 
     render() {
         return (
             <div>
                 <TopHeader section="Проекты" />
                 <div className="container">
-                    <BreadCrumbs pages={this.state.breadcrumbs} />
+                    <BreadCrumbs pages={this.breadcrumbs} />
                     <div className="flex__space-between">
                         <Page_Title title="Проекты" />
                         <Button_Functional text="Подать заявку" link="create" />

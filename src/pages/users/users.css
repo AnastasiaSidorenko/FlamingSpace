@@ -5,6 +5,11 @@
     margin: 17px 0;
 }
 
+.flex__centered {
+    display:flex;
+    justify-content: center;
+}
+
 .grid {
     display: grid;
     grid-gap: 20px 7px;

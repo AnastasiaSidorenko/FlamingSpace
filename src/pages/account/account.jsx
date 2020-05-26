@@ -14,10 +14,11 @@ class Account extends React.Component {
     constructor() {
         super()
         this.state = {
-            breadcrumbs: [{ link: "#", title: "Аккаунт" }, { link: "#", title: "nickname" }],
             whichComponentToShow: "Information"
         }
     }
+
+    breadcrumbs = [{ link: "#", title: "Аккаунт" }, { link: "#", title: "nickname" }];
 
     render() {
         let Slider = () => {
@@ -111,7 +112,7 @@ class Account extends React.Component {
             <div>
                 <TopHeader />
                 <div className="container">
-                    <BreadCrumbs pages={this.state.breadcrumbs} />
+                    <BreadCrumbs pages={breadcrumbs} />
                     <div className="user">
                         <div className="user__name-img">
                             <Page_Title title="Елисеев Юлий" className="user__name" />

@@ -17,6 +17,8 @@ import path from "path";
 const app = express();
 const cookieParser = require('cookie-parser')
 
+exports.apiURL = "api.flamingspace.sevsu.ru"
+
 // View engine setup
 app.set("views", path.join(__dirname, 'static', "views"));
 app.set("view engine", "ejs");

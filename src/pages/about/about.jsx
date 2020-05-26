@@ -4,10 +4,8 @@ import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 //import TopHeader from "../../topheader/topheader";
 
 class About extends React.Component {
-    constructor() {
-        super()
-        this.state = { breadcrumbs: [{ link: "#", title: "О сервисе" }] }
-    }
+
+    breadcrumbs = [{ link: "#", title: "О сервисе" }];
 
     render() {
         return (
