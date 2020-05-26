@@ -8,56 +8,59 @@ import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 import { Page_Title } from "../../components/page_title/page_title";
 import { Button_Functional } from "../../components/button/button_functional";
 
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 class Users extends React.Component {
     constructor(props) {
         super(props);
+        let initialUsers
+        if (props.initialData) {
+            initialUsers = props.initialData.results;
+            console.log("props data", props.initialData.results)
+        }
+        else {
+            initialUsers = window.__initialData__.results;
+            console.log("window data", window.__initialData__)
+            delete window.__initialData__;
+        }
         this.state = {
             loading: false,
-            users: []
+            users: initialUsers
         }
-        let initialUsers;
-        if (props.initialData) {
-            initialUsers = props.initialData;
-            //console.log(initialUsers);
-            this.setState({ users: initialUsers })
-            console.log(this.state.users);
-        }
-        /*else {
-            console.log(window);
-            initialUsers = window.__initialData__;
-            console.log(initialUsers);
-            delete window.__initialData__;
-        }*/
-        //this.setState({ users: initialUsers })
-        //this.setState = ({ users: initialUsers })
-        //console.log(this.state.users);
     }
 
     breadcrumbs = [{ link: "#", title: "Участники" }];
 
+
     static requestInitialData() {
-        return fetch("https://api.randomuser.me/?results=20")
-            .then(response => response.json());
-    }
+        return fetch("https://api.randomuser.me/?results=2")
+            .then(response => response.json())
+            .catch(error => console.log(error));
+    };
 
-    async fetchUsers() {
+    alert() {
+        console.log("AAAAAAA")
+    };
+
+    /*fetchUsers() {
         this.setState({ loading: true });
-
-        fetch("https://api.randomuser.me/?results=20")
+        fetch("https://api.randomuser.me/?results=2")
             .then(response => response.json())
             .then(data => {
-                this.setState({ loading: false, users: [...this.state.users, data.results] });
+                this.setState({ loading: false, users: [...this.state.users, ...data.results] });
+                console.log(this.state.users)
             })
             .catch(e => {
                 console.log(e);
                 //this.setState({ ...this.state, loading: false });
             });
-    }
-
+    }*/
     render() {
-
+        console.log("in render", this.state.users);
         let users = this.state.users.map((user, index) => (
-            <User_Card key={index} FLname={`${user.name.first}  ${user.name.last}`} img={user.picture.large} />
+            <User_Card key={index} FLname={`${user.name.first}  ${user.name.last}`} img={user.picture.large}
+                nickname={user.location.country} />
         ));
 
         return (
@@ -74,10 +77,16 @@ class Users extends React.Component {
                     </div>
                     <Button_apply_filter />
                     <div className="grid">
-                        <p>{this.state.loading ? 'Fetching users...' : ''}</p>
+                        {this.state.users.map((user, index) => (
+                            <User_Card key={index} FLname={`${user.name.first}  ${user.name.last}`} img={user.picture.large}
+                                nickname={user.location.country} />
+                        ))}
                     </div>
-                    <div>
-                        {this.state.loading ? '' : <Button_Functional text="Показать больше" onClick={this.fetchUsers} />}
+                    <div className="flex__centered">
+                        <p>{this.state.loading ? 'Fetching users...' : ''}</p>
+                        {this.state.loading ? '' : <Button_Functional text="Показать больше" onClick={this.alert} />}
+                        {this.state.loading ? '' : <button onClick={() => { this.alert }}>Показать больше</button>}
+                        <button onClick={() => { this.alert }}>Показать больше</button>
                     </div>
                 </div >
             </div>

@@ -1,10 +1,14 @@
 .button_functional {
-    display:flex;
+    display:block;
     background-color: #D3170B;
     width: 262px;
     height: 39px;
+    cursor: pointer;
+    font-size:15px;
+    line-height: 39px;
 
-    align-content: center;
+    /*align-items: center;
+    justify-content: center;*/
     
     color: white;
     font-size: 16px;

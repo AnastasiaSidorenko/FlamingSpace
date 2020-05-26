@@ -20,7 +20,7 @@ export class User_Card extends React.Component {
                 <div className="user-card__img-container">
                     <img className="user-card__img" alt="Фото участника" src={this.props.img} />
                 </div>
-                <span className="user-card__nickname">@ivanov</span>
+                <span className="user-card__nickname">@{this.props.nickname}</span>
                 <hr className="user-card__hr" />
                 <p className="user-card__skill">Разработчик С++</p>
                 <p className="user-card__skill">Разработчик Java</p>

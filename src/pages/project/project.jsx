@@ -7,7 +7,7 @@ import { Indicator } from "../../components/indicator/indicator";
 //import TopHeader from "../../topheader/topheader";
 import img from "./img.png"
 import member from "./member.png"
-import { Button_Functional } from "../../components/button/button_functional";
+import { Link_Functional } from "../../components/button/link_functional";
 
 import pageCSS from "./project.css"
 
@@ -27,7 +27,7 @@ class Project extends React.Component {
                             <p className="project__category">Категория: Информационные системы</p>
                         </div>
                         <hr className="project__strip" />
-                        <Button_Functional text="Подать заявку" link="#" />
+                        <Link_Functional text="Подать заявку" link="#" />
                     </div>
 
                     <div className="flex__2-columns">
