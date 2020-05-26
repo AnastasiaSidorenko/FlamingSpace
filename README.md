@@ -1,8 +1,3 @@
-# Smoke -h
+# FlamingSpace
 
-##### Commands to run 
-
-`$ npm run webpack`
-
-`$ npm run dev`
 
