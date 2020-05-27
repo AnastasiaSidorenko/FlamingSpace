@@ -8,25 +8,25 @@ import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 import { Page_Title } from "../../components/page_title/page_title";
 import { Button_Functional } from "../../components/button/button_functional";
 
-import "core-js/stable";
-import "regenerator-runtime/runtime";
+//import "core-js/stable";
+//import "regenerator-runtime/runtime";
 
 class Users extends React.Component {
     constructor(props) {
-        super(props);
+        super();
         let initialUsers
         if (props.initialData) {
-            initialUsers = props.initialData.results;
-            console.log("props data", props.initialData.results)
+            initialUsers = props.initialData;
+            console.log("props data", props.initialData)
         }
         else {
-            initialUsers = window.__initialData__.results;
-            console.log("window data", window.__initialData__)
+            initialUsers = JSON.parse(window.__initialData__);
+            console.log("window data", initialUsers)
             delete window.__initialData__;
         }
         this.state = {
             loading: false,
-            users: initialUsers
+            users: initialUsers.results
         }
     }
 
@@ -36,14 +36,13 @@ class Users extends React.Component {
     static requestInitialData() {
         return fetch("https://api.randomuser.me/?results=2")
             .then(response => response.json())
-            .catch(error => console.log(error));
     };
 
     alert() {
         console.log("AAAAAAA")
     };
 
-    /*fetchUsers() {
+    fetchUsers() {
         this.setState({ loading: true });
         fetch("https://api.randomuser.me/?results=2")
             .then(response => response.json())
@@ -55,9 +54,11 @@ class Users extends React.Component {
                 console.log(e);
                 //this.setState({ ...this.state, loading: false });
             });
-    }*/
+    }
+
     render() {
         console.log("in render", this.state.users);
+
         let users = this.state.users.map((user, index) => (
             <User_Card key={index} FLname={`${user.name.first}  ${user.name.last}`} img={user.picture.large}
                 nickname={user.location.country} />
@@ -77,10 +78,7 @@ class Users extends React.Component {
                     </div>
                     <Button_apply_filter />
                     <div className="grid">
-                        {this.state.users.map((user, index) => (
-                            <User_Card key={index} FLname={`${user.name.first}  ${user.name.last}`} img={user.picture.large}
-                                nickname={user.location.country} />
-                        ))}
+                        {users}
                     </div>
                     <div className="flex__centered">
                         <p>{this.state.loading ? 'Fetching users...' : ''}</p>
@@ -89,7 +87,7 @@ class Users extends React.Component {
                         <button onClick={() => { this.alert }}>Показать больше</button>
                     </div>
                 </div >
-            </div>
+            </div >
         );
     }
 }

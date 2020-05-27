@@ -15,14 +15,8 @@ const presets =
 
 
 const plugins = [
-  [
-    "@babel/plugin-proposal-class-properties",
-  ],
-  //["@babel/plugin-transform-runtime"] //26.05
-]
-/*const plugins = [
   "@babel/plugin-proposal-class-properties",
-]*/
+]
 
 if (process.env.COMPILER_ENV === 'server') {
   plugins.push(
