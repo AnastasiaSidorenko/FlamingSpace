@@ -17,11 +17,11 @@ class Users extends React.Component {
         let initialUsers
         if (props.initialData) {
             initialUsers = props.initialData;
-            console.log("props data", initialUsers)
+            //console.log("props data", initialUsers)
         }
         else {
             initialUsers = JSON.parse(window.__initialData__);
-            console.log("window data", initialUsers)
+            //console.log("window data", initialUsers)
             delete window.__initialData__;
         }
         this.state = {
@@ -57,8 +57,10 @@ class Users extends React.Component {
                 console.log("this.state.users", this.state.users)
             })
             .catch(e => {
+                if (e == "Failed to fetch") {
+                    this.setState({ loading: false, error: "Не удалось загрузить данные" })
+                }
                 console.log(e);
-
                 //this.setState({ ...this.state, loading: false });
             });
     }
@@ -75,9 +77,10 @@ class Users extends React.Component {
                 console.log("this.state.filtered-users", this.state.users)
             })
             .catch(e => {
-                if (e == "Failed to fetch")
-                    console.log(e);
-                this.setState({ loading: false, error: "Не удалось загрузить данные" })
+                if (e == "Failed to fetch") {
+                    this.setState({ loading: false, error: "Не удалось загрузить данные" })
+                }
+                console.log(e);
             });
     }
 

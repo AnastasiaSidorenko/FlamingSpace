@@ -19,13 +19,13 @@ class Projects extends React.Component {
             console.log("props data", initialProjects)
         }
         else {
-            initialUsers = JSON.parse(window.__initialData__);
+            initialProjects = JSON.parse(window.__initialData__);
             console.log("window data", initialProjects)
             delete window.__initialData__;
         }
         this.state = {
             loading: false,
-            users: initialProjects.results,
+            projects: initialProjects.results,
             page: 0,
             filter: "",
             error: false
@@ -79,7 +79,7 @@ class Projects extends React.Component {
         let projects = this.state.projects.map((project, index) => (
             <Project_Card key={index} link="/projects/1234" title={`${project.name.first}  ${project.name.last}`}
                 img={project.picture.large} startDate={project.dob.date} finishDate={project.dob.date}
-                vacancies={[user.location.country, user.location.country, user.location.country, user.location.country, user.location.country]} />
+                vacancies={[project.location.country, project.location.country, project.location.country, project.location.country, project.location.country]} />
         ));
 
         return (
@@ -92,9 +92,6 @@ class Projects extends React.Component {
                         <Button_Functional text="Подать заявку" link="create" />
                     </div>
                     <Search_Bar />
-                    <div className="flex">
-                        <Button_apply_filter />
-                    </div>
                     {projects}
 
                     <div className="flex__centered">

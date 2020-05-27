@@ -48,7 +48,8 @@
 }*/
 
 .project-card__block-text {
-    width: 550px; 
+    /*width: 550px; */
+    width: 568px;
     line-height:17px;
     /*height: 137px;*/
     overflow: hidden;
@@ -62,7 +63,7 @@
     /* use this value to count block height */
     /*line-height: 1.2em;*/
     /* max-height = line-height (1.2) * lines max number (3) */
-    max-height: 137px; 
+    max-height: 133px; 
     /* fix problem when last visible word doesn't adjoin right side  */
     text-align: justify;  
     /* place for '...' */
@@ -147,7 +148,12 @@
     font-weight: bolder;
 }
 
-.flex__centered{
+/*.flex__centered{
     display: flex;
     justify-content: center;
+    height: 160px;
+}*/
+.project-card__button {
+    margin-left:523px;
+    margin-bottom:18px;
 }

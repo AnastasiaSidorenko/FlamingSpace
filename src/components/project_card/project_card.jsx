@@ -19,7 +19,7 @@ export class Project_Card extends React.Component {
 
     render() {
         let vacancies = this.props.vacancies.map((elem, index) => (
-            <p className="project-card__block-vacancy">elem</p>
+            <p key={index} className="project-card__block-vacancy">elem</p>
         ));
 
         return (
@@ -62,8 +62,8 @@ export class Project_Card extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="flex__centered">
-                    <Button_Show_Details link="/projects/1234" className="project-card__button" />
+                <div className="project-card__button">
+                    <Button_Show_Details link="/projects/1234" />
                 </div>
             </div >
         )

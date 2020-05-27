@@ -3,7 +3,9 @@
 
 <head>
     <title>Flaming Space</title>
-    <script>window.__initialData__ = '<%-JSON.stringify(initialData) %>'</script>
+    <% if(initialData) {%>
+    <script>window.__initialData__ = `<%-JSON.stringify(initialData) %>`</script>
+    <%} %>
 </head>
 
 <body>
