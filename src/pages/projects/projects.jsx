@@ -91,17 +91,11 @@ class Projects extends React.Component {
                         <Page_Title title="Проекты" />
                         <Button_Functional text="Подать заявку" link="create" />
                     </div>
-                    <div className="flex__space-between">
-                        <Search placeholder="Поиск по ФИО..." />
-                        <Search placeholder="Выберите сферу деятельности..." />
-                        <Search placeholder="Выберите статус..." />
-                        <Search placeholder="Выберите статус..." />
-                    </div>
+                    <Search_Bar />
                     <div className="flex">
                         <Button_apply_filter />
                     </div>
                     {projects}
-                    <Project_Card link="/projects/1234" />
 
                     <div className="flex__centered">
                         <p className="capture">{this.state.loading ? 'Загрузка...' : ''}</p>
