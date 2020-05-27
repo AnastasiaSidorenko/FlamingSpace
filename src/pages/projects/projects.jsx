@@ -26,7 +26,9 @@ class Projects extends React.Component {
         this.state = {
             loading: false,
             users: initialProjects.results,
-            page: 0
+            page: 0,
+            filter: "",
+            error: false
         }
     }
 
@@ -52,6 +54,24 @@ class Projects extends React.Component {
             .catch(e => {
                 console.log(e);
                 //this.setState({ ...this.state, loading: false });
+            });
+    }
+
+    fetchFilteredProjects = (filter) => {
+        this.setState({ users: [], loading: true, page: 0, filter: filter });
+        //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20`)
+        let _url = "http://localhost:3012/users/0/20" + filter;
+        fetch(_url)
+            .then(response => response.json())
+            .then(data => {
+                console.log("data", data)
+                this.setState({ loading: false, users: [...data.results] });
+                console.log("this.state.filtered-users", this.state.users)
+            })
+            .catch(e => {
+                if (e == "Failed to fetch")
+                    console.log(e);
+                this.setState({ loading: false, error: "Не удалось загрузить данные" })
             });
     }
 
@@ -82,13 +102,66 @@ class Projects extends React.Component {
                     </div>
                     {projects}
                     <Project_Card link="/projects/1234" />
-                    <div className="flex__centered">
-                        <p className="capture__loading-users">{this.state.loading ? 'Загрузка...' : ''}</p>
-                        {this.state.loading ? '' : <Button_Functional text="Показать больше" onClick={this.fetchProjects} />}
-                    </div>
 
+                    <div className="flex__centered">
+                        <p className="capture">{this.state.loading ? 'Загрузка...' : ''}</p>
+                        <p className="capture">{this.state.error ? this.state.error : ''}</p>
+                        {(this.state.loading && !this.state.error) ? '' : <Button_Functional text="Показать больше" onClick={this.fetchProjects} />}
+                    </div>
                 </div>
             </div>
+        )
+    }
+}
+
+class Search_Bar extends React.Component {
+    state = {
+        title: "",
+        category: "",
+        vacancy: "",
+        status: ""
+    }
+
+    handleChange = (event, name) => {
+        this.setState({ [name]: event.target.value })
+    }
+
+    getFilter = () => {
+        if (!this.state.title && !this.state.category && !this.state.vacancy && !this.state.status) {
+            return;
+        }
+        let filter;
+        if (this.state.title) {
+            filter = `?title=${this.state.title}` + (this.state.category ? `&category=${this.state.category}` : "") +
+                (this.state.vacancy ? `&vacancy=${this.state.vacancy}` : "") + (this.state.status ? `&status=${this.state.status}` : "")
+            return this.props.getFilteredData(filter);
+        }
+        if (this.state.category) {
+            filter = `?category=${this.state.category}` + (this.state.vacancy ? `&vacancy=${this.state.vacancy}` : "") +
+                (this.state.status ? `&status=${this.state.status}` : "")
+            return this.props.getFilteredData(filter);
+        }
+        if (this.state.vacancy) {
+            filter = `?vacancy=${this.state.vacancy}` + (this.state.status ? `&status=${this.state.status}` : "")
+            return this.props.getFilteredData(filter);
+        }
+        if (this.state.status) {
+            filter = `?status=${this.state.status}`
+            return this.props.getFilteredData(filter);
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="flex__space-between">
+                    <Search name="title" onChange={event => { this.handleChange(event, "fio") }} placeholder="Поиск по названию..." />
+                    <Search name="category" placeholder="Выберите категорию..." />
+                    <Search name="vacancy" onChange={event => { this.handleChange(event, "status") }} placeholder="Выберите вакансию..." />
+                    <Search name="status" placeholder="Выберите статус..." />
+                </div>
+                <Button_apply_filter onClick={this.getFilter} />
+            </div >
         )
     }
 }

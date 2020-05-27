@@ -35,8 +35,8 @@ class Users extends React.Component {
 
     breadcrumbs = [{ link: "#", title: "Участники" }];
 
-
     static requestInitialData() {
+        //const _url = "https://api.flamingspace.sevsu.ru/users/0/20"
         // return fetch("https://api.flamingspace.sevsu.ru/users/0/20")
         return fetch("https://api.randomuser.me/?results=2")
             .then(response => response.json())
@@ -63,11 +63,10 @@ class Users extends React.Component {
             });
     }
 
-    fetchFilteredUsers = (url, filter) => {
-        let _filter = filter.replace(/%20/g, "+");
-        let _url = url.replace(/%20/g, "+");
-        this.setState({ users: [], loading: true, page: 0, filter: _filter });
+    fetchFilteredUsers = (filter) => {
+        this.setState({ users: [], loading: true, page: 0, filter: filter });
         //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20`)
+        let _url = "http://localhost:3012/users/0/20" + filter;
         fetch(_url)
             .then(response => response.json())
             .then(data => {
@@ -122,21 +121,17 @@ class Search_Bar extends React.Component {
         this.setState({ [name]: event.target.value })
     }
 
-    searchByFilters = () => {
+    getFilter = () => {
         if (!this.state.fio && !this.state.status) {
-            return
-        }
-        if (this.state.fio && this.state.status) {
-            return this.props.getFilteredData(`http://localhost:3012/users/0/20?status=${this.state.status}&fio=${this.state.fio}`,
-                `?status=${this.state.status}&fio=${this.state.fio}`);
+            return;
         }
         if (this.state.fio) {
-            return this.props.getFilteredData(`http://localhost:3012/users/0/20?fio=${this.state.fio}`,
-                `?fio=${this.state.fio}`);
+            filter = `?fio=${this.state.fio}` + (this.state.status ? `&status=${this.state.status}` : "")
+            return this.props.getFilteredData(filter);
         }
         if (this.state.status) {
-            return this.props.getFilteredData(`http://localhost:3012/users/0/20?status=${this.state.status}`,
-                `?status=${this.state.status}`);
+            filter = `?status=${this.state.status}`
+            return this.props.getFilteredData(filter);
         }
     }
 
@@ -144,12 +139,12 @@ class Search_Bar extends React.Component {
         return (
             <div>
                 <div className="flex__space-between">
-                    <Search name="фио" onChange={event => { this.handleChange(event, "fio") }} placeholder="Поиск по ФИО..." />
+                    <Search name="fio" onChange={event => { this.handleChange(event, "fio") }} placeholder="Поиск по ФИО..." />
                     <Search placeholder="Выберите сферу деятельности..." />
-                    <Search name="статус" onChange={event => { this.handleChange(event, "status") }} placeholder="Выберите статус..." />
+                    <Search name="status" onChange={event => { this.handleChange(event, "status") }} placeholder="Выберите статус..." />
                     <Search placeholder="Выберите статус..." />
                 </div>
-                <Button_apply_filter onClick={this.searchByFilters} />
+                <Button_apply_filter onClick={this.getFilter} />
             </div >
         )
     }
