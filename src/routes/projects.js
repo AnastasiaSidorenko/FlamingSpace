@@ -8,8 +8,14 @@ import Project_Create from "../pages/project_create/project_create";
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const reactComp = renderToString(< Projects />);
-    res.status(200).render('pages/projects', { reactApp: reactComp });
+    Projects.requestInitialData()
+        .then(initialData => {
+            const reactComp = renderToString(< Projects initialData={initialData} />);
+            let data = initialData;
+            res.status(200).render('pages/projects', { reactApp: reactComp, initialData: data });
+        })
+        .catch(error => console.log(error));
+
 });
 
 router.get('/create', async (req, res) => {

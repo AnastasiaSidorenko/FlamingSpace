@@ -23,6 +23,10 @@
     color: #648FFF;
     margin-bottom: 10px;
     font-weight:500;
+
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+    overflow: hidden; 
 }
 
 .project-card__block-title_left-padded{

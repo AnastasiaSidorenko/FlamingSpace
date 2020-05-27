@@ -10,6 +10,8 @@
     justify-items: start;
 }
 .flex__centered{
-    display: flex;
+    display:flex;
     justify-content: center;
+    align-items: center;
+    height:150px;
 }

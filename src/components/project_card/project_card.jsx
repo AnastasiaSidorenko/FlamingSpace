@@ -10,13 +10,24 @@ export class Project_Card extends React.Component {
         this.state = { bla: "bla" }
     }
 
+    /*<p className="project-card__block-vacancy">Разработчик С++</p>
+                                <p className="project-card__block-vacancy">Разработчик Java</p>
+                                <p className="project-card__block-vacancy">Менеджер проекта</p>
+                                <p className="project-card__block-vacancy">Дизайнер</p>
+                                <p className="project-card__block-vacancy">Дизайнер</p>
+                                */
+
     render() {
+        let vacancies = this.props.vacancies.map((elem, index) => (
+            <p className="project-card__block-vacancy">elem</p>
+        ));
+
         return (
             <div className="project-card">
                 <div className="project-card__info">
                     <div className="project-card__block">
                         <div className="project-card__block-title">
-                            <span className="project-card__project-name">Название проекта</span>
+                            <span className="project-card__project-name">{this.props.title}</span>
                             <span className="project-card__title-delimiter">/</span>
                             <span className="project-card__project-category">Категория</span>
                         </div>
@@ -27,12 +38,7 @@ export class Project_Card extends React.Component {
                     <div className="project-card__block">
                         <div className="project-card__block-title project-card__block-title_left-padded">Вакансии</div>
                         <div className="project-card__block-vacancies">
-                            <p className="project-card__block-vacancy">Разработчик С++</p>
-                            <p className="project-card__block-vacancy">Разработчик Java</p>
-                            <p className="project-card__block-vacancy">Менеджер проекта</p>
-                            <p className="project-card__block-vacancy">Дизайнер</p>
-                            <p className="project-card__block-vacancy">Дизайнер</p>
-                            <p className="project-card__block-vacancy">Дизайнер</p>
+                            {vacancies}
                         </div>
                     </div>
                     <div className="project-card__block">
@@ -47,11 +53,11 @@ export class Project_Card extends React.Component {
                         <div className="project-card__block-events">
                             <div className="project-card__event-group">
                                 <p className="project-card__event-p project-card__event-title">Начало проекта:</p>
-                                <p className="project-card__event-p">01/01/2020</p>
+                                <p className="project-card__event-p">{this.props.startDate}</p>
                             </div>
                             <div>
                                 <p className="project-card__event-p project-card__event-title">Завершение проекта:</p>
-                                <p className="project-card__event-p">01/06/2020</p>
+                                <p className="project-card__event-p">{this.props.finishDate}</p>
                             </div>
                         </div>
                     </div>
