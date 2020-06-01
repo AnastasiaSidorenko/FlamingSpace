@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const reactComp = renderToString(< About />);
-    res.status(200).render('pages/about', { reactApp: reactComp });
+    res.status(200).render('pages/about', { reactApp: reactComp, initialData: false });
 });
 
 export default router;

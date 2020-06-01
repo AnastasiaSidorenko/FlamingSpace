@@ -55,13 +55,13 @@ html, body, #root {
 
 .topheader__link:after {
     content:"";
-    width:  100%;
-    height: 3px;
-    background-color:#D3170B;;
+    width: 50%;
+    height: 2px;
+    background-color:#D3170B;
     opacity: 0;
     position:absolute;
     top:100%;
-    left:0;
+    left:25%;
     z-index:1;
     transition: opacity .1s linear;
 }
@@ -72,19 +72,6 @@ html, body, #root {
 
 .topheader__link:hover:after {
     opacity:1;
-}
-
-.topheader__link:after {
-    content:"";
-    width: 50%;
-    height: 2px;
-    background-color:#D3170B;
-    opacity: 0;
-    position:absolute;
-    top:100%;
-    left:25%;
-    z-index:1;
-    transition: opacity .1s linear;
 }
 
 .topheader__current-section {
@@ -100,8 +87,8 @@ html, body, #root {
     position:absolute;
     top:100%;
     left:25%;
-    z-index:1;
-    transition: opacity .1s linear;
+    opacity:1;
+    z-index:990;
 }
 
 .topheader__auth-button {

@@ -6,6 +6,8 @@
     width:262px;
     height:262px;
     font-size: 16px;
+
+    text-align: center;
 }
 
 /*.event-card__title{
@@ -45,13 +47,12 @@
 }
 
 .event-card__title {
-    width:100%;
+    width:250px;
     font-size:16px;
-    line-height: 19px;
-    padding:4px;
-    height:50px;
+    line-height: 21px;
+    margin:4px;
+    /* was padding: 4px;*/
     overflow: hidden;
-    margin:0;
 
     /* hide text if it more than N lines  */
     overflow: hidden;
@@ -60,12 +61,12 @@
     /* use this value to count block height */
     /*line-height: 1.2em;*/
     /* max-height = line-height (1.2) * lines max number (3) */
-    max-height: 50px; 
+    max-height: 42px; 
     /* fix problem when last visible word doesn't adjoin right side  */
-    text-align: justify;  
+    /*text-align: justify;*/
     /* place for '...' */
-    margin-right: -1em;
-    padding-right: 1em;
+    padding-right: 14px;
+    margin-right: -14px;
   }
   /* create the ... */
   .event-card__title:before {
@@ -86,9 +87,9 @@
     /* set position to right bottom corner of text */
     right: 0;
     /* set width and height */
-    width: 1em;
-    height: 1em;
-    margin-top: 0.2em;
+    width: 14px;
+    height: 14px;
+    margin-top: 3px;
     /* bg color = bg color under block */
     background: white;
   }

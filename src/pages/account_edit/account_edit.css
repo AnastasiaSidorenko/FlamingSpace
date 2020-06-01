@@ -20,7 +20,7 @@
 }
 
 .contact-section__title {
-    height:150px;
+    height:90px;
 }
 
 .section-content {
@@ -50,9 +50,38 @@
     margin-bottom: 10px;
 }
 
+.contact-section__item-label {
+    display: inline-block;
+    width: 35px;
+}
+
 .select-list__status {
     height: 35px;
     width: 200px;
+}
+
+.skill-group {
+    margin-bottom:20px;
+}
+
+.select-list__skill {
+    display: inline-block;
+    height: 35px;
+    width: 400px;
+    margin-right:20px;
+    font-size: 16px;
+}
+
+.select-list__level {
+    display: inline-block;
+    height: 35px;
+    width: 200px;
+    font-size: 16px;
+}
+
+.option {
+    padding:5px 0;
+    font-size: 16px;
 }
 
 /*.main-section{
@@ -80,7 +109,7 @@
     line-height: 40px;
     border-radius: 7px;
     color: white;*/
-    font-size:18px;
+    font-size:16px;
     font-weight:500px;
     color: #648FFF;
     cursor: pointer;
@@ -88,4 +117,8 @@
     font-size: 14px;
     margin-top: 7px;
     text-decoration: none;*/
+}
+
+.submit-container {
+    margin-bottom:40px;
 }

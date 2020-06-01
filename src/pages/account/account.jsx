@@ -112,7 +112,7 @@ class Account extends React.Component {
             <div>
                 <TopHeader />
                 <div className="container">
-                    <BreadCrumbs pages={breadcrumbs} />
+                    <BreadCrumbs pages={this.breadcrumbs} />
                     <div className="user">
                         <div className="user__name-img">
                             <Page_Title title="Елисеев Юлий" className="user__name" />

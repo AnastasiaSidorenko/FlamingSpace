@@ -8,7 +8,7 @@ import { Button_apply_filter } from "../../components/button/button_apply_filter
 import { Project_Card } from "../../components/project_card/project_card";
 import { Button_Functional } from "../../components/button/button_functional";
 import { Page_Title } from "../../components/page_title/page_title";
-//import TopHeader from "../../topheader/topheader";
+import { Link_Functional } from "../../components/button/link_functional";
 
 class Projects extends React.Component {
     constructor(props) {
@@ -82,15 +82,25 @@ class Projects extends React.Component {
                 vacancies={[project.location.country, project.location.country, project.location.country, project.location.country, project.location.country]} />
         ));
 
+        /*<div className="flex__space-between">
+                        <Page_Title title="Проекты" />
+                        <Button_Functional text="Создать проект" link="create" />
+                    </div>*/
+
         return (
             <div>
                 <TopHeader section="Проекты" />
                 <div className="container">
                     <BreadCrumbs pages={this.breadcrumbs} />
-                    <div className="flex__space-between">
-                        <Page_Title title="Проекты" />
-                        <Button_Functional text="Подать заявку" link="create" />
+
+                    <div className="project__heading">
+                        <div>
+                            <Page_Title title="Проекты" />
+                        </div>
+                        <hr className="project__strip" />
+                        <Link_Functional text="Создать проект" link="projects/create" />
                     </div>
+
                     <Search_Bar />
                     {projects}
 

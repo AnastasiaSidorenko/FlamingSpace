@@ -8,17 +8,54 @@ import Select from 'react-select';
 
 class Account_Edit extends React.Component {
     state = {
-        selectedOption: null,
+        skills: [{ skill: "JS разработчик", level: "2" }],
+        status: null
+        //skills = projects: initialProjects.results,
     };
-    handleChange = selectedOption => {
+
+    handleChangeStatus = status => {
         this.setState(
-            { selectedOption },
-            () => console.log(`Option selected:`, this.state.selectedOption)
+            { status },
+            () => console.log(`Option selected:`, this.state.status)
         );
     };
 
+    handleChange = (event, index, type) => {
+        /*this.setState({ [name]: event.target.value })
+        console.log(this.state)*/
+        const skills = this.state.skills;
+        let value = event.target.value;
+        skills[index][type] = value;
+        this.setState({ skills: skills });
+        console.log(this.state)
+    }
+
+    addSkill = () => {
+        this.setState({ skills: [...this.state.skills, { skill: null, level: null }] })
+    }
+
+    SubmitChanges() {
+        //sent results to API
+    }
+
     render() {
-        const { selectedOption } = this.state;
+        //const { selectedOption } = this.state;
+
+        let skills = this.state.skills.map((item, index) => (
+            <div className="skill-group">
+                <select key={index} className="select-list__skill" value={item.skill} onChange={event => this.handleChange(event, index, "skill")}>
+                    <option className="option" value="" disabled selected>Выберете компетенцию</option>
+                    <option className="option" value="C++ разработчик">C++ разработчик</option>
+                    <option className="option" value="JS разработчик">JS разработчик</option>
+                </select>
+                <select key={0 - index} className="select-list__level" value={item.level} onChange={event => this.handleChange(event, index, "level")} >
+                    <option className="option" value="" disabled selected>Уровень</option>
+                    <option className="option" value="1">Начальный</option>
+                    <option className="option" value="2">Средний</option>
+                    <option className="option" value="3">Высокий</option>
+                </select>
+            </div>
+        ));
 
         return (
             <div>
@@ -32,41 +69,42 @@ class Account_Edit extends React.Component {
                             <hr className="section-titles__delimiter" />
                             <p className="skills-section__title">Компетенции</p>
                         </div>
-                        <form onSubmit="{this.add}" ref="form" className="form">
+                        <form onSubmit={this.SubmitChanges} ref="form" className="form">
                             <div className="main-section section-content">
                                 <div className="form__item">
                                     <label className="main-section__item-label form__item-label">Nickname</label>
-                                    <input className="main-section__item-field form__item-field"></input>
+                                    <input className="main-section__item-field form__item-field" maxLength="30"></input>
                                 </div>
                                 <div className="form__item">
                                     <label className="main-section__item-label form__item-label">Статус</label>
-                                    <Select className="select-list__status" value={selectedOption} onChange={this.handleChange}
+                                    <Select className="select-list__status" value={this.state.status} onChange={this.handleChangeStatus}
                                         options={[{ value: 'ищу команду', label: 'ищу команду' }, { value: 'занят', label: 'занят' }]}
                                         placeholder="Статус" />
                                 </div>
                                 <div className="form__item">
                                     <label className="main-section__item-label form__item-label">Должность</label>
-                                    <input className="main-section__item-field form__item-field"></input>
+                                    <input className="main-section__item-field form__item-field" maxLength="30"></input>
                                 </div>
                             </div>
 
                             <div className="contact-section section-content">
                                 <div className="form__item">
-                                    <label className="contact-section__item-label form__item-label">VK</label>
-                                    <input className="contact-section__item-field form__item-field"></input>
+                                    <label className="form__item-label contact-section__item-label">VK :</label>
+                                    <input className="contact-section__item-field form__item-field" maxLength="50"></input>
                                 </div>
                                 <div className="form__item">
-                                    <label className="contact-section__item-label form__item-label">GIT</label>
-                                    <input className="contact-section__item-field form__item-field"></input>
+                                    <label className="form__item-label contact-section__item-label">Git :</label>
+                                    <input className="contact-section__item-field form__item-field" maxLength="50"></input>
                                 </div>
                             </div>
 
                             <div className="skills-section section-content">
-                                <div>
-                                </div>
-                                <p className="skills-section__add-competency-button" >Добавить компетенцию</p>
+                                {skills}
+                                <p onClick={this.addSkill} className="skills-section__add-competency-button" >Добавить компетенцию</p>
                             </div>
-                            <Button_Functional type="submit" text="Сохранить изменения" />
+                            <div className="submit-container">
+                                <Button_Functional type="submit" text="Сохранить изменения" />
+                            </div>
                         </form>
                     </div>
                 </div >

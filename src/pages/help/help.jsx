@@ -10,7 +10,7 @@ class Help extends React.Component {
     render() {
         return (
             <div>
-                <TopHeader />
+                <TopHeader section="Помощь" />
                 <BreadCrumbs pages={this.breadcrumbs} />
                 <h1>HELP</h1>
             </div>

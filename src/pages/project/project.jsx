@@ -57,7 +57,7 @@ class Project extends React.Component {
                                 <div className="events__items">
                                     <Event_Card className="events__event" img={img} title="Окрестности Тулы оросил боевой клич героев" link="#" />
                                     <Event_Card className="events__event" img={img} title="Частокол на границе развеял последние сомнения" link="#" />
-                                    <Event_Card className="events__event" title="Частокол на границе развеял последние сомнения ааааааааа аааааа ааааа ааааааа ааааа " link="#" />
+                                    <Event_Card className="events__event" title="Частокол на границе развеял последние сомнения ааааа аааааа ааааа ааааааа ааааа " link="#" />
                                 </div>
                             </div>
 

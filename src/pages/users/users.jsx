@@ -92,7 +92,7 @@ class Users extends React.Component {
 
         return (
             <div>
-                <TopHeader />
+                <TopHeader section="Участники" />
                 <div className="container">
                     <BreadCrumbs pages={this.breadcrumbs} />
                     <Page_Title title="Участники" />

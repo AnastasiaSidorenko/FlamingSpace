@@ -19,7 +19,7 @@ router.get("/edit", async (req, res) => {
     }
     if ((req.cookies.userIdCookie == userID) && (req.params.ID == userID)) {*/
     const reactComp = renderToString(< Account_Edit />);
-    res.status(200).render('pages/account_edit', { reactApp: reactComp });
+    res.status(200).render('pages/account_edit', { reactApp: reactComp, initialData: false });
     /* }
      else {
          res.send("<h2>Это не ваш аккаунт!</h2>");
@@ -30,7 +30,7 @@ router.get("/edit", async (req, res) => {
 
 router.get('/', async (req, res) => {
     const reactComp = renderToString(< Account />);
-    res.status(200).render('pages/account', { reactApp: reactComp });
+    res.status(200).render('pages/account', { reactApp: reactComp, initialData: false });
 });
 
 router.get("/:ID", async (req, res) => {
@@ -46,7 +46,7 @@ router.get("/:ID", async (req, res) => {
     if ((req.cookies.userIdCookie == userID) && (req.params.ID == userID)) {
     */
     const reactComp = renderToString(< Account />);
-    res.status(200).render('pages/account', { reactApp: reactComp });
+    res.status(200).render('pages/account', { reactApp: reactComp, initialData: false });
 
     /*
 }
@@ -67,7 +67,7 @@ router.get("/:ID", async (req, res) => {
     }
     if ((req.cookies.userIdCookie == userID) && (req.params.ID == userID)) {
         const reactComp = renderToString(< Account />);
-        res.status(200).render('pages/account', { reactApp: reactComp });
+        res.status(200).render('pages/account', { reactApp: reactComp, initialData: false });
     }
     else {
         res.send("<h2>Это не ваш аккаунт!</h2>");

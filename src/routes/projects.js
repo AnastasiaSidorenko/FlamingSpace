@@ -21,12 +21,12 @@ router.get('/', async (req, res) => {
 router.get('/create', async (req, res) => {
     //if not authorized redirect to authentication
     const reactComp = renderToString(< Project_Create />);
-    res.status(200).render('pages/project_create', { reactApp: reactComp });
+    res.status(200).render('pages/project_create', { reactApp: reactComp, initialData: false });
 });
 
 router.get('/:ID', async (req, res) => {
     const reactComp = renderToString(< Project />);
-    res.status(200).render('pages/project', { reactApp: reactComp, projectID: req.params.ID }); //add projectID: ID
+    res.status(200).render('pages/project', { reactApp: reactComp, initialData: false, projectID: req.params.ID }); //add projectID: ID
 });
 
 /*router.get('/:ID', async (req, res) => {

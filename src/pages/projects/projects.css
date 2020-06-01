@@ -18,3 +18,20 @@
 .capture {
     font-size:20px;
 }
+
+.project__heading {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.project__strip {
+    display:inline-block;
+    border-top: 1px solid #E8E8E8;
+    width:500px;
+    /*margin-top: 20px;*/
+}
+
+.project__heading .button_functional {
+    background-color: #65247F;
+}

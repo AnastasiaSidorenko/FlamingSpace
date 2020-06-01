@@ -14,6 +14,7 @@ import account from "./routes/account";
 import path from "path";
 
 // Server var
+var helmet = require('helmet');
 const app = express();
 const cookieParser = require('cookie-parser')
 
@@ -24,6 +25,8 @@ app.set("views", path.join(__dirname, 'static', "views"));
 app.set("view engine", "ejs");
 
 // Middleware
+app.use(helmet());
+
 app.use(compression())
 app.use(cookieParser())
 app.use('/public', express.static(path.join(__dirname, 'static', 'public')));
