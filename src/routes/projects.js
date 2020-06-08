@@ -7,6 +7,8 @@ import Project_Create from "../pages/project_create/project_create";
 
 const router = express.Router();
 
+let _redirectURL = "http://localhost:3000/auth"
+
 router.get('/', async (req, res) => {
     Projects.requestInitialData()
         .then(initialData => {
@@ -19,21 +21,20 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/create', async (req, res) => {
-    //if not authorized redirect to authentication
-    const reactComp = renderToString(< Project_Create />);
-    res.status(200).render('pages/project_create', { reactApp: reactComp, initialData: false });
+
+    let token = await loggedUsers.get(req.cookies.userIdCookie)
+    if (token == req.cookies.userToken) {
+        const reactComp = renderToString(< Project_Create />);
+        res.status(200).render('pages/project_create', { reactApp: reactComp, initialData: false });
+    }
+    else {
+        res.redirect(_redirectURL);
+    }
 });
 
 router.get('/:ID', async (req, res) => {
     const reactComp = renderToString(< Project />);
     res.status(200).render('pages/project', { reactApp: reactComp, initialData: false, projectID: req.params.ID }); //add projectID: ID
 });
-
-/*router.get('/:ID', async (req, res) => {
-    ID = req.params.ID;
-    const reactComp = renderToString(< Project />);
-    res.status(200).render('pages/project', { reactApp: reactComp, projectID: ID });
-});*/
-
 
 export default router;

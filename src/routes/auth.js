@@ -3,6 +3,7 @@ import axios from "axios";
 import React from "react";
 import { renderToString } from "react-dom/server"
 import Auth from "../pages/auth/auth"
+import Users from "../pages/users/users";
 
 const router = express.Router();
 
@@ -10,8 +11,7 @@ const router = express.Router();
 const appID = '031140a5c46d6e46b49e5a7c2c35c3c2'
 const appSecret = 'ab37e3db90e513e1dcfee27312455c18'
 
-let userID = '';
-let access_token = ''
+
 let _indexURL = "http://localhost:3000/"
 let _redirectURL = "http://localhost:3000/auth/redirect"
 
@@ -27,13 +27,30 @@ router.get('/redirect', async (req, res) => {
     })
         .then((response) => {
             let userID = response.data.user_id;
-            access_token = response.data.access_token;
+            let access_token = response.data.access_token;
             console.log(response);
             console.log(userID);
             console.log(access_token)
-            res.cookie("userIdCookie", userID)
+
+            await loggedUsers.set(userID, access_token);
+
+            //Saving pic url in cookie
+            axios({
+                method: 'get',
+                url: `https://leader-id.ru/api/users/current`,
+            })
+                .then((result) => {
+                    let pic = result.Data.Photo.Medium
+                    if (pic) {
+                        res.cookie("userPic", pic)
+                    }
+                })
+
+            res.cookie("userIdCookie", userID, { secure: true })
+            res.cookie("userIdCookie", userID, { secure: true })
+            res.cookie("userToken", access_token, { secure: true })
+
             res.redirect(_indexURL)
-            exports.userID = userID;
         })
         .catch(error => {
             console.log(error)
@@ -41,14 +58,12 @@ router.get('/redirect', async (req, res) => {
 })
 
 router.get('/logout', async (req, res) => {
-    access_token = '';
-    userID = '';
-    exports.userID = '';
-    res.clearCookie("userIdFS")
+    await loggedUsers.delete(req.cookies.userIdCookie);
+
+    res.clearCookie("userIdCookie")
+    res.clearCookie("userToken")
+    res.clearCookie("userPic", pic)
     res.redirect(_indexURL)
-    // const reactComp = renderToString(< Auth />); // So that program doesn't break
-    //res.status(200).render('pages/index', { reactApp: reactComp });
-    //const requestToken = req.query.code
 });
 
 export default router;

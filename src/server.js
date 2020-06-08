@@ -13,10 +13,15 @@ import account from "./routes/account";
 
 import path from "path";
 
+// One of the following
+
 // Server var
 var helmet = require('helmet');
+const Keyv = require('keyv');
 const app = express();
 const cookieParser = require('cookie-parser')
+
+var loggedUsers = new Keyv();
 
 exports.apiURL = "api.flamingspace.sevsu.ru"
 
