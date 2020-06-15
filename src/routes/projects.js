@@ -17,7 +17,6 @@ router.get('/', async (req, res) => {
             res.status(200).render('pages/projects', { reactApp: reactComp, initialData: data });
         })
         .catch(error => console.log(error));
-
 });
 
 router.get('/create', async (req, res) => {

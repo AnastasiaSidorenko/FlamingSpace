@@ -38,7 +38,7 @@ class Users extends React.Component {
     static requestInitialData() {
         //const _url = "https://api.flamingspace.sevsu.ru/users/0/20"
         // return fetch("https://api.flamingspace.sevsu.ru/users/0/20")
-        return fetch("https://api.randomuser.me/?results=2")
+        return fetch("https://api.randomuser.me/?results=20")
             .then(response => response.json())
     };
 
@@ -49,7 +49,7 @@ class Users extends React.Component {
     fetchUsers = () => {
         this.setState({ loading: true });
         //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20${this.state.filter}`)
-        fetch("https://api.randomuser.me/?results=2")
+        fetch("https://api.randomuser.me/?results=20")
             .then(response => response.json())
             .then(data => {
                 console.log("data", data)
@@ -68,7 +68,7 @@ class Users extends React.Component {
     fetchFilteredUsers = (filter) => {
         this.setState({ users: [], loading: true, page: 0, filter: filter });
         //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20`)
-        let _url = "http://localhost:3012/users/0/20" + filter;
+        let _url = "http://localhost:3000/users/0/20" + filter;
         fetch(_url)
             .then(response => response.json())
             .then(data => {
@@ -142,7 +142,7 @@ class Search_Bar extends React.Component {
         return (
             <div>
                 <div className="flex__space-between">
-                    <Search name="fio" onChange={event => { this.handleChange(event, "fio") }} placeholder="Поиск по ФИО..." />
+                    <Search name="fio" onChange={event => { this.handleChange(event, "fio") }} placeholder="Поиск по Фамилии и имени.." />
                     <Search placeholder="Выберите сферу деятельности..." />
                     <Search name="status" onChange={event => { this.handleChange(event, "status") }} placeholder="Выберите статус..." />
                     <Search placeholder="Выберите статус..." />

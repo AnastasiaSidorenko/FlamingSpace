@@ -1,6 +1,6 @@
 import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
-import pageCSS from "./user.css"
+import pageCSS from "./account.css"
 import user from "./user.png"
 import icon__leader from "./icon__leader-id.svg"
 import icon__vk from "./icon__vk.svg"

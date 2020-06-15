@@ -3,7 +3,7 @@ import React from "react";
 import { renderToString } from "react-dom/server"
 import Account from "../pages/account/account"
 import Account_Edit from "../pages/account_edit/account_edit"
-import User from "../pages/user/user";
+import User from "../pages/account/user";
 
 const router = express.Router();
 let userID

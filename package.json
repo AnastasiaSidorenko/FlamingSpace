@@ -6,6 +6,7 @@
   "scripts": {
     "webpack": "webpack -d",
     "mine": "nodemon --exec cross-env ./node_modules/.bin/babel-node src/server.js",
+    "dev-s": "nodemon --exec 'npm run webpack &&  COMPILER_ENV=server babel-node src/server.js'",
     "dev": "nodemon --exec 'npm run webpack && set COMPILER_ENV=server cross-env ./node_modules/.bin/babel-node src/server.js'",
     "dev1": "nodemon --exec cross-env ./node_modules/.bin/babel-node src/server.js",
     "dev2": "do it before dev1 set COMPILER_ENV=server",
@@ -21,7 +22,7 @@
   "keywords": [
     "FlamingSpace"
   ],
-  "author": "smoketrees",
+  "author": "Sidorenko Anastasiia",
   "license": "MIT",
   "bugs": {
     "url": ""
@@ -66,6 +67,7 @@
     "compression": "^1.7.4",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
+    "helmet": "^3.22.1",
     "keyv": "^4.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.12.0",

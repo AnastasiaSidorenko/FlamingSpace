@@ -1,6 +1,5 @@
 import express from "express";
 import compression from "compression";
-//import axios from "axios";
 
 import index from "./routes/index";
 import users from "./routes/users";
@@ -35,10 +34,7 @@ app.use(helmet());
 app.use(compression())
 app.use(cookieParser())
 app.use('/public', express.static(path.join(__dirname, 'static', 'public')));
-//app.use('/styles', express.static(path.join(__dirname + 'styles')))
-//app.use(express.static(path.join(__dirname, 'public')));
 
-var userID;
 //Routes
 app.use("/", index);
 app.use("/users", users);

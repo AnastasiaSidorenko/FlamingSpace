@@ -1,16 +1,11 @@
 import express from "express";
 import axios from "axios";
-import React from "react";
-import { renderToString } from "react-dom/server"
-import Auth from "../pages/auth/auth"
-import Users from "../pages/users/users";
 
 const router = express.Router();
 
 //APP Keys for Leader_ID
 const appID = '031140a5c46d6e46b49e5a7c2c35c3c2'
 const appSecret = 'ab37e3db90e513e1dcfee27312455c18'
-
 
 let _indexURL = "http://localhost:3000/"
 let _redirectURL = "http://localhost:3000/auth/redirect"
@@ -32,9 +27,8 @@ router.get('/redirect', async (req, res) => {
             console.log(userID);
             console.log(access_token)
 
-            await loggedUsers.set(userID, access_token);
+            loggedUsers.set(userID, access_token);
 
-            //Saving pic url in cookie
             axios({
                 method: 'get',
                 url: `https://leader-id.ru/api/users/current`,
@@ -46,7 +40,6 @@ router.get('/redirect', async (req, res) => {
                     }
                 })
 
-            res.cookie("userIdCookie", userID, { secure: true })
             res.cookie("userIdCookie", userID, { secure: true })
             res.cookie("userToken", access_token, { secure: true })
 

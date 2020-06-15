@@ -4,7 +4,6 @@ import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 import { Event_Card } from "../../components/event_card/event_card";
 import { Page_Title } from "../../components/page_title/page_title";
 import { Indicator } from "../../components/indicator/indicator";
-//import TopHeader from "../../topheader/topheader";
 import img from "./img.png"
 import member from "./member.png"
 import { Link_Functional } from "../../components/button/link_functional";
@@ -13,7 +12,7 @@ import pageCSS from "./project.css"
 
 class Project extends React.Component {
 
-    breadcrumbs = [{ link: "/projects", title: "Проекты" }, { link: "#", title: "Проект тыры ты" }];
+    breadcrumbs = [{ link: "/projects", title: "Проекты" }, { link: "#", title: "Название проекта" }];
 
     render() {
         return (

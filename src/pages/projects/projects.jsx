@@ -81,12 +81,6 @@ class Projects extends React.Component {
                 img={project.picture.large} startDate={project.dob.date} finishDate={project.dob.date}
                 vacancies={[project.location.country, project.location.country, project.location.country, project.location.country, project.location.country]} />
         ));
-
-        /*<div className="flex__space-between">
-                        <Page_Title title="Проекты" />
-                        <Button_Functional text="Создать проект" link="create" />
-                    </div>*/
-
         return (
             <div>
                 <TopHeader section="Проекты" />

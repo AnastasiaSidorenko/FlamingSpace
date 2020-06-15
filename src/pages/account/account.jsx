@@ -52,61 +52,16 @@ class Account extends React.Component {
                     <div className="project-slider-content">
                         <div className="project-slider-content__item">
                             <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                            <span className="project-slider-content__project-name">Название проекта</span>
                         </div>
                         <div className="project-slider-content__item">
                             <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
-                        </div>
-                        <div className="project-slider-content__item">
-                            <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
-                        </div>
-                        <div className="project-slider-content__item">
-                            <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
-                        </div>
-                        <div className="project-slider-content__item">
-                            <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
-                        </div>
-                        <div className="project-slider-content__item">
-                            <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
-                        </div>
-                        <div className="project-slider-content__item">
-                            <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
-                        </div>
-                        <div className="project-slider-content__item">
-                            <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
-                        </div>
-                        <div className="project-slider-content__item">
-                            <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
-                        </div>
-                        <div className="project-slider-content__item">
-                            <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
-                        </div>
-                        <div className="project-slider-content__item">
-                            <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
-                        </div>
-                        <div className="project-slider-content__item">
-                            <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
-                        </div>
-                        <div className="project-slider-content__item">
-                            <Indicator className="project-slider-content__indicator" color="red" />
-                            <span className="project-slider-content__project-name">Какой-то проект</span>
+                            <span className="project-slider-content__project-name">Название проекта</span>
                         </div>
                     </div>
                 );
             }
         }
-
 
         return (
             <div>
