@@ -87,7 +87,7 @@ class Users extends React.Component {
     render() {
         let users = this.state.users.map((user, index) => (
             <User_Card key={index} FLname={`${user.name.first}  ${user.name.last}`} img={user.picture.large}
-                nickname={user.location.country} />
+                nickname={user.location.country} id="1234" />
         ));
 
         return (

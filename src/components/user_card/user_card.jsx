@@ -26,7 +26,7 @@ export class User_Card extends React.Component {
                 <p className="user-card__skill">Разработчик Java</p>
                 <p className="user-card__skill">Менеджер проекта</p>
                 <p className="user-card__skill">Дизайнер</p>
-                <Button_Show_Details link="#" />
+                <Button_Show_Details link={`/account/${this.props.id}`} />
             </div >
         )
     }

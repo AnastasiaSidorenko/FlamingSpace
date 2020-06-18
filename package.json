@@ -9,7 +9,7 @@
     "dev-s": "nodemon --exec 'npm run webpack &&  COMPILER_ENV=server babel-node src/server.js'",
     "dev": "nodemon --exec 'npm run webpack && set COMPILER_ENV=server cross-env ./node_modules/.bin/babel-node src/server.js'",
     "dev1": "nodemon --exec cross-env ./node_modules/.bin/babel-node src/server.js",
-    "dev2": "do it before dev1 set COMPILER_ENV=server",
+    "dev2": "do it before dev1 set COMPILER_ENV=server ",
     "webpack-production": "NODE_ENV=production webpack -p",
     "babel-production": "NODE_ENV=production COMPILER_ENV=server babel --out-dir dist src",
     "start": "node dist/server.js",
