@@ -32,7 +32,7 @@ class Projects extends React.Component {
         }
     }
 
-    breadcrumbs = [{ link: "№", title: "Проекты" }];
+    breadcrumbs = [{ link: "#", title: "Проекты" }];
 
     static requestInitialData() {
         // return fetch("https://api.flamingspace.sevsu.ru/projects/0/20")

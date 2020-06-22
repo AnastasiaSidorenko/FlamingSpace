@@ -10,7 +10,6 @@ class Account_Edit extends React.Component {
     state = {
         skills: [{ skill: "JS разработчик", level: "2" }],
         status: null
-        //skills = projects: initialProjects.results,
     };
 
     handleChangeStatus = status => {

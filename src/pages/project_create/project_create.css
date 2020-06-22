@@ -50,3 +50,7 @@
     background-color: grey;
     outline-width:0;
 }
+
+.description {
+    font-size:14px;
+}

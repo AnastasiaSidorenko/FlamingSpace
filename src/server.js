@@ -65,7 +65,7 @@ app.get('/auth', async (req, res) => {
     res.redirect(`https://leader-id.ru/api/oauth/authorize?client_id=${appID}&redirect_uri=${_redirectURL}&response_type=code&state`)
 })
 
-app.get('/auth/redirect', async (req, res) => {
+app.get('/auth/redirect', async (req, res, next) => {
     let _redirectURL = "http://localhost:3000/auth/redirect"
     let auth_code = req.query.code
     axios({
@@ -81,14 +81,17 @@ app.get('/auth/redirect', async (req, res) => {
 
             loggedUsers.set(userID, access_token);
 
+            let pic;
+
             axios({
                 method: 'get',
                 url: `https://leader-id.ru/api/users/current?access_token=${access_token}`,
             })
                 .then((result) => {
                     console.log("userdata", result)
-                    if (result.data.Data.Photo) {
-                        let pic = result.data.Data.Photo.Medium
+                    console.log("userPhoto", result.data.Data.Photo.Medium)
+                    if (result.data.Data.Photo.Medium) {
+                        pic = result.data.Data.Photo.Medium;
                         res.cookie("userPic", pic)
                         console.log("pic", pic)
                     }
@@ -96,14 +99,18 @@ app.get('/auth/redirect', async (req, res) => {
 
             res.cookie("userIdCookie", userID)
             res.cookie("userToken", access_token)
-            res.redirect(_indexURL)
+            if (pic) {
+                res.cookie("userPic", pic)
+            }
+            next()
+            //res.redirect(_indexURL)
             //res.cookie("userIdCookie", userID, { secure: true })
             // res.cookie("userToken", access_token, { secure: true })
         })
         .catch(error => {
             console.log(error)
         })
-})
+}, function (req, res, next) { res.redirect(_indexURL) })
 
 app.get('/auth/logout', async (req, res) => {
     await loggedUsers.delete(req.cookies.userIdCookie);
@@ -116,8 +123,6 @@ app.get('/auth/logout', async (req, res) => {
     res.redirect(_indexURL)
 });
 
-//
-//account
 let _redirectURL = "http://localhost:3000/auth"
 
 app.get("/account/edit", async (req, res) => {
@@ -144,7 +149,6 @@ app.get("/account/:ID", async (req, res) => {
         res.status(200).render('pages/user', { reactApp: reactComp, initialData: false });
     }
 });
-//
 
 const port = process.env.PORT || 3000;
 

@@ -1,4 +1,17 @@
 .text {
     width: 800px;
-    font-size:22px;
+    font-size:20px;
+    line-height:30px;
+}
+
+.mobileapp__img{
+    display:inline-block;
+    padding-right:20px;
+}
+
+.content {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:25px;
 }

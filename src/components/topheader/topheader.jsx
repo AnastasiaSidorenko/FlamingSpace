@@ -16,7 +16,7 @@ export class TopHeader extends React.Component {
     }
 
     render() {
-        console.log(this.state.cookie_userID)
+        //console.log(this.state.cookie_userID)
         return (
             <div className="topheader">
                 <img className="topheader__logo" alt="Площадка проектов лого" src={logo} />

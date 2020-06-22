@@ -1,26 +1,31 @@
 import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
-import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 //import TopHeader from "../../topheader/topheader";
 import pageCSS from "./mobileapp.css"
+import img1 from "./main.jpg"
+import img2 from "./events.jpg"
+import img3 from "./calendar.jpg"
 
 class MobileApp extends React.Component {
-
-    breadcrumbs = [{ link: "#", title: "Мобильное приложение" }];
 
     render() {
         return (
             <div>
                 <TopHeader section="Мобильное приложение" />
                 <div className="container">
-                    <BreadCrumbs pages={this.breadcrumbs} />
-                    <div className="text">
-                        <p> У Площадки Проектов и Точки Кипения есть мобильное приложение </p>
-                        <p>Скачать мобильное приложение можно по ссылке:</p><a href="#"></a>
+                    <div className="content">
+                        <div className="text">
+                            <p> Мобильное приложение "FlamingSpace SevSU"<br />
+                        Скачивание доступно по <a href="#">ссылке</a></p>
+                        </div>
+                        <div>
+                            <img className="mobileapp__img" src={img1} />
+                            <img className="mobileapp__img" src={img2} />
+                            <img className="mobileapp__img" src={img3} />
+                        </div>
                     </div>
-                    <img />
                 </div>
-            </div>
+            </div >
         )
     }
 }

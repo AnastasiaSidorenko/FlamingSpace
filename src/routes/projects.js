@@ -21,14 +21,14 @@ router.get('/', async (req, res) => {
 
 router.get('/create', async (req, res) => {
 
-    let token = await loggedUsers.get(req.cookies.userIdCookie)
-    if (token == req.cookies.userToken) {
-        const reactComp = renderToString(< Project_Create />);
-        res.status(200).render('pages/project_create', { reactApp: reactComp, initialData: false });
-    }
-    else {
-        res.redirect(_redirectURL);
-    }
+    // let token = await loggedUsers.get(req.cookies.userIdCookie)
+    // if (token == req.cookies.userToken) {
+    const reactComp = renderToString(< Project_Create />);
+    res.status(200).render('pages/project_create', { reactApp: reactComp, initialData: false });
+    //  }
+    // else {
+    //     res.redirect(_redirectURL);
+    //  }
 });
 
 router.get('/:ID', async (req, res) => {
