@@ -56,6 +56,12 @@
     border-top: 2px solid #E8E8E8;
 }
 
+.user-card__skills{
+    margin:0;
+    padding:0;
+    height: 96px;
+}
+
 .user-card__skill {
     margin:0;
     padding:4px 0;

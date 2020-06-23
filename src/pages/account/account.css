@@ -81,6 +81,11 @@
     font-size: 20px;
     color : #648FFF;
     margin-left:10px;
+    text-decoration: none;
+}
+
+.project-slider-content__project-name:hover {
+    text-decoration: none;
 }
 
 .slider {

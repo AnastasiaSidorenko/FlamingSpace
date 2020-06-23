@@ -51,7 +51,7 @@ class Projects extends React.Component {
             //response
             .then(data => {
                 console.log("data", data)
-                this.setState({ loading: false, page: (this.state.page + 1), users: [...this.state.projects, ...data] });
+                this.setState({ loading: false, page: (this.state.page + 1), users: [...this.state.projects, ...data.data], error: "" });
                 console.log("this.state.projects", this.state.projects)
             })
             .catch(e => {
@@ -74,9 +74,12 @@ class Projects extends React.Component {
                 console.log("this.state.filtered-projects", this.state.data)
             })
             .catch(e => {
-                if (e == "Failed to fetch")
-                    console.log(e);
+                console.log(e);
                 this.setState({ loading: false, error: "Не удалось загрузить данные" })
+                /*if (e == "Failed to fetch") {
+                    console.log(e);
+                    this.setState({ loading: false, error: "Не удалось загрузить данные" })
+                }*/
             });
     }
 
@@ -104,9 +107,9 @@ class Projects extends React.Component {
                     {projects}
 
                     <div className="flex__centered">
-                        <p className="capture">{this.state.loading ? 'Загрузка...' : ''}</p>
-                        <p className="capture">{this.state.error ? this.state.error : ''}</p>
-                        {(this.state.loading && this.state.error == "") ? '' : <Button_Functional text="Показать больше" onClick={this.fetchProjects} />}
+                        <span className="capture">{this.state.loading ? 'Загрузка...' : ''}</span>
+                        <span className="capture">{this.state.error ? this.state.error : ''}</span>
+                        <div>{(this.state.loading) ? '' : <Button_Functional text="Показать больше" onClick={this.fetchProjects} />}</div>
                     </div>
                 </div>
             </div>

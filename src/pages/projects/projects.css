@@ -13,9 +13,13 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    height:150px;
+    height:100px;
+    flex-direction: column;
+    margin-bottom:20px;
 }
 .capture {
+    margin:10px;
+    padding:0;
     font-size:20px;
 }
 

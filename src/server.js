@@ -28,6 +28,7 @@ var helmet = require('helmet');
 const Keyv = require('keyv');
 const app = express();
 const cookieParser = require('cookie-parser')
+var cors = require('cors')
 
 var loggedUsers = new Keyv();
 
@@ -39,6 +40,7 @@ app.set("view engine", "ejs");
 
 // Middleware
 app.use(helmet());
+app.use(cors({ origin: '*' }));
 
 app.use(compression())
 app.use(cookieParser())
@@ -55,8 +57,8 @@ app.use("/help", help);
 //app.use("/account", account);
 
 //auth
-const appID = '031140a5c46d6e46b49e5a7c2c35c3c2'
-const appSecret = 'ab37e3db90e513e1dcfee27312455c18'
+const appID = 'cc4a954744950e6537ff29917ed06344'
+const appSecret = '03a6badbe2f2cb410ca915762cd86c7e'
 
 let _indexURL = "http://localhost:3000/users"
 
@@ -144,10 +146,10 @@ app.get("/account/:ID", async (req, res) => {
         const reactComp = renderToString(< Account />);
         res.status(200).render('pages/account', { reactApp: reactComp, initialData: false });
     }
-    else {
+    /*else {
         const reactComp = renderToString(< User />);
         res.status(200).render('pages/user', { reactApp: reactComp, initialData: false });
-    }
+    }*/
 });
 
 const port = process.env.PORT || 3000;

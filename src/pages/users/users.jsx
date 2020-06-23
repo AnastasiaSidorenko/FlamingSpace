@@ -17,11 +17,11 @@ class Users extends React.Component {
         let initialUsers
         if (props.initialData) {
             initialUsers = props.initialData;
-            //console.log("props data", initialUsers)
+            console.log("props data", initialUsers)
         }
         else {
             initialUsers = JSON.parse(window.__initialData__);
-            //console.log("window data", initialUsers)
+            console.log("window data", initialUsers)
             delete window.__initialData__;
         }
         this.state = {
@@ -29,8 +29,9 @@ class Users extends React.Component {
             users: initialUsers.data,
             page: 0,
             filter: "",
-            error: false
+            error: ""
         }
+        console.log(this.state);
     }
 
     breadcrumbs = [{ link: "#", title: "Участники" }];
@@ -53,15 +54,12 @@ class Users extends React.Component {
             .then(response => response.json())
             .then(data => {
                 console.log("data", data)
-                this.setState({ loading: false, users: [...this.state.users, ...data.data] });
+                this.setState({ loading: false, page: (this.state.page + 1), users: [...this.state.users, ...data.data], error: "" });
                 console.log("this.state.users", this.state.users)
             })
             .catch(e => {
-                if (e == "Failed to fetch") {
-                    this.setState({ loading: false, error: "Не удалось загрузить данные" })
-                }
                 console.log(e);
-                //this.setState({ ...this.state, loading: false });
+                this.setState({ loading: false, error: "Не удалось загрузить данные" })
             });
     }
 
@@ -77,17 +75,16 @@ class Users extends React.Component {
                 console.log("this.state.filtered-users", this.state.users)
             })
             .catch(e => {
-                if (e == "Failed to fetch") {
-                    this.setState({ loading: false, error: "Не удалось загрузить данные" })
-                }
                 console.log(e);
+                this.setState({ loading: false, error: "Не удалось загрузить данные" })
+                //this.setState({ ...this.state, loading: false });
             });
     }
 
     render() {
         let users = this.state.users.map((user, index) => (
-            <User_Card key={index} FLname={`${user.lastname}  ${user.name.firstname}`} img={user.photo}
-                nickname={user.nickname} id={user.id} />
+            <User_Card key={index} FLname={`${user.lastname}  ${user.firstname}`} img={user.photo}
+                nickname={user.nickname} id={user.id} status={user.status} skills={user.competences} />
         ));
 
         return (
@@ -104,9 +101,9 @@ class Users extends React.Component {
                     </div>
 
                     <div className="flex__centered">
-                        <p className="capture">{this.state.loading ? 'Загрузка...' : ''}</p>
-                        <p className="capture">{this.state.error ? this.state.error : ''}</p>
-                        {(this.state.loading && !this.state.error) ? '' : <Button_Functional text="Показать больше" onClick={this.fetchUsers} />}
+                        <span className="capture">{this.state.loading ? 'Загрузка...' : ''}</span>
+                        <span className="capture">{this.state.error ? this.state.error : ''}</span>
+                        <div>{(this.state.loading) ? '' : <Button_Functional text="Показать больше" onClick={this.fetchUsers} />}</div>
                     </div>
                 </div >
             </div >

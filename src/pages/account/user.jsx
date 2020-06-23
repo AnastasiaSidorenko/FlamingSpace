@@ -1,18 +1,29 @@
 import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
 import pageCSS from "./account.css"
-import user from "./user.png"
-import icon__leader from "./icon__leader-id.svg"
-import icon__vk from "./icon__vk.svg"
+import user from "./img/user.png"
+import icon__leader from "./img/icon__leader-id.svg"
+import icon__vk from "./img/icon__vk.svg"
 import { Indicator } from "../../components/indicator/indicator";
 import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 import { Page_Title } from "../../components/page_title/page_title";
 
 class User extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props);
+        let initialProjects
+        if (props.initialData) {
+            initialProjects = props.initialData;
+            console.log("props data", initialProjects)
+        }
+        else {
+            initialProjects = JSON.parse(window.__initialData__);
+            console.log("window data", initialProjects)
+            delete window.__initialData__;
+        }
         this.state = {
-            whichComponentToShow: "Information"
+            whichComponentToShow: "Information",
+            data: initialProjects.data,
         }
     }
 
@@ -48,6 +59,18 @@ class User extends React.Component {
             else {
                 return (
                     <div className="project-slider-content">
+                        {this.state.data.projects.map((project, index) => (
+                            <div className="project-slider-content__item">
+                                <Indicator className="project-slider-content__indicator" color="red" />
+                                <a className="project-slider-content__project-name" href={`/projects/${project.id}`}>{project.name}</a>
+                            </div>))}
+
+                        let projects = this.state.projects.map((project, index) => (
+                        <Project_Card key={index} link={`/projects/${project.id}`} title={project.name} category={project.category}
+                            description={project.description} status={project.status} startDate={project.projectstart} finishDate={project.projectend}
+                            vacancies={project.vacancies} />
+        ));
+
                         <div className="project-slider-content__item">
                             <Indicator className="project-slider-content__indicator" color="red" />
                             <span className="project-slider-content__project-name">Название проекта</span>
@@ -78,8 +101,8 @@ class User extends React.Component {
                     <div className="user">
                         <div className="user__name-img">
                             <Page_Title title="Елисеев Юлий" className="user__name" />
-                            <div className="user__img-container"><img className="user__img" alt="Изображение пользователя" src={user} /></div>
-                            <p className="user__nickname">@eliseev</p>
+                            <div className="user__img-container"><img className="user__img" alt="Изображение пользователя" src={this.state.data.info.photo} /></div>
+                            <p className="user__nickname">@{this.state.data.info.nickname}</p>
                         </div>
 
                         <div className="slider">

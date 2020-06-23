@@ -8,13 +8,15 @@ class Error extends React.Component {
         let data
         if (props.initialData) {
             data = props.initialData;
+            console.log("props data", initialProjects)
         }
         else {
             data = JSON.parse(window.__initialData__);
+            console.log("window data", initialProjects)
             delete window.__initialData__;
         }
         this.state = {
-            message: data.message,
+            message: data.error_description,
         }
     }
 
