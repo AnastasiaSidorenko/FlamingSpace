@@ -4,6 +4,7 @@ import { Button_Functional } from "../../components/button/button_functional";
 import pageCSS from "./project_create.css"
 import { Page_Title } from "../../components/page_title/page_title";
 import Select from 'react-select';
+import cookie from 'react-cookies'
 
 class Project_Create extends React.Component {
     state = {
@@ -11,12 +12,13 @@ class Project_Create extends React.Component {
         title: "",
         category: "",
         description: "",
-        data_start: "",
-        data_finish: ""
+        date_start: "",
+        date_finish: ""
     }
 
     handleChange = (event, name) => {
         this.setState({ [name]: event.target.value })
+        console.log(`State:`, this.state);
     }
 
     handleChangeCategory = category => {
@@ -26,36 +28,54 @@ class Project_Create extends React.Component {
         );
     };
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
 
-        let data = {
-            userid: this.state.userID,
+        /*let data = {
             name: this.state.title,
-            category: this.state.category,
+            category: this.state.category.value,
             description: this.state.description,
-            projectstart: this.state.data_start,
-            projectend: this.state.data_finish,
-        };
+            projectstart: this.state.date_start,
+            projectend: this.state.date_finish,
+        };*/
+        let data;
 
-        if (this.state.userid && this.state.title !== '' && this.state.category !== '' &&
+        if (this.state.userid !== '' && this.state.title !== '' && this.state.category !== '' &&
             this.state.description !== '' && this.state.data_start !== '') {
-            // console.log('name', this.state.name, 'phone ', this.state.phone, 'address ', this.state.address);
+            if (this.state.date_finish !== '') {
+                data = {
+                    name: this.state.title,
+                    category: this.state.category.value,
+                    description: this.state.description,
+                    projectstart: this.state.date_start,
+                };
+            }
+            else {
+                data = {
+                    name: this.state.title,
+                    category: this.state.category.value,
+                    description: this.state.description,
+                    projectstart: this.state.date_start,
+                    projectend: this.state.date_finish,
+                };
+            }
 
-            fetch("example.com/:id", {
+            // console.log('name', this.state.name, 'phone ', this.state.phone, 'address ', this.state.address);
+            console.log("forming fetch", data);
+            fetch(`http://api.flamingspace.sevsu.ru/projects/edit/userid=${this.state.userID}`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                mode: "cors",
                 body: JSON.stringify(data)
             })
-                .then(response => response.json())
-                .then(data => console.log(data))
+            console.log("json data", JSON.stringify(data))
+                .then(response => console.log(response))
                 .catch(error => console.log(error));
 
-        } else {
+        }
+        else {
             alert('no')
         }
     }
@@ -67,7 +87,7 @@ class Project_Create extends React.Component {
                 <div className="container">
                     <Page_Title title="Создать проект" />
                     <hr />
-                    <form className="form" method="POST" onSubmit={this.handleSubmit}>
+                    <form className="form" onSubmit={this.handleSubmit}>
                         <div className="form__item">
                             <label className="form__item-label">Название</label>
                             <input onChange={event => { this.handleChange(event, "title") }}
@@ -86,12 +106,12 @@ class Project_Create extends React.Component {
                         </div>
                         <div className="form__item">
                             <label className="form__item-label">Дата начала</label>
-                            <input type="text" onChange={event => { this.handleChange(event, "data_start") }}
+                            <input type="text" onChange={event => { this.handleChange(event, "date_start") }}
                                 className="form__item-field form__item-field_date" name="input" placeholder="ДД.ММ.ГГГГ" />
                         </div>
                         <div className="form__item">
                             <label className="form__item-label">Дата окончания</label>
-                            <input type="text" onChange={event => { this.handleChange(event, "data_finish") }}
+                            <input type="text" onChange={event => { this.handleChange(event, "date_finish") }}
                                 className="form__item-field form__item-field_date" name="input" placeholder="ДД.ММ.ГГГГ" />
                         </div>
                         <div className="submit-container">

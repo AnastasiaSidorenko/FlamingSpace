@@ -25,34 +25,38 @@ class Projects extends React.Component {
         }
         this.state = {
             loading: false,
-            projects: initialProjects.results,
+            projects: initialProjects.data,
             page: 0,
             filter: "",
-            error: false
+            error: ""
         }
+        console.log(this.state.projects);
     }
 
     breadcrumbs = [{ link: "#", title: "Проекты" }];
 
     static requestInitialData() {
-        // return fetch("https://api.flamingspace.sevsu.ru/projects/0/20")
-        return fetch("https://api.randomuser.me/?results=5")
+        return fetch("https://api.flamingspace.sevsu.ru/projects/0/20")
+            //return fetch("https://api.randomuser.me/?results=5")
             .then(response => response.json())
 
     };
 
     fetchProjects = () => {
         this.setState({ loading: true });
-        //fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page + 1}/20`)
-        fetch("https://api.randomuser.me/?results=2")
-            .then(response => response.json())
+        //let response = await fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page + 1}/20`, { mode: 'no-cors' });
+        fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page + 1}/20`)
+            //fetch("https://api.randomuser.me/?results=2")
+            //.then(response => response.json())
+            //response
             .then(data => {
                 console.log("data", data)
-                this.setState({ loading: false, page: (this.state.page + 1), users: [...this.state.projects, ...data.results] });
+                this.setState({ loading: false, page: (this.state.page + 1), users: [...this.state.projects, ...data] });
                 console.log("this.state.projects", this.state.projects)
             })
             .catch(e => {
                 console.log(e);
+                this.setState({ loading: false, error: "Не удалось загрузить данные" })
                 //this.setState({ ...this.state, loading: false });
             });
     }
@@ -60,13 +64,14 @@ class Projects extends React.Component {
     fetchFilteredProjects = (filter) => {
         this.setState({ users: [], loading: true, page: 0, filter: filter });
         //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20`)
-        let _url = "http://localhost:3012/users/0/20" + filter;
+        // let _url = "http://localhost:3012/users/0/20" + filter;
+        let _url = fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page}/20` + filter);
         fetch(_url)
             .then(response => response.json())
             .then(data => {
                 console.log("data", data)
-                this.setState({ loading: false, users: [...data.results] });
-                console.log("this.state.filtered-users", this.state.users)
+                this.setState({ loading: false, page: (this.state.page + 1), users: [...data], error: '' });
+                console.log("this.state.filtered-projects", this.state.data)
             })
             .catch(e => {
                 if (e == "Failed to fetch")
@@ -77,9 +82,9 @@ class Projects extends React.Component {
 
     render() {
         let projects = this.state.projects.map((project, index) => (
-            <Project_Card key={index} link="/projects/1234" title={`${project.name.first}  ${project.name.last}`}
-                img={project.picture.large} startDate={project.dob.date} finishDate={project.dob.date}
-                vacancies={[project.location.country, project.location.country, project.location.country, project.location.country, project.location.country]} />
+            <Project_Card key={index} link={`/projects/${project.id}`} title={project.name} category={project.category}
+                description={project.description} status={project.status} startDate={project.projectstart} finishDate={project.projectend}
+                vacancies={project.vacancies} />
         ));
         return (
             <div>
@@ -101,7 +106,7 @@ class Projects extends React.Component {
                     <div className="flex__centered">
                         <p className="capture">{this.state.loading ? 'Загрузка...' : ''}</p>
                         <p className="capture">{this.state.error ? this.state.error : ''}</p>
-                        {(this.state.loading && !this.state.error) ? '' : <Button_Functional text="Показать больше" onClick={this.fetchProjects} />}
+                        {(this.state.loading && this.state.error == "") ? '' : <Button_Functional text="Показать больше" onClick={this.fetchProjects} />}
                     </div>
                 </div>
             </div>

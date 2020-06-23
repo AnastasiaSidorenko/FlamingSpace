@@ -16,11 +16,23 @@ export class Project_Card extends React.Component {
                                 <p className="project-card__block-vacancy">Дизайнер</p>
                                 <p className="project-card__block-vacancy">Дизайнер</p>
                                 */
+    formattedNumber(number) {
+        if (number < 9) {
+            return `0${number + 1}`
+        }
+        else {
+            return `${number + 1}`
+        }
+    }
 
     render() {
         let vacancies = this.props.vacancies.map((elem, index) => (
-            <p key={index} className="project-card__block-vacancy">elem</p>
+            <p key={index} className="project-card__block-vacancy">{elem.name}</p>
         ));
+        let startDate = new Date(this.props.startDate);
+        let startDateFormatted = `${this.formattedNumber(startDate.getDate())}/${this.formattedNumber(startDate.getMonth())}/${startDate.getYear()}`
+        let finishDate = this.props.endDate ? new Date(this.props.endDate) : '';
+        let finishDateFormatted = finishDate ? `${this.formattedNumber(finishDate.getDate())}/${this.formattedNumber(finishDate.getMonth())}/${finishDate.getYear()}` : '';
 
         return (
             <div className="project-card">
@@ -29,10 +41,10 @@ export class Project_Card extends React.Component {
                         <div className="project-card__block-title">
                             <span className="project-card__project-name">{this.props.title}</span>
                             <span className="project-card__title-delimiter">/</span>
-                            <span className="project-card__project-category">Категория</span>
+                            <span className="project-card__project-category">{this.props.category}</span>
                         </div>
                         <p className="project-card__block-text">
-                            Повседневная практика показывает, что сплочённость команды профессионалов требует определения и уточнения системы массового участия! Мы вынуждены отталкиваться от того, что сложившаяся структура организации, а также свежий взгляд на привычные вещи - безусловно открывает новые горизонты для поэтапного и последовательного развития общества. Следует отметить, что базовый вектор развития однозначно определяет каждого участника как способного принимать собственные решения касаемо прогресса профессионального сообщества. ффффффффф фффффффффффф фффффффффффффффф фффффффффффффффф фффффффффффффффф фффффффффффффффф фффффф фффффффффф
+                            {this.props.description}
                         </p>
                     </div>
                     <div className="project-card__block">
@@ -44,8 +56,8 @@ export class Project_Card extends React.Component {
                     <div className="project-card__block">
                         <div className="project-card__block-title project-card__block-title_left-padded">Статус</div>
                         <div className="project-card__block-status">
-                            <Indicator color="red" className="project-card__status-indicator" />
-                            <span>набор команды</span>
+                            <Indicator color={(this.props.status == "набор") ? "green" : (this.props.status == "набор") ? "yellow" : "red"} className="project-card__status-indicator" />
+                            <span>{this.props.status}</span>
                         </div>
                     </div>
                     <div className="project-card__block">
@@ -53,12 +65,13 @@ export class Project_Card extends React.Component {
                         <div className="project-card__block-events">
                             <div className="project-card__event-group">
                                 <p className="project-card__event-p project-card__event-title">Начало проекта:</p>
-                                <p className="project-card__event-p">{this.props.startDate}</p>
+                                <p className="project-card__event-p">{startDateFormatted}</p>
                             </div>
                             <div>
                                 <p className="project-card__event-p project-card__event-title">Завершение проекта:</p>
-                                <p className="project-card__event-p">{this.props.finishDate}</p>
+                                <p className="project-card__event-p">{finishDateFormatted}</p>
                             </div>
+                            {this.startDate}
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,10 @@ export function Indicator(props) {
     if ((color) == "green") {
         return < div className="indicator indicator-green" ></ div>
     }
-    else if ((color) == "red") {
+    if ((color) == "red") {
         return < div className="indicator indicator-red" ></ div>
+    }
+    if ((color) == "yellow") {
+        return < div className="indicator indicator-yellow" ></ div>
     }
 }

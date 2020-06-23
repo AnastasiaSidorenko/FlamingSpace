@@ -12,6 +12,9 @@ export class User_Card extends React.Component {
     }
 
     render() {
+        let competencies = this.props.competencies.map((elem, index) => (
+            <p key={index} className="project-card__block-vacancy">{elem.name}</p>
+        ));
         return (
             <div className="user-card">
                 <p className="user-card__full-name">{this.props.FLname}</p>

@@ -26,7 +26,7 @@ class Users extends React.Component {
         }
         this.state = {
             loading: false,
-            users: initialUsers.results,
+            users: initialUsers.data,
             page: 0,
             filter: "",
             error: false
@@ -37,8 +37,8 @@ class Users extends React.Component {
 
     static requestInitialData() {
         //const _url = "https://api.flamingspace.sevsu.ru/users/0/20"
-        // return fetch("https://api.flamingspace.sevsu.ru/users/0/20")
-        return fetch("https://api.randomuser.me/?results=20")
+        return fetch("https://api.flamingspace.sevsu.ru/users/0/20")
+            //return fetch("https://api.randomuser.me/?results=20")
             .then(response => response.json())
     };
 
@@ -48,12 +48,12 @@ class Users extends React.Component {
 
     fetchUsers = () => {
         this.setState({ loading: true });
-        //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20${this.state.filter}`)
-        fetch("https://api.randomuser.me/?results=20")
+        fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20`)
+            //fetch("https://api.randomuser.me/?results=20")
             .then(response => response.json())
             .then(data => {
                 console.log("data", data)
-                this.setState({ loading: false, users: [...this.state.users, ...data.results] });
+                this.setState({ loading: false, users: [...this.state.users, ...data.data] });
                 console.log("this.state.users", this.state.users)
             })
             .catch(e => {
@@ -67,7 +67,7 @@ class Users extends React.Component {
 
     fetchFilteredUsers = (filter) => {
         this.setState({ users: [], loading: true, page: 0, filter: filter });
-        //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20`)
+        //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20${this.state.filter}`)
         let _url = "http://localhost:3000/users/0/20" + filter;
         fetch(_url)
             .then(response => response.json())
@@ -86,8 +86,8 @@ class Users extends React.Component {
 
     render() {
         let users = this.state.users.map((user, index) => (
-            <User_Card key={index} FLname={`${user.name.first}  ${user.name.last}`} img={user.picture.large}
-                nickname={user.location.country} id="1234" />
+            <User_Card key={index} FLname={`${user.lastname}  ${user.name.firstname}`} img={user.photo}
+                nickname={user.nickname} id={user.id} />
         ));
 
         return (
