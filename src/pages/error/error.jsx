@@ -1,6 +1,6 @@
 import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
-import { pic } from "./error_pic.svg"
+import pic from "./error_pic.svg";
 
 class Error extends React.Component {
     constructor(props) {
@@ -8,11 +8,11 @@ class Error extends React.Component {
         let data
         if (props.initialData) {
             data = props.initialData;
-            console.log("props data", initialProjects)
+            console.log("props data", data)
         }
         else {
             data = JSON.parse(window.__initialData__);
-            console.log("window data", initialProjects)
+            console.log("window data", data)
             delete window.__initialData__;
         }
         this.state = {

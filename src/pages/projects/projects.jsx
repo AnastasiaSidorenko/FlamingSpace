@@ -36,16 +36,16 @@ class Projects extends React.Component {
     breadcrumbs = [{ link: "#", title: "Проекты" }];
 
     static requestInitialData() {
-        return fetch("https://api.flamingspace.sevsu.ru/projects/0/20")
+        return fetch("https://api.flamingspace.sevsu.ru/projects/0/5")
             //return fetch("https://api.randomuser.me/?results=5")
             .then(response => response.json())
 
     };
 
     fetchProjects = () => {
-        this.setState({ loading: true });
+        this.setState({ loading: true, error: "" });
         //let response = await fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page + 1}/20`, { mode: 'no-cors' });
-        fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page + 1}/20`)
+        fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page + 1}/5`)
             //fetch("https://api.randomuser.me/?results=2")
             //.then(response => response.json())
             //response
@@ -65,7 +65,7 @@ class Projects extends React.Component {
         this.setState({ users: [], loading: true, page: 0, filter: filter });
         //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20`)
         // let _url = "http://localhost:3012/users/0/20" + filter;
-        let _url = fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page}/20` + filter);
+        let _url = fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page}/5` + filter);
         fetch(_url)
             .then(response => response.json())
             .then(data => {

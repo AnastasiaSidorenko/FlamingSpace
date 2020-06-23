@@ -23,7 +23,7 @@ export class User_Card extends React.Component {
         return (
             <div className="user-card">
                 <p className="user-card__full-name">{this.props.FLname}</p>
-                <div className="user-card__status"><Indicator color="green" />
+                <div className="user-card__status"><Indicator color={(this.props.status == "ищу команду") ? "green" : (this.props.status == "в работе") ? "red" : "grey"} />
                     <span>{this.props.status}</span></div>
                 <div className="user-card__img-container">
                     <img className="user-card__img" alt="Фото участника" src={this.props.img} />
@@ -33,7 +33,7 @@ export class User_Card extends React.Component {
                 <div className="user-card__skills">
                     {skills}
                 </div>
-                <Button_Show_Details link={`/account/${this.props.id}`} />
+                <Button_Show_Details link={`/users/${this.props.id}`} />
             </div >
         )
     }

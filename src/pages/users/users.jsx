@@ -49,8 +49,8 @@ class Users extends React.Component {
 
     fetchUsers = () => {
         this.setState({ loading: true });
-        fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20`)
-            //fetch("https://api.randomuser.me/?results=20")
+        //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20`)
+        fetch("https://api.randomuser.me/?results=20")
             .then(response => response.json())
             .then(data => {
                 console.log("data", data)

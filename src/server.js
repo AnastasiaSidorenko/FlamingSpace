@@ -15,7 +15,6 @@ import account from "./routes/account";
 import { renderToString } from "react-dom/server"
 import Account from "./pages/account/account"
 import Account_Edit from "./pages/account_edit/account_edit"
-import User from "./pages/account/user";
 import React from "react";
 //
 
@@ -28,7 +27,7 @@ var helmet = require('helmet');
 const Keyv = require('keyv');
 const app = express();
 const cookieParser = require('cookie-parser')
-var cors = require('cors')
+//var cors = require('cors')
 
 var loggedUsers = new Keyv();
 
@@ -40,7 +39,7 @@ app.set("view engine", "ejs");
 
 // Middleware
 app.use(helmet());
-app.use(cors({ origin: '*' }));
+//app.use(cors({ origin: '*' }));  !!DELETE CORS FROM DEV DEP
 
 app.use(compression())
 app.use(cookieParser())

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "##### Commands to run",
   "main": "index.js",
+  "proxy": "https://api.flamingspace.sevsu.ru",
   "scripts": {
     "webpack": "webpack -d",
     "mine": "nodemon --exec cross-env ./node_modules/.bin/babel-node src/server.js",

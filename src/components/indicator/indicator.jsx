@@ -12,4 +12,8 @@ export function Indicator(props) {
     if ((color) == "yellow") {
         return < div className="indicator indicator-yellow" ></ div>
     }
+    if ((color) == "grey") {
+        return < div className="indicator indicator-grey" ></ div>
+    }
+}
 }

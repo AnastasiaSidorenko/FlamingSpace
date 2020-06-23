@@ -1,10 +1,10 @@
 import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
 import pageCSS from "./account.css"
-import user from "./user.png"
-import img from "./img.png"
-import icon__leader from "./icon__leader-id.svg"
-import icon__vk from "./icon__vk.svg"
+import user from "./img/user.png"
+import img from "./img/img.png"
+import icon__leader from "./img/icon__leader-id.svg"
+import icon__vk from "./img/icon__vk.svg"
 import { Indicator } from "../../components/indicator/indicator";
 import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 import { Page_Title } from "../../components/page_title/page_title";
