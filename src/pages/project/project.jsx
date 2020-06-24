@@ -5,10 +5,12 @@ import { Event_Card } from "../../components/event_card/event_card";
 import { Page_Title } from "../../components/page_title/page_title";
 import { Indicator } from "../../components/indicator/indicator";
 import { Button_Functional } from "../../components/button/button_functional";
+import Select from 'react-select';
 import default_pic from "./img/default.jpg"
 import default_event_pic from "./img/img.png"
 import cookie from 'react-cookies'
 
+import componentCSS from "./joinRequestCard.css"
 import pageCSS from "./project.css"
 
 class Project extends React.Component {
@@ -115,7 +117,8 @@ class Project extends React.Component {
         }
 
         let JoinRequestWindow = this.state.isJoinRequestCardOpened ?
-            <JoinRequestCard onClose={this.closeCard} userID="1234" />
+            <JoinRequestCard onClose={this.closeJoinRequestCard} userID={this.state.userID}
+                vacancies={this.state.project.vacancies} projectID={this.state.project__info.id} />
             : '';
 
         return (
@@ -123,6 +126,7 @@ class Project extends React.Component {
                 <TopHeader section="Проекты" />
                 <div className="container">
                     <BreadCrumbs pages={breadcrumbs} />
+                    {JoinRequestWindow}
                     <div className="project__heading">
                         <div className="project__title-group">
                             <Page_Title title={this.state.project__info.name} className="project__title" />
@@ -131,8 +135,6 @@ class Project extends React.Component {
                         <hr className="project__strip" />
                         <JoinLeaveButton />
                     </div>
-
-                    {JoinRequestWindow}
 
                     <div className="flex__2-columns">
                         <div className="info">
@@ -170,14 +172,99 @@ class Project extends React.Component {
 }
 
 class JoinRequestCard extends React.Component {
+    state = {
+        vacancy: "",
+        message: "",
+        error: ""
+    }
+
+    handleChange = (event, name) => {
+        this.setState({ [name]: event.target.value })
+        console.log(`State:`, this.state);
+    }
+
+    handleChangeVacancy = vacancy => {
+        this.setState(
+            { vacancy },
+            () => console.log(`Option selected:`, this.state.vacancy)
+        );
+    };
+
+    handleSubmit = () => {
+        let data;
+
+        if (this.state.vacancy !== '') {
+            this.setState({ error: "" });
+            if (this.state.message !== '') {
+                data = {
+                    date: new Date()
+                };
+            }
+            else {
+                data = {
+                    date: new Date(),
+                    message: this.state.message
+                };
+            }
+
+            console.log("forming fetch", data);
+            console.log("json data", JSON.stringify(data));
+
+            fetch(`http://api.flamingspace.sevsu.ru/projects/edit/${this.props.projectID}/vacancies/${this.state.vacancy.value}/${this.props.userID}`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'charset': 'utf-8'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(result => result.json())
+                .then(response => {
+                    console.log(response);
+                    if (!response.error_code) {
+                        //this.props
+                        this.setState({ error: "Заявка отправлена" })
+                        //this.props.onClose();
+                    }
+                    else {
+                        this.setState({ error: "Ошибка данных" })
+                    }
+                })
+                .catch(error => this.setState({ error: "Не удалось отправить заявку" }));
+
+        }
+        else {
+            this.setState({ error: "Необходимо выбрать вакансию" })
+        }
+    }
+
     render() {
+        let vacancies = this.props.vacancies.map((item, index) => (
+            { value: item.id, label: item.name }
+        ))
+        console.log(vacancies);
+
         return (
-            <div className="openJoinRequestCard" >
-                <span className="openJoinRequestCard__close" onClick={props.onClose}></span>
-                <div className="openCard__info" >
+            <div className="joinRequestCard" >
+                <span className="joinRequestCard__close" onClick={this.props.onClose}></span>
+                <div className="form" >
+                    <div className="form__item">
+                        <label className="form__item-label">Вакансия</label>
+                        <Select className="select-list" value={this.state.vacancy} onChange={this.handleChangeVacancy}
+                            options={vacancies} placeholder="Выберете вакансию" />
+                    </div>
+                    <div className="form__item">
+                        <label className="form__item-label">Сообщение</label>
+                        <textarea onChange={event => { this.handleChange(event, "message") }}
+                            className="description" maxLength="300" rows="8" cols="60" className="form__item-textarea"></textarea>
+                    </div>
                 </div>
-                <Button_Functional text="Отправить заявку" onClick={() => { console.log("Заявка отправлена") }} />
-            </div>
+                <div className="submit-container">
+                    <Button_Functional text="Отправить заявку" onClick={this.handleSubmit} />
+                    <p className="error_message">{this.state.error}</p>
+                </div>
+            </div >
         );
     }
 }

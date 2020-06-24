@@ -49,7 +49,7 @@ class Projects extends React.Component {
             .then(results => {
                 console.log("data", results)
                 if (results.data.length != 0) {
-                    this.setState({ loading: false, page: (this.state.page + 1), projects: [...this.state.projects, ...results.data], error: "" });
+                    this.setState({ loading: false, page: (this.state.page + 1), projects: [...this.state.projects, ...results.data], error: '' });
                     console.log("this.state.projects", this.state.projects)
                 }
                 else {
@@ -57,23 +57,20 @@ class Projects extends React.Component {
                 }
             })
             .catch(e => {
-                console.log(e);
                 this.setState({ loading: false, error: "Не удалось загрузить данные" })
             });
     }
 
     fetchFilteredProjects = (filter) => {
         this.setState({ users: [], loading: true, page: 0, filter: filter });
-        let _url = fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page}/5${filter}`);
-        fetch(_url)
+        fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page}/5${filter}`)
             .then(response => response.json())
-            .then(data => {
-                console.log("data", data)
-                this.setState({ loading: false, page: (this.state.page + 1), projects: [...data], error: '' });
+            .then(results => {
+                console.log("data", results)
+                this.setState({ loading: false, page: (this.state.page + 1), projects: [...results.data], error: '' });
                 console.log("this.state.filtered-projects", this.state.data)
             })
             .catch(e => {
-                console.log(e);
                 this.setState({ loading: false, error: "Не удалось загрузить данные" })
             });
     }
@@ -98,7 +95,7 @@ class Projects extends React.Component {
                         <Link_Functional text="Создать проект" link="projects/create" />
                     </div>
 
-                    <Search_Bar />
+                    <Search_Bar getFilteredData={this.fetchFilteredProjects} />
                     {projects}
 
                     <div className="flex__centered">
@@ -122,6 +119,7 @@ class Search_Bar extends React.Component {
 
     handleChange = (event, name) => {
         this.setState({ [name]: event.target.value })
+        console.log(this.state);
     }
 
     getFilter = () => {

@@ -115,7 +115,7 @@ class Users extends React.Component {
 
 class Search_Bar extends React.Component {
     state = {
-        fio: "",
+        LFname: "",
         status: ""
     }
 
@@ -129,7 +129,7 @@ class Search_Bar extends React.Component {
             return;
         }
         if (this.state.fio) {
-            filter = `?fio=${this.state.fio}` + (this.state.status ? `&status=${this.state.status}` : '')
+            filter = `?fio=${this.state.LFname}` + (this.state.status ? `&status=${this.state.status}` : '')
             return this.props.getFilteredData(filter);
         }
         if (this.state.status) {
@@ -142,7 +142,7 @@ class Search_Bar extends React.Component {
         return (
             <div>
                 <div className="flex__space-between">
-                    <Search name="fio" onChange={event => { this.handleChange(event, "fio") }} placeholder="Поиск по Фамилии и имени.." />
+                    <Search name="fio" onChange={event => { this.handleChange(event, "LFname") }} placeholder="Поиск по Фамилии и имени.." />
                     <Search placeholder="Выберите сферу деятельности..." />
                     <Search name="status" onChange={event => { this.handleChange(event, "status") }} placeholder="Выберите статус..." />
                     <Search placeholder="Выберите статус..." />

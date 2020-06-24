@@ -76,9 +76,7 @@ class Account_Edit extends React.Component {
                                 </div>
                                 <div className="form__item">
                                     <label className="main-section__item-label form__item-label">Статус</label>
-                                    <Select className="select-list__status" value={this.state.status} onChange={this.handleChangeStatus}
-                                        options={[{ value: 'ищу команду', label: 'ищу команду' }, { value: 'занят', label: 'занят' }]}
-                                        placeholder="Статус" />
+
                                 </div>
                                 <div className="form__item">
                                     <label className="main-section__item-label form__item-label">Должность</label>
