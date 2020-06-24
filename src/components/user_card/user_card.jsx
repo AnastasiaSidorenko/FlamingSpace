@@ -3,7 +3,7 @@ import React from 'react'
 import default_pic from "./default.jpg"
 import componentCSS from "./user_card.css"
 import { Button_Show_Details } from '../button/button_show_details'
-import { Indicator } from '../indicator/indicator'
+import { User_status } from '../status/user_status'
 
 export class User_Card extends React.Component {
     constructor() {
@@ -23,8 +23,10 @@ export class User_Card extends React.Component {
         return (
             <div className="user-card">
                 <p className="user-card__full-name">{this.props.FLname}</p>
-                <div className="user-card__status"><Indicator color={(this.props.status == "ищу команду") ? "green" : (this.props.status == "в работе") ? "red" : "grey"} />
-                    <span>{this.props.status ? this.props.status : "не определен"}</span></div>
+                <div className="user-card__status">
+                    <User_status status={this.props.status} />
+                    <span>{this.props.status ? this.props.status : "не определен"}</span>
+                </div>
                 <div className="user-card__img-container">
                     <img className="user-card__img" alt="Фото участника" src={(this.props.img) ? this.props.img : default_pic} />
                 </div>

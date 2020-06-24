@@ -7,7 +7,7 @@ export function Button_apply_filter(props) {
     return (
         <div className="horizontal_strips">
             <hr className="strip" />
-            <button className="button_functional" onClick={props.onClick}>Применить фильтр</button>
+            <button className="button_functional button_functional_filter" onClick={props.onClick}>Применить фильтр</button>
             <hr className="strip" />
         </div>
     )

@@ -16,20 +16,31 @@ html, body, #root {
     margin: 0 auto;
 }
 
-.topheader {
+.topheader-strip {
     height:100px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.topheader {
+    width:1140px;
+    height:100%;
     display:flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
     font-size: 16px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
 }
 
 .topheader__logo {
     height:50px;
     width: auto;
+}
+
+.topheader__sections{
+    display:flex;
+    flex-direction: row;
 }
 
 .topheader__link {

@@ -18,32 +18,36 @@ export class TopHeader extends React.Component {
     render() {
         //console.log(this.state.cookie_userID)
         return (
-            <div className="topheader">
-                <img className="topheader__logo" alt="Площадка проектов лого" src={logo} />
-                <a className={this.state.currentSection == "Главная"
-                    ? "topheader__link topheader__current-section" : "topheader__link"} href='/'>Главная</a>
-                <a className={this.state.currentSection == "Участники"
-                    ? "topheader__link topheader__current-section" : "topheader__link"} href='/users'>Участники</a>
-                <a className={this.state.currentSection == "Проекты"
-                    ? "topheader__link topheader__current-section" : "topheader__link"} href='/projects'>Проекты</a>
-                <a className={this.state.currentSection == "Мобильное приложение"
-                    ? "topheader__link topheader__current-section" : "topheader__link"} href='/mobileapp'>Мобильное приложение</a>
-                <a className={this.state.currentSection == "О сервисе"
-                    ? "topheader__link topheader__current-section" : "topheader__link"} href='/about'>О сервисе</a>
-                <a className={this.state.currentSection == "Помощь"
-                    ? "topheader__link topheader__current-section" : "topheader__link"} href='/help' > Помощь</a>
-                {
-                    this.state.cookie_userID ?
-                        < div className="topheader__loggedInDiv" >
-                            <a className="topheader__link topheader__item" href={"/account/" + this.state.cookie_userID} >
-                                <div className="topheader__user-preview topheader__item"></div>
-                            </a>
-                            <a className="topheader__auth-button topheader__item" href='/auth/logout'>Выйти</a>
-                        </ div>
-                        :
-                        <a className="topheader__auth-button" href='/auth'>Авторизация</a>
-                }
-            </div >
+            <div className="topheader-strip">
+                <div className="topheader">
+                    <img className="topheader__logo" alt="Площадка проектов лого" src={logo} />
+                    <div className="topheader__sections">
+                        <a className={this.state.currentSection == "Главная"
+                            ? "topheader__link topheader__current-section" : "topheader__link"} href='/'>Главная</a>
+                        <a className={this.state.currentSection == "Участники"
+                            ? "topheader__link topheader__current-section" : "topheader__link"} href='/users'>Участники</a>
+                        <a className={this.state.currentSection == "Проекты"
+                            ? "topheader__link topheader__current-section" : "topheader__link"} href='/projects'>Проекты</a>
+                        <a className={this.state.currentSection == "Мобильное приложение"
+                            ? "topheader__link topheader__current-section" : "topheader__link"} href='/mobileapp'>Мобильное приложение</a>
+                        <a className={this.state.currentSection == "О сервисе"
+                            ? "topheader__link topheader__current-section" : "topheader__link"} href='/about'>О сервисе</a>
+                        <a className={this.state.currentSection == "Помощь"
+                            ? "topheader__link topheader__current-section" : "topheader__link"} href='/help' > Помощь</a>
+                    </div>
+                    {
+                        this.state.cookie_userID ?
+                            < div className="topheader__loggedInDiv" >
+                                <a className="topheader__link topheader__item" href={"/account/" + this.state.cookie_userID} >
+                                    <div className="topheader__user-preview topheader__item"></div>
+                                </a>
+                                <a className="topheader__auth-button topheader__item" href='/auth/logout'>Выйти</a>
+                            </ div>
+                            :
+                            <a className="topheader__auth-button" href='/auth'>Авторизация</a>
+                    }
+                </div >
+            </div>
         )
     }
 }

@@ -26,7 +26,7 @@ class Projects extends React.Component {
         this.state = {
             loading: false,
             projects: initialProjects.data,
-            page: 0,
+            page: 1,
             filter: "",
             error: ""
         }
@@ -44,42 +44,37 @@ class Projects extends React.Component {
 
     fetchProjects = () => {
         this.setState({ loading: true, error: "" });
-        //let response = await fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page + 1}/20`, { mode: 'no-cors' });
-        fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page + 1}/5`)
-            //fetch("https://api.randomuser.me/?results=2")
-            //.then(response => response.json())
-            //response
-            .then(data => {
-                console.log("data", data)
-                this.setState({ loading: false, page: (this.state.page + 1), users: [...this.state.projects, ...data.data], error: "" });
-                console.log("this.state.projects", this.state.projects)
+        fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page}/5${this.state.filter}`)
+            .then(response => response.json())
+            .then(results => {
+                console.log("data", results)
+                if (results.data.length != 0) {
+                    this.setState({ loading: false, page: (this.state.page + 1), projects: [...this.state.projects, ...results.data], error: "" });
+                    console.log("this.state.projects", this.state.projects)
+                }
+                else {
+                    this.setState({ loading: false, error: "Проектов больше не найдено" })
+                }
             })
             .catch(e => {
                 console.log(e);
                 this.setState({ loading: false, error: "Не удалось загрузить данные" })
-                //this.setState({ ...this.state, loading: false });
             });
     }
 
     fetchFilteredProjects = (filter) => {
         this.setState({ users: [], loading: true, page: 0, filter: filter });
-        //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20`)
-        // let _url = "http://localhost:3012/users/0/20" + filter;
-        let _url = fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page}/5` + filter);
+        let _url = fetch(`https://api.flamingspace.sevsu.ru/projects/${this.state.page}/5${filter}`);
         fetch(_url)
             .then(response => response.json())
             .then(data => {
                 console.log("data", data)
-                this.setState({ loading: false, page: (this.state.page + 1), users: [...data], error: '' });
+                this.setState({ loading: false, page: (this.state.page + 1), projects: [...data], error: '' });
                 console.log("this.state.filtered-projects", this.state.data)
             })
             .catch(e => {
                 console.log(e);
                 this.setState({ loading: false, error: "Не удалось загрузить данные" })
-                /*if (e == "Failed to fetch") {
-                    console.log(e);
-                    this.setState({ loading: false, error: "Не удалось загрузить данные" })
-                }*/
             });
     }
 

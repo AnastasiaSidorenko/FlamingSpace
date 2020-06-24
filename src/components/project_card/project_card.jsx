@@ -2,7 +2,8 @@ import React from 'react'
 
 import componentCSS from "./project_card.css"
 import { Button_Show_Details } from '../button/button_show_details'
-import { Indicator } from '../indicator/indicator'
+//import { Indicator } from '../indicator/indicator'
+import { Project_status } from '../status/project_status'
 
 export class Project_Card extends React.Component {
     constructor() {
@@ -56,7 +57,7 @@ export class Project_Card extends React.Component {
                     <div className="project-card__block">
                         <div className="project-card__block-title project-card__block-title_left-padded">Статус</div>
                         <div className="project-card__block-status">
-                            <Indicator color={(this.props.status == "набор") ? "green" : (this.props.status == "набор") ? "yellow" : "red"} className="project-card__status-indicator" />
+                            <Project_status status={this.props.status} />
                             <span>{this.props.status}</span>
                         </div>
                     </div>

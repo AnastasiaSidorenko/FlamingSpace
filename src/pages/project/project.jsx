@@ -4,9 +4,10 @@ import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 import { Event_Card } from "../../components/event_card/event_card";
 import { Page_Title } from "../../components/page_title/page_title";
 import { Indicator } from "../../components/indicator/indicator";
+import { Button_Functional } from "../../components/button/button_functional";
 import default_pic from "./img/default.jpg"
 import default_event_pic from "./img/img.png"
-import { Link_Functional } from "../../components/button/link_functional";
+import cookie from 'react-cookies'
 
 import pageCSS from "./project.css"
 
@@ -25,7 +26,37 @@ class Project extends React.Component {
         }
         this.state = {
             project: project.data,
-            project__info: project.data.info[0]
+            project__info: project.data.info[0],
+            cookie_userID: cookie.load("userIdCookie"),
+            isUserParticipant: false,
+            isJoinRequestCardOpened: false
+        }
+    }
+
+    isUserParticipant = (participantID) => {
+        console.log("isUserParticipant", participantID);
+        console.log("userID", this.state.cookie_userID);
+        if (participantID !== this.state.cookie_userID) {
+            return;
+        }
+        else {
+            this.setState({ isUserParticipant: true });
+            return;
+        }
+    }
+
+    sendLeaveRequest = () => {//Check if user logged in!!!!!!!!
+        console.log("leaveRequestButton clicked")
+    }
+
+    closeJoinRequestCard = () => {
+        this.setState({ isJoinRequestCardOpened: false })
+    }
+
+    showJoinRequestCard = () => {
+        console.log("showJoinRequestButton clicked")
+        if (this.state.isJoinRequestCardOpened === false) { //Check if user logged in!!!!!!!! if (this.state.cookie_userID)
+            this.setState({ isJoinRequestCardOpened: true })
         }
     }
 
@@ -39,22 +70,53 @@ class Project extends React.Component {
             </div>
         ));
 
-        let participants = this.state.project.participants.map((elem, index) => (
-            <div className="member-card" key={index}>
-                <div className="member-card__img-container">
-                    <img className="member-card__img" src={(elem.photo) ? elem.photo : default_pic} />
-                </div>
-                <div>
-                    <p className="member-card__name">{elem.lastname} {elem.firstname}</p>
-                    <hr className="member-card__name-position-delimiter" />
-                    <p className="member-card__position">{elem.jobs[0].name}</p>
-                </div>
-            </div>
-        ));
+        let participants = this.state.project.participants.map((elem, index) => {
+            this.isUserParticipant(elem.id);
+            return (
+                <div className="member-card" key={index} >
+                    <div className="member-card__img-container">
+                        <img className="member-card__img" src={(elem.photo) ? elem.photo : default_pic} />
+                    </div>
+                    <div>
+                        <p className="member-card__name">{elem.lastname} {elem.firstname}</p>
+                        <hr className="member-card__name-position-delimiter" />
+                        {elem.jobs.map((elem, index) => (
+                            <p key={index} className="member-card__position">{elem.name}</p>
+                        ))}
+                    </div>
+                </div >
+            )
+        });
 
-        let events = this.state.project.events.map((elem, index) => (
-            <Event_Card className="events__event" img={(elem.photo) ? elem.photo : default_event_pic} title={elem.name} link="#" />
-        ));
+        let Events = () => {
+            if (this.state.project.events.length) {
+                /*  return this.state.project.events.map((elem, index) => (
+                      <Event_Card key={index} className="events__event" date="2020-05-30T00:00:00.000Z" img={(elem.photo) ? elem.photo : default_event_pic} title={elem.name} link="#" />
+                  ));*/
+            }
+            else {
+                return <p>Ближайших мероприятий не найдено</p>
+            }
+        }
+
+        let JoinLeaveButton = () => {
+            if (this.state.project__info.status != "завершен") { //!!!!!!&& this.state.project.vacancies.length) {
+                if (this.state.isUserParticipant === false) {
+                    return <Button_Functional text="Подать заявку" onClick={this.showJoinRequestCard} />
+                }
+                else {
+                    return <Button_Functional text="Покинуть проект" onClick={this.sendLeaveRequest} />
+                }
+            }
+
+            else {
+                return '';
+            }
+        }
+
+        let JoinRequestWindow = this.state.isJoinRequestCardOpened ?
+            <JoinRequestCard onClose={this.closeCard} userID="1234" />
+            : '';
 
         return (
             <div>
@@ -62,13 +124,15 @@ class Project extends React.Component {
                 <div className="container">
                     <BreadCrumbs pages={breadcrumbs} />
                     <div className="project__heading">
-                        <div>
+                        <div className="project__title-group">
                             <Page_Title title={this.state.project__info.name} className="project__title" />
                             <p className="project__category">Категория: {this.state.project__info.category}</p>
                         </div>
                         <hr className="project__strip" />
-                        <Link_Functional text="Подать заявку" link="#" />
+                        <JoinLeaveButton />
                     </div>
+
+                    {JoinRequestWindow}
 
                     <div className="flex__2-columns">
                         <div className="info">
@@ -88,7 +152,7 @@ class Project extends React.Component {
                             <div className="events">
                                 <p className="events__title">Мероприятия проектной группы</p>
                                 <div className="events__items">
-                                    {events}
+                                    <Events />
                                 </div>
                             </div>
 
@@ -102,6 +166,19 @@ class Project extends React.Component {
                 </div>
             </div>
         )
+    }
+}
+
+class JoinRequestCard extends React.Component {
+    render() {
+        return (
+            <div className="openJoinRequestCard" >
+                <span className="openJoinRequestCard__close" onClick={props.onClose}></span>
+                <div className="openCard__info" >
+                </div>
+                <Button_Functional text="Отправить заявку" onClick={() => { console.log("Заявка отправлена") }} />
+            </div>
+        );
     }
 }
 

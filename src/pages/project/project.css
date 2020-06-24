@@ -13,17 +13,22 @@
 .project__heading {
     display:flex;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .project__category {
     font-size: 18px;
     color: #7C7C7C;
+    margin:0;
 }
 
 .project__strip {
     display:inline-block;
     border-top: 1px solid #E8E8E8;
-    width:453px;
+    max-width:453px; /*to think*/
+    width:100%;
+    min-width: 200px;
+    margin-right:28px;
     /*margin-top: 20px;*/
 }
 
@@ -41,12 +46,14 @@
 
 .main-info__description {
     width: 780px;
+    text-align: justify;
 }
 
 .events {
     margin-top:60px;
     width:840px;
     margin-right:10px;
+    margin: 60px 10px 30px 0px;
 }
 
 .events__items{
@@ -81,8 +88,10 @@
     display: flex;
     align-items:center;
     height:80px;
+    max-height:160px;
     font-size: 16px;
     line-height: 19px;
+    margin-bottom:5px;
 }
 
 .member-card__img-container {
@@ -100,11 +109,14 @@
 .member-card__name {
     text-overflow: ellipsis;
     overflow: hidden;
+    margin:0;
 }
 
 .member-card__position{
     text-overflow: ellipsis;
     overflow: hidden;
+    margin:0;
+    padding-bottom:2px;
 }
 
 .member-card__name-position-delimiter{
@@ -113,3 +125,47 @@
     margin-left:10px;
     width: 69px;
 }
+
+.openJoinRequestCard {
+    display: flex;
+    z-index: 999;
+    margin: 120px auto 0 auto;
+    width: 600px;
+    height: 600px;
+    background: white;
+    justify-content: space-between;
+    align-items: flex-end;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+
+  .openJoinRequestCard__close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+  }
+  
+  .openJoinRequestCard__close:hover {
+    opacity: 1;
+  }
+  
+  .openJoinRequestCard__close:before,
+  .openJoinRequestCard__close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 30px;
+    width: 5px;
+    background-color: #333;
+  }
+  
+  .openJoinRequestCard__close:before {
+    transform: rotate(45deg);
+  }
+  
+  .openJoinRequestCard__close:after {
+    transform: rotate(-45deg);
+  }

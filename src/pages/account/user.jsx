@@ -8,6 +8,7 @@ import icon__git from "./img/icon__git.png"
 import { Indicator } from "../../components/indicator/indicator";
 import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 import { Page_Title } from "../../components/page_title/page_title";
+import { User_status } from '../../components/status/user_status';
 
 class User extends React.Component {
     constructor(props) {
@@ -43,7 +44,8 @@ class User extends React.Component {
                     <div>
                         <div className="user__params_values">
                             <p className="user__param">Статус:</p>
-                            <div className="user__value"><Indicator color={(this.state.user__status == "ищу команду") ? "green" : (this.state.user__status == "в работе") ? "red" : "grey"} />
+                            <div className="user__value">
+                                <User_status status={this.state.user__status} />
                                 {this.state.user__status ? this.state.user__status : "не определен"}
                             </div>
                         </div>
