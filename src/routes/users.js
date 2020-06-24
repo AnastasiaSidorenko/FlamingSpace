@@ -3,14 +3,12 @@ import React from "react";
 import { renderToString } from "react-dom/server"
 import Users from "../pages/users/users"
 import User from "../pages/account/user";
-import Error from "../pages/error/error"
+import Error_page from "../pages/error_page/error_page"
 import "isomorphic-fetch";
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-
-
     Users.requestInitialData()
         .then(initialData => {
             const reactComp = renderToString(< Users initialData={initialData} />);
@@ -23,17 +21,15 @@ router.get('/', async (req, res) => {
 router.get('/:ID', async (req, res) => {
     let ID = req.params.ID;
     fetch(`http://api.flamingspace.sevsu.ru/users/${ID}`)
-        //return fetch("https://api.randomuser.me/?results=5")
         .then(response => response.json())
         .then(initialData => {
-            let data = initialData;
-            console.log(data);
-            if (!data.error_code) {
+            console.log(initialData);
+            if (!initialData.error_code) {
                 const reactComp = renderToString(< User initialData={initialData} />);
                 res.status(200).render('pages/user', { reactApp: reactComp, initialData: data });
             }
             else {
-                const reactComp = renderToString(< Error initialData={initialData} />);
+                const reactComp = renderToString(< Error_page initialData={initialData} />);
                 res.status(200).render('pages/error', { reactApp: reactComp, initialData: data });
             }
         })

@@ -1,10 +1,10 @@
 import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
 import pageCSS from "./account.css"
-import user from "./img/user.png"
+import default_pic from "./img/default.jpg"
 import icon__leader from "./img/icon__leader-id.svg"
 import icon__vk from "./img/icon__vk.svg"
-import icon__git from "./img/icon__git.svg"
+import icon__git from "./img/icon__git.png"
 import { Indicator } from "../../components/indicator/indicator";
 import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 import { Page_Title } from "../../components/page_title/page_title";
@@ -24,37 +24,45 @@ class User extends React.Component {
         }
         this.state = {
             whichComponentToShow: "Information",
-            data: user.data,
+            user: user.data,
+            user__status: user.data.info[0].status,
+            user__photo: user.data.info[0].photo,
+            user__nickname: user.data.info[0].nickname,
+            user__fullName: `${user.data.info[0].lastname} ${user.data.info[0].firstname}`,
+            user__post: user.data.info[0].post,
         }
     }
 
-    breadcrumbs = [{ link: "#", title: "Аккаунт" }, { link: "#", title: "nickname" }];
     //<div className="user__value">студент кафедры ИС, 4 курс</div>
     render() {
+        let breadcrumbs = [{ link: "#", title: "Аккаунт" }, { link: "#", title: this.state.user__nickname }];
+
         let Slider = () => {
             if (this.state.whichComponentToShow == "Information") {
                 return (
                     <div>
                         <div className="user__params_values">
                             <p className="user__param">Статус:</p>
-                            <div className="user__value"><Indicator color={(this.props.status == "ищу команду") ? "green" : (this.props.status == "в работе") ? "red" : "grey"} />{this.state.info.status}</div>
+                            <div className="user__value"><Indicator color={(this.state.user__status == "ищу команду") ? "green" : (this.state.user__status == "в работе") ? "red" : "grey"} />
+                                {this.state.user__status ? this.state.user__status : "не определен"}
+                            </div>
                         </div>
                         <div className="user__params_values">
                             <p className="user__param">Должность:</p>
-                            <div className="user__value">{this.state.post}</div>
+                            <div className="user__value">{this.state.user__post}</div>
                         </div>
                         <div className="user__params_values">
                             <p className="user__param">Контакты:</p>
                             <div>
-                                {this.state.data.contacts.map(function (contact, index) {
+                                {this.state.user.contacts.map(function (contact, index) {
                                     if (contact.name == "LeaderID") {
-                                        return <a src="link to account" href={contact.url}> <img src={icon__leader} className="contact__icon" /></a>
+                                        return <a src="link to account" href={contact.url}> <img src={icon__leader} className="contact__icon" key={index} /></a>
                                     }
                                     if (contact.name == "Vkontakte") {
-                                        return <a src="link to account" href={contact.url}> <img src={icon__vk} className="contact__icon" /></a>
+                                        return <a src="link to account" href={contact.url}> <img src={icon__vk} className="contact__icon" key={index} /></a>
                                     }
                                     if (contact.name == "GitHub") {
-                                        return <a src="link to account" href={contact.url}> <img src={icon__git} className="contact__icon" /></a>
+                                        return <a src="link to account" href={contact.url}> <img src={icon__git} className="contact__icon" key={index} /></a>
                                     }
                                 })}
                             </div>
@@ -62,7 +70,7 @@ class User extends React.Component {
                         <div className="user__params_values">
                             <p className="user__param">Компетенции:</p>
                             <div className="user__value">
-                                {this.state.data.competences.map((elem, index) => (
+                                {this.state.user.competences.map((elem, index) => (
                                     <span key={index} className="user-card__skill">{elem.name} - {elem.level}; </span>
                                 ))}
                             </div>
@@ -73,8 +81,8 @@ class User extends React.Component {
             else {
                 return (
                     <div className="project-slider-content">
-                        {this.state.data.projects.map((project, index) => (
-                            <div className="project-slider-content__item">
+                        {this.state.user.projects.map((project, index) => (
+                            <div key={index} className="project-slider-content__item">
                                 <Indicator className="project-slider-content__indicator" color="red" />
                                 <a className="project-slider-content__project-name" href={`/projects/${project.id}`}>{project.name}</a>
                             </div>))}
@@ -83,17 +91,19 @@ class User extends React.Component {
             }
         }
 
-
         return (
             <div>
                 <TopHeader />
                 <div className="container">
-                    <BreadCrumbs pages={this.breadcrumbs} />
+                    <BreadCrumbs pages={breadcrumbs} />
+                    <Page_Title title={this.state.user__fullName} className="user__name" />
                     <div className="user">
                         <div className="user__name-img">
-                            <Page_Title title="Елисеев Юлий" className="user__name" />
-                            <div className="user__img-container"><img className="user__img" alt="Изображение пользователя" src={this.state.data.info.photo} /></div>
-                            <p className="user__nickname">@{this.state.data.info.nickname}</p>
+                            <div className="user__img-container"><img className="user__img" alt="Изображение пользователя"
+                                src={(this.state.user__photo) ? this.state.user__photo : default_pic} /></div>
+                            <p className="user__nickname">
+                                @{this.state.user__nickname}
+                            </p>
                         </div>
 
                         <div className="slider">

@@ -4,6 +4,7 @@ import { renderToString } from "react-dom/server"
 import Projects from "../pages/projects/projects"
 import Project from "../pages/project/project";
 import Project_Create from "../pages/project_create/project_create";
+import Error_page from "../pages/error_page/error_page"
 
 const router = express.Router();
 
@@ -32,8 +33,22 @@ router.get('/create', async (req, res) => {
 });
 
 router.get('/:ID', async (req, res) => {
-    const reactComp = renderToString(< Project />);
-    res.status(200).render('pages/project', { reactApp: reactComp, initialData: false, projectID: req.params.ID }); //add projectID: ID
+    let ID = req.params.ID;
+    fetch(`http://api.flamingspace.sevsu.ru/projects/${ID}`)
+        .then(response => response.json())
+        .then(initialData => {
+            console.log(data);
+            if (!initialData.error_code) {
+                const reactComp = renderToString(< Project initialData={initialData} />);
+                res.status(200).render('pages/project', { reactApp: reactComp, initialData: data });
+            }
+            else {
+                const reactComp = renderToString(< Error_page initialData={initialData} />);
+                res.status(200).render('pages/error_page', { reactApp: reactComp, initialData: data });
+            }
+        })
+        .catch(error => console.log(error));
+    //res.status(200).render('pages/project', { reactApp: reactComp, initialData: false, projectID: req.params.ID }); //add projectID: ID
 });
 
 export default router;

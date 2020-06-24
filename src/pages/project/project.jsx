@@ -4,26 +4,62 @@ import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs";
 import { Event_Card } from "../../components/event_card/event_card";
 import { Page_Title } from "../../components/page_title/page_title";
 import { Indicator } from "../../components/indicator/indicator";
-import img from "./img.png"
-import member from "./member.png"
+import default_pic from "./img/default.jpg"
 import { Link_Functional } from "../../components/button/link_functional";
 
 import pageCSS from "./project.css"
 
 class Project extends React.Component {
-
-    breadcrumbs = [{ link: "/projects", title: "Проекты" }, { link: "#", title: "Название проекта" }];
+    constructor(props) {
+        super(props);
+        let project
+        if (props.initialData) {
+            project = props.initialData;
+            console.log("props data", project)
+        }
+        else {
+            user = JSON.parse(window.__initialData__);
+            console.log("window data", project)
+            delete window.__initialData__;
+        }
+        this.state = {
+            project: project.data,
+            project__info: project.data.info[0]
+        }
+    }
 
     render() {
+
+        let breadcrumbs = [{ link: "/projects", title: "Проекты" }, { link: "#", title: "Название проекта" }];
+
+        let vacancies = this.state.project.vacancies.map((elem, index) => (
+            <div className="main-info__recruitment_item" key={index}>
+                <Indicator color="red" /><span>{elem.name}</span>
+            </div>
+        ));
+
+        let participants = this.state.project.participants.map((elem, index) => (
+            <div className="member-card" key={index}>
+                <div className="member-card__img-container">
+                    <img className="member-card__img" src={(elem.photo) ? elem.photo : default_pic} />
+                </div>
+                <div>
+                    <p className="member-card__name">{elem.lastname} {elem.firstname}</p>
+                    <hr className="member-card__name-position-delimiter" />
+                    <p className="member-card__position">{elem.jobs[0].name}</p>
+                </div>
+            </div>
+        ));
+
         return (
             <div>
                 <TopHeader section="Проекты" />
                 <div className="container">
-                    <BreadCrumbs pages={this.breadcrumbs} />
+                    <BreadCrumbs pages={breadcrumbs} />
                     <div className="project__heading">
                         <div>
                             <Page_Title title="Проект такой-то" className="project__title" />
-                            <p className="project__category">Категория: Информационные системы</p>
+                            <p className="project__category">Категория: {this.state.project__info.category}</p>
                         </div>
                         <hr className="project__strip" />
                         <Link_Functional text="Подать заявку" link="#" />
@@ -34,19 +70,12 @@ class Project extends React.Component {
                             <div className="main-info">
                                 <div className="main-info__description">
                                     <h3 className="main-info__block-title">Описание проекта</h3>
-                                    <p>Диаграммы связей, инициированные исключительно синтетически, превращены
-                                    в посмешище, хотя само их существование приносит несомненную пользу обществу.
-                                    Предварительные выводы неутешительны: высокое качество позиционных исследований
-                                    однозначно фиксирует необходимость дальнейших направлений развития. Лишь
-                                    предприниматели в сети интернет, инициированные исключительно синтетически,
-                                    преданы социально-демократической анафеме. Сложно сказать, почему независимые
-                             государства могут быть призваны к ответу.</p>
+                                    <p>{this.state.project__info.description}</p>
                                 </div>
                                 <div className="main-info__recruitment">
                                     <h3 className="main-info__block-title">Кто требуется:</h3>
                                     <div>
-                                        <div className="main-info__recruitment_item"><Indicator color="red" /><span>UI/UX разработчик</span></div>
-                                        <div className="main-info__recruitment_item"><Indicator color="red" /><span>Backend разработчик</span></div>
+                                        {vacancies}
                                     </div>
                                 </div>
                             </div>
@@ -64,51 +93,7 @@ class Project extends React.Component {
 
                         <div className="members">
                             <h3 className="subtitle">Участники</h3>
-
-                            <div className="member-card">
-                                <div className="member-card__img-container">
-                                    <img className="member-card__img" src={img} />
-                                </div>
-                                <div>
-                                    <p className="member-card__name" title="fullNAME">Котовский Роман</p>
-                                    <hr className="member-card__name-position-delimiter" />
-                                    <p className="member-card__position" title="fullPOSITION">UI/UX разработчик</p>
-                                </div>
-                            </div>
-
-                            <div className="member-card">
-                                <div className="member-card__img-container">
-                                    <img className="member-card__img" src={img} />
-                                </div>
-                                <div>
-                                    <p className="member-card__name">Котовский Роман</p>
-                                    <hr className="member-card__name-position-delimiter" />
-                                    <p className="member-card__position">UI/UX разработчик</p>
-                                </div>
-                            </div>
-
-                            <div className="member-card">
-                                <div className="member-card__img-container">
-                                    <img className="member-card__img" src={img} />
-                                </div>
-                                <div>
-                                    <p className="member-card__name">Котовский Роман</p>
-                                    <hr className="member-card__name-position-delimiter" />
-                                    <p className="member-card__position">UI/UX разработчик</p>
-                                </div>
-                            </div>
-
-                            <div className="member-card">
-                                <div className="member-card__img-container">
-                                    <img className="member-card__img" src={img} />
-                                </div>
-                                <div>
-                                    <p className="member-card__name">Котовский Роман</p>
-                                    <hr className="member-card__name-position-delimiter" />
-                                    <p className="member-card__position">UI/UX разработчик</p>
-                                </div>
-                            </div>
-
+                            {participants}
                         </div>
                     </div >
                 </div>

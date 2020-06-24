@@ -102,6 +102,7 @@ app.get('/auth/redirect', async (req, res, next) => {
             res.cookie("userToken", access_token)
             if (pic) {
                 res.cookie("userPic", pic)
+                console.log("pic link", pic);
             }
             next()
             //res.redirect(_indexURL)

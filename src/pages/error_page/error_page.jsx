@@ -2,7 +2,7 @@ import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
 import pic from "./error_pic.svg";
 
-class Error extends React.Component {
+class Error_page extends React.Component {
     constructor(props) {
         super(props);
         let data
@@ -25,12 +25,11 @@ class Error extends React.Component {
             <div>
                 <TopHeader />
                 <div className="container">
-                    <BreadCrumbs pages={this.breadcrumbs} />
-                    <img src={pic} /><p>Ошибка: {this.state.message}</p>
+                    <img src={pic} className="error__img" /><p>Ошибка: {this.state.message}</p>
                 </div>
             </div>
         )
     }
 }
 
-export default Error;
+export default Error_page;

@@ -16,4 +16,3 @@ export function Indicator(props) {
         return < div className="indicator indicator-grey" ></ div>
     }
 }
-}

@@ -76,7 +76,7 @@ export class Project_Card extends React.Component {
                     </div>
                 </div>
                 <div className="project-card__button">
-                    <Button_Show_Details link="/projects/1234" />
+                    <Button_Show_Details link={this.props.link} />
                 </div>
             </div >
         )

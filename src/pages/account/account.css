@@ -98,7 +98,7 @@
 .slider__titles {
     cursor: pointer;
     display: flex;
-    margin:20px 0;
+    margin:-20px 0 20px 0;
 }
 
 .slider__titles > div {

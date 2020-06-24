@@ -27,7 +27,7 @@ class Users extends React.Component {
         this.state = {
             loading: false,
             users: initialUsers.data,
-            page: 0,
+            page: 1,
             filter: "",
             error: ""
         }
@@ -43,19 +43,19 @@ class Users extends React.Component {
             .then(response => response.json())
     };
 
-    alert() {
-        console.log("Show more clicked")
-    };
-
     fetchUsers = () => {
         this.setState({ loading: true });
-        //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20`)
-        fetch("https://api.randomuser.me/?results=20")
+        fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page}/20${this.state.filter}`)
             .then(response => response.json())
-            .then(data => {
+            .then(results => {
                 console.log("data", data)
-                this.setState({ loading: false, page: (this.state.page + 1), users: [...this.state.users, ...data.data], error: "" });
-                console.log("this.state.users", this.state.users)
+                if (results.data.length != 0) {
+                    this.setState({ loading: false, page: (this.state.page + 1), users: [...this.state.users, ...results.data], error: "" });
+                    console.log("this.state.users", this.state.users)
+                }
+                else {
+                    this.setState({ loading: false, error: "Пользователей больше не найдено" })
+                }
             })
             .catch(e => {
                 console.log(e);
@@ -63,21 +63,23 @@ class Users extends React.Component {
             });
     }
 
+
     fetchFilteredUsers = (filter) => {
         this.setState({ users: [], loading: true, page: 0, filter: filter });
-        //fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page + 1}/20${this.state.filter}`)
-        let _url = "http://localhost:3000/users/0/20" + filter;
-        fetch(_url)
+        fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page}/20${this.state.filter}`)
             .then(response => response.json())
-            .then(data => {
-                console.log("data", data)
-                this.setState({ loading: false, users: [...data.results] });
-                console.log("this.state.filtered-users", this.state.users)
+            .then(results => {
+                if (results.data.length != 0) {
+                    this.setState({ loading: false, page: (this.state.page + 1), users: [...results.data] });
+                    console.log("this.state.filtered-users", this.state.users)
+                }
+                else {
+                    this.setState({ loading: false, error: "Пользователей больше не найдено" })
+                }
             })
             .catch(e => {
                 console.log(e);
                 this.setState({ loading: false, error: "Не удалось загрузить данные" })
-                //this.setState({ ...this.state, loading: false });
             });
     }
 
@@ -122,11 +124,12 @@ class Search_Bar extends React.Component {
     }
 
     getFilter = () => {
+        let filter;
         if (!this.state.fio && !this.state.status) {
             return;
         }
         if (this.state.fio) {
-            filter = `?fio=${this.state.fio}` + (this.state.status ? `&status=${this.state.status}` : "")
+            filter = `?fio=${this.state.fio}` + (this.state.status ? `&status=${this.state.status}` : '')
             return this.props.getFilteredData(filter);
         }
         if (this.state.status) {
