@@ -5,6 +5,7 @@ import { Event_Card } from "../../components/event_card/event_card";
 import { Page_Title } from "../../components/page_title/page_title";
 import { Indicator } from "../../components/indicator/indicator";
 import default_pic from "./img/default.jpg"
+import default_event_pic from "./img/img.png"
 import { Link_Functional } from "../../components/button/link_functional";
 
 import pageCSS from "./project.css"
@@ -18,7 +19,7 @@ class Project extends React.Component {
             console.log("props data", project)
         }
         else {
-            user = JSON.parse(window.__initialData__);
+            project = JSON.parse(window.__initialData__);
             console.log("window data", project)
             delete window.__initialData__;
         }
@@ -30,7 +31,7 @@ class Project extends React.Component {
 
     render() {
 
-        let breadcrumbs = [{ link: "/projects", title: "Проекты" }, { link: "#", title: "Название проекта" }];
+        let breadcrumbs = [{ link: "/projects", title: "Проекты" }, { link: "#", title: this.state.project__info.name }];
 
         let vacancies = this.state.project.vacancies.map((elem, index) => (
             <div className="main-info__recruitment_item" key={index}>
@@ -51,6 +52,10 @@ class Project extends React.Component {
             </div>
         ));
 
+        let events = this.state.project.events.map((elem, index) => (
+            <Event_Card className="events__event" img={(elem.photo) ? elem.photo : default_event_pic} title={elem.name} link="#" />
+        ));
+
         return (
             <div>
                 <TopHeader section="Проекты" />
@@ -58,7 +63,7 @@ class Project extends React.Component {
                     <BreadCrumbs pages={breadcrumbs} />
                     <div className="project__heading">
                         <div>
-                            <Page_Title title="Проект такой-то" className="project__title" />
+                            <Page_Title title={this.state.project__info.name} className="project__title" />
                             <p className="project__category">Категория: {this.state.project__info.category}</p>
                         </div>
                         <hr className="project__strip" />
@@ -83,9 +88,7 @@ class Project extends React.Component {
                             <div className="events">
                                 <p className="events__title">Мероприятия проектной группы</p>
                                 <div className="events__items">
-                                    <Event_Card className="events__event" img={img} title="Окрестности Тулы оросил боевой клич героев" link="#" />
-                                    <Event_Card className="events__event" img={img} title="Частокол на границе развеял последние сомнения" link="#" />
-                                    <Event_Card className="events__event" title="Частокол на границе развеял последние сомнения ааааа аааааа ааааа ааааааа ааааа " link="#" />
+                                    {events}
                                 </div>
                             </div>
 

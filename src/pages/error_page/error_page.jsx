@@ -1,6 +1,6 @@
 import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
-import pic from "./error_pic.svg";
+import pic from "./img/error_pic.svg";
 
 class Error_page extends React.Component {
     constructor(props) {

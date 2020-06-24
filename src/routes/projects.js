@@ -37,14 +37,14 @@ router.get('/:ID', async (req, res) => {
     fetch(`http://api.flamingspace.sevsu.ru/projects/${ID}`)
         .then(response => response.json())
         .then(initialData => {
-            console.log(data);
+            console.log(initialData);
             if (!initialData.error_code) {
                 const reactComp = renderToString(< Project initialData={initialData} />);
-                res.status(200).render('pages/project', { reactApp: reactComp, initialData: data });
+                res.status(200).render('pages/project', { reactApp: reactComp, initialData: initialData });
             }
             else {
                 const reactComp = renderToString(< Error_page initialData={initialData} />);
-                res.status(200).render('pages/error_page', { reactApp: reactComp, initialData: data });
+                res.status(200).render('pages/error_page', { reactApp: reactComp, initialData: initialData });
             }
         })
         .catch(error => console.log(error));

@@ -26,11 +26,11 @@ router.get('/:ID', async (req, res) => {
             console.log(initialData);
             if (!initialData.error_code) {
                 const reactComp = renderToString(< User initialData={initialData} />);
-                res.status(200).render('pages/user', { reactApp: reactComp, initialData: data });
+                res.status(200).render('pages/user', { reactApp: reactComp, initialData: initialData });
             }
             else {
                 const reactComp = renderToString(< Error_page initialData={initialData} />);
-                res.status(200).render('pages/error', { reactApp: reactComp, initialData: data });
+                res.status(200).render('pages/error', { reactApp: reactComp, initialData: initialData });
             }
         })
         .catch(error => console.log(error));
