@@ -1,6 +1,6 @@
 import React from 'react'
-import componentCSS from "./button_functional.css"
-import horizontal_strips from "./horizontal_strips.css"
+import componentCSS from "./css/button_functional.css"
+import horizontal_strips from "./css/horizontal_strips.css"
 
 export function Button_apply_filter(props) {
     // render() {

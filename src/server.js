@@ -15,19 +15,19 @@ import account from "./routes/account";
 import { renderToString } from "react-dom/server"
 import Account from "./pages/account/account"
 import Account_Edit from "./pages/account_edit/account_edit"
+import Error_page from "./pages/error_page/error_page"
 import React from "react";
-//
 
 import path from "path";
 
 // One of the following
 
 // Server var
-var helmet = require('helmet');
+
+//var helmet = require('helmet');
 const Keyv = require('keyv');
 const app = express();
 const cookieParser = require('cookie-parser')
-//var cors = require('cors')
 
 var loggedUsers = new Keyv();
 
@@ -38,8 +38,7 @@ app.set("views", path.join(__dirname, 'static', "views"));
 app.set("view engine", "ejs");
 
 // Middleware
-app.use(helmet());
-//app.use(cors({ origin: '*' }));  !!DELETE CORS FROM DEV DEP
+//app.use(helmet());
 
 app.use(compression())
 app.use(cookieParser())
@@ -59,7 +58,7 @@ app.use("/help", help);
 const appID = 'cc4a954744950e6537ff29917ed06344'
 const appSecret = '03a6badbe2f2cb410ca915762cd86c7e'
 
-let _indexURL = "http://localhost:3000/users"
+let _indexURL = "http://localhost:3000"
 
 app.get('/auth', async (req, res) => {
     let _redirectURL = "http://localhost:3000/auth/redirect"
@@ -89,21 +88,28 @@ app.get('/auth/redirect', async (req, res, next) => {
                 url: `https://leader-id.ru/api/users/current?access_token=${access_token}`,
             })
                 .then((result) => {
-                    console.log("userdata", result)
-                    console.log("userPhoto", result.data.Data.Photo.Medium)
-                    if (result.data.Data.Photo.Medium) {
-                        pic = result.data.Data.Photo.Medium;
-                        res.cookie("userPic", pic)
+                    console.log("userdata", result.data.Data)
+                    console.log("userPhoto", result.data.Data.Photo)
+                    if (result.data.Data.Photo) {
+                        pic = result.data.Data.Photo.Small;
+                        pic = pic.split("/").pop().split("?");
                         console.log("pic", pic)
                     }
                 })
 
+            if (pic) {
+                res.cookie("userImg_1", pic[0])
+                res.cookie("userImg_2", pic[1])
+
+                console.log("pic", userImg_1);
+                console.log("pic", userImg_2);
+            }
             res.cookie("userIdCookie", userID)
             res.cookie("userToken", access_token)
-            if (pic) {
-                res.cookie("userPic", pic)
-                console.log("pic link", pic);
-            }
+
+            //НА 24 часа!!!!
+
+            console.log("pic", pic);
             next()
             //res.redirect(_indexURL)
             //res.cookie("userIdCookie", userID, { secure: true })
@@ -119,9 +125,10 @@ app.get('/auth/logout', async (req, res) => {
 
     res.clearCookie("userIdCookie")
     res.clearCookie("userToken")
-    if (req.cookies.pic) {
-        res.clearCookie("userPic", pic)
-    }
+    res.clearCookie("userPicture")
+    //if (req.cookies.pic) {
+    //   res.clearCookie("userPic", pic)
+    //}
     res.redirect(_indexURL)
 });
 
@@ -129,9 +136,21 @@ let _redirectURL = "http://localhost:3000/auth"
 
 app.get("/account/edit", async (req, res) => {
     let token = await loggedUsers.get(req.cookies.userIdCookie)
+    console.log("TOKEN", token);
     if (token == req.cookies.userToken) {
-        const reactComp = renderToString(< Account_Edit />);
-        res.status(200).render('pages/account_edit', { reactApp: reactComp, initialData: false });
+        fetch(`http://api.flamingspace.sevsu.ru/users/${ID}`)
+            .then(response => response.json())
+            .then(initialData => {
+                console.log(initialData);
+                if (!initialData.error_code) {
+                    const reactComp = renderToString(< Account_Edit initialData={initialData} />);
+                    res.status(200).render('pages/account_edit', { reactApp: reactComp, initialData: initialData });
+                }
+                else {
+                    const reactComp = renderToString(< Error_page initialData={initialData} />);
+                    res.status(200).render('pages/error_page', { reactApp: reactComp, initialData: initialData });
+                }
+            });
     }
     else {
         res.redirect(_redirectURL);
@@ -140,16 +159,28 @@ app.get("/account/edit", async (req, res) => {
 
 app.get("/account/:ID", async (req, res) => {
     let token = await loggedUsers.get(req.cookies.userIdCookie)
-    console.log("TOKEN", token)
+    console.log("TOKEN", token);
 
     if (req.params.ID == req.cookies.userIdCookie && token == req.cookies.userToken) {//if ID like in Cookie and user has token
-        const reactComp = renderToString(< Account />);
-        res.status(200).render('pages/account', { reactApp: reactComp, initialData: false });
+        let ID = req.params.ID;
+        fetch(`http://api.flamingspace.sevsu.ru/users/${ID}`)
+            .then(response => response.json())
+            .then(initialData => {
+                console.log(initialData);
+                if (!initialData.error_code) {
+                    const reactComp = renderToString(< Account initialData={initialData} />);
+                    res.status(200).render('pages/account', { reactApp: reactComp, initialData: initialData });
+                }
+                else {
+                    const reactComp = renderToString(< Error_page initialData={initialData} />);
+                    res.status(200).render('pages/error_page', { reactApp: reactComp, initialData: initialData });
+                }
+            })
+            .catch(error => console.log(error));
     }
-    /*else {
-        const reactComp = renderToString(< User />);
-        res.status(200).render('pages/user', { reactApp: reactComp, initialData: false });
-    }*/
+    else {
+        res.redirect(_indexURL)
+    }
 });
 
 const port = process.env.PORT || 3000;

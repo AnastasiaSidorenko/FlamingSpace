@@ -34,8 +34,31 @@ class User extends React.Component {
         }
     }
 
+    //breadcrumbs = [{ link: "#", title: "Аккаунт" }, { link: "#", title: this.state.user__nickname }];
     //<div className="user__value">студент кафедры ИС, 4 курс</div>
     render() {
+        let projects = this.state.user.projects.map((project, index) => (
+            <div key={index} className="project-slider-content__item">
+                <Indicator className="project-slider-content__indicator" color="red" />
+                <a className="project-slider-content__project-name" href={`/projects/${project.id}`} key={index} >{project.name}</a>
+            </div>));
+
+        let contacts = this.state.user.contacts.map(function (contact, index) {
+            if (contact.name == "LeaderID") {
+                return <a src="link to account" href={contact.url}> <img src={icon__leader} className="contact__icon" key={index} /></a>
+            }
+            if (contact.name == "Vkontakte") {
+                return <a src="link to account" href={contact.url}> <img src={icon__vk} className="contact__icon" key={index} /></a>
+            }
+            if (contact.name == "GitHub") {
+                return <a src="link to account" href={contact.url}> <img src={icon__git} className="contact__icon" key={index} /></a>
+            }
+        });
+
+        let skills = this.state.user.competences.map((elem, index) => (
+            <span key={index} className="user-card__skill">{elem.name} - {elem.level}; </span>
+        ));
+
         let breadcrumbs = [{ link: "#", title: "Аккаунт" }, { link: "#", title: this.state.user__nickname }];
 
         let Slider = () => {
@@ -56,25 +79,13 @@ class User extends React.Component {
                         <div className="user__params_values">
                             <p className="user__param">Контакты:</p>
                             <div>
-                                {this.state.user.contacts.map(function (contact, index) {
-                                    if (contact.name == "LeaderID") {
-                                        return <a src="link to account" href={contact.url}> <img src={icon__leader} className="contact__icon" key={index} /></a>
-                                    }
-                                    if (contact.name == "Vkontakte") {
-                                        return <a src="link to account" href={contact.url}> <img src={icon__vk} className="contact__icon" key={index} /></a>
-                                    }
-                                    if (contact.name == "GitHub") {
-                                        return <a src="link to account" href={contact.url}> <img src={icon__git} className="contact__icon" key={index} /></a>
-                                    }
-                                })}
+                                {contacts}
                             </div>
                         </div>
                         <div className="user__params_values">
                             <p className="user__param">Компетенции:</p>
                             <div className="user__value">
-                                {this.state.user.competences.map((elem, index) => (
-                                    <span key={index} className="user-card__skill">{elem.name} - {elem.level}; </span>
-                                ))}
+                                {skills}
                             </div>
                         </div>
                     </div >
@@ -83,11 +94,7 @@ class User extends React.Component {
             else {
                 return (
                     <div className="project-slider-content">
-                        {this.state.user.projects.map((project, index) => (
-                            <div key={index} className="project-slider-content__item">
-                                <Indicator className="project-slider-content__indicator" color="red" />
-                                <a className="project-slider-content__project-name" href={`/projects/${project.id}`}>{project.name}</a>
-                            </div>))}
+                        {projects}
                     </div>
                 );
             }

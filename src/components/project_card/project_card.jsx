@@ -8,7 +8,6 @@ import { Project_status } from '../status/project_status'
 export class Project_Card extends React.Component {
     constructor() {
         super()
-        this.state = { bla: "bla" }
     }
 
     /*<p className="project-card__block-vacancy">Разработчик С++</p>

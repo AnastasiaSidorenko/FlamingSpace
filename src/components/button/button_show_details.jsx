@@ -1,5 +1,5 @@
 import React from 'react'
-import componentCSS from "./button_show_details.css"
+import componentCSS from "./css/button_show_details.css"
 
 export function Button_Show_Details(props) {
     // render() {

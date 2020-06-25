@@ -48,7 +48,7 @@ class Users extends React.Component {
         fetch(`https://api.flamingspace.sevsu.ru/users/${this.state.page}/20${this.state.filter}`)
             .then(response => response.json())
             .then(results => {
-                console.log("data", data)
+                console.log("data", results)
                 if (results.data.length != 0) {
                     this.setState({ loading: false, page: (this.state.page + 1), users: [...this.state.users, ...results.data], error: "" });
                     console.log("this.state.users", this.state.users)
@@ -78,7 +78,6 @@ class Users extends React.Component {
                 }
             })
             .catch(e => {
-                console.log(e);
                 this.setState({ loading: false, error: "Не удалось загрузить данные" })
             });
     }

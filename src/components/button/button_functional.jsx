@@ -1,5 +1,5 @@
 import React from 'react'
-import componentCSS from "./button_functional.css"
+import componentCSS from "./css/button_functional.css"
 
 export function Button_Functional(props) {
     // render() {

@@ -6,9 +6,8 @@ import { Page_Title } from "../../components/page_title/page_title";
 import { Indicator } from "../../components/indicator/indicator";
 import { Button_Functional } from "../../components/button/button_functional";
 import Select from 'react-select';
-import default_pic from "./img/default.jpg"
-import default_event_pic from "./img/img.png"
 import cookie from 'react-cookies'
+import default_pic from "./img/default.jpg"
 
 import componentCSS from "./joinRequestCard.css"
 import pageCSS from "./project.css"
@@ -35,6 +34,8 @@ class Project extends React.Component {
         }
     }
 
+    redirectUrl = "http://localhost:3000/auth";
+
     isUserParticipant = (participantID) => {
         console.log("isUserParticipant", participantID);
         console.log("userID", this.state.cookie_userID);
@@ -56,9 +57,13 @@ class Project extends React.Component {
     }
 
     showJoinRequestCard = () => {
-        console.log("showJoinRequestButton clicked")
-        if (this.state.isJoinRequestCardOpened === false) { //Check if user logged in!!!!!!!! if (this.state.cookie_userID)
-            this.setState({ isJoinRequestCardOpened: true })
+        if (this.state.cookie_userID) {
+            if (this.state.isJoinRequestCardOpened === false) { //Check if user logged in!!!!!!!! if (this.state.cookie_userID)
+                this.setState({ isJoinRequestCardOpened: true })
+            }
+        }
+        else {
+            window.location.replace(redirectUrl);
         }
     }
 
@@ -92,9 +97,9 @@ class Project extends React.Component {
 
         let Events = () => {
             if (this.state.project.events.length) {
-                /*  return this.state.project.events.map((elem, index) => (
-                      <Event_Card key={index} className="events__event" date="2020-05-30T00:00:00.000Z" img={(elem.photo) ? elem.photo : default_event_pic} title={elem.name} link="#" />
-                  ));*/
+                return this.state.project.events.map((elem, index) => (
+                    <Event_Card key={index} className="events__event" date={elem.date} img={(elem.photo)} title={elem.name} id={elem.id} />
+                ));
             }
             else {
                 return <p>Ближайших мероприятий не найдено</p>
@@ -117,7 +122,7 @@ class Project extends React.Component {
         }
 
         let JoinRequestWindow = this.state.isJoinRequestCardOpened ?
-            <JoinRequestCard onClose={this.closeJoinRequestCard} userID={this.state.userID}
+            <JoinRequestCard onClose={this.closeJoinRequestCard} userID={this.state.cookie_userID}
                 vacancies={this.state.project.vacancies} projectID={this.state.project__info.id} />
             : '';
 
@@ -195,7 +200,7 @@ class JoinRequestCard extends React.Component {
 
         if (this.state.vacancy !== '') {
             this.setState({ error: "" });
-            if (this.state.message !== '') {
+            if (this.state.message !== "") {
                 data = {
                     date: new Date()
                 };
