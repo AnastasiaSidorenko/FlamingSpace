@@ -79,6 +79,10 @@
     font-size: 14px;
 }
 
+.select-list:focus, .description:focus {
+  outline:none !important;
+}
+
 .option {
     font-size:16px;
     outline: none;

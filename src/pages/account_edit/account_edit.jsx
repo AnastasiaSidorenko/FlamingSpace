@@ -3,14 +3,29 @@ import { TopHeader } from "../../components/topheader/topheader";
 import pageCSS from "./account_edit.css"
 import { Button_Functional } from "../../components/button/button_functional";
 //import { Select_List } from "../../components/select_list/select_list";
+import cookie from 'react-cookies'
 
 import Select from 'react-select';
 
 class Account_Edit extends React.Component {
-    state = {
-        skills: [{ skill: "JS разработчик", level: "2" }],
-        status: null
-    };
+    constructor(props) {
+        super(props);
+        let user
+        if (props.initialData) {
+            user = props.initialData;
+            console.log("props data", user)
+        }
+        else {
+            user = JSON.parse(window.__initialData__);
+            console.log("window data", user)
+            delete window.__initialData__;
+        }
+        this.state = {
+            user: user.data,
+            skills: [{ skill: "JS разработчик", level: "2" }],
+            status: null
+        }
+    }
 
     handleChangeStatus = status => {
         this.setState(

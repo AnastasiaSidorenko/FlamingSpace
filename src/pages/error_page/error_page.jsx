@@ -1,6 +1,6 @@
 import React from "react";
 import { TopHeader } from "../../components/topheader/topheader";
-import pic from "./img/error_pic.svg";
+import pic from "./img/error_pic.png";
 
 class Error_page extends React.Component {
     constructor(props) {
@@ -25,7 +25,10 @@ class Error_page extends React.Component {
             <div>
                 <TopHeader />
                 <div className="container">
-                    <img src={pic} className="error__img" /><p>Ошибка: {this.state.message}</p>
+                    <div>
+                        <h2>Ошибка: {this.state.message}</h2>
+                        <img src={pic} className="error__img" />
+                    </div>
                 </div>
             </div>
         )

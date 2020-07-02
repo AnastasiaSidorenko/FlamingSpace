@@ -16,6 +16,7 @@ import { renderToString } from "react-dom/server"
 import Account from "./pages/account/account"
 import Account_Edit from "./pages/account_edit/account_edit"
 import Error_page from "./pages/error_page/error_page"
+import Project_Create from "./pages/project_create/project_create";
 import React from "react";
 
 import path from "path";
@@ -59,6 +60,7 @@ const appID = 'cc4a954744950e6537ff29917ed06344'
 const appSecret = '03a6badbe2f2cb410ca915762cd86c7e'
 
 let _indexURL = "http://localhost:3000"
+let _authURL = "http://localhost:3000/auth"
 
 app.get('/auth', async (req, res) => {
     let _redirectURL = "http://localhost:3000/auth/redirect"
@@ -181,6 +183,31 @@ app.get("/account/:ID", async (req, res) => {
     }
     else {
         res.redirect(_indexURL)
+    }
+});
+
+
+app.get('/project/create', async (req, res) => {
+    let token = await loggedUsers.get(req.cookies.userIdCookie)
+    if (token == req.cookies.userToken) {
+        let ID = req.params.ID;
+        fetch(`http://api.flamingspace.sevsu.ru/users/`) //SEND GET PROJECTS CATEGORIES 
+            .then(response => response.json())
+            .then(initialData => {
+                console.log(initialData);
+                if (!initialData.error_code) {
+                    const reactComp = renderToString(< Project_Create initialData={initialData} />);
+                    res.status(200).render('pages/project_create', { reactApp: reactComp, initialData: initialData });
+                }
+                {
+                    const reactComp = renderToString(< Error_page initialData={initialData} />);
+                    res.status(200).render('pages/error_page', { reactApp: reactComp, initialData: initialData });
+                }
+            })
+            .catch(error => console.log(error));
+    }
+    else {
+        res.redirect(_authURL)
     }
 });
 

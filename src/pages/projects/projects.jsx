@@ -9,6 +9,10 @@ import { Project_Card } from "../../components/project_card/project_card";
 import { Button_Functional } from "../../components/button/button_functional";
 import { Page_Title } from "../../components/page_title/page_title";
 import { Link_Functional } from "../../components/button/link_functional";
+import cookie from 'react-cookies'
+
+const _urlProjectCreate = "http://localhost:3000/project/create";
+const _urlAuth = "http://localhost:3000/auth";
 
 class Projects extends React.Component {
     constructor(props) {
@@ -28,7 +32,8 @@ class Projects extends React.Component {
             projects: initialProjects.data,
             page: 1,
             filter: "",
-            error: ""
+            error: "",
+            cookie_userID: cookie.load("userIdCookie"),
         }
         console.log(this.state.projects);
     }
@@ -75,6 +80,28 @@ class Projects extends React.Component {
             });
     }
 
+    showCreateProjectPage = () => {
+        if (this.state.cookie_userID) {
+            window.location.replace(_urlProjectCreate);
+        }
+        else {
+            window.location.replace(_urlAuth);
+        }
+    }
+
+    CreateProjectButton = () => {
+        return <Button_Functional text="Создать проект" onClick={this.showCreateProjectPage} />
+        //return <Link_Functional text="Создать проект" link="projects/create" onClick={this.showCreateProjectPage} />
+        /*if (this.state.cookie_userID) {
+            return <Link_Functional text="Создать проект" link="projects/create" />
+        }
+        else {
+            return <Link_Functional text="Создать проект" link="auth" />
+        }*/
+    }
+
+    //<Link_Functional text="Создать проект" link="projects/create" />
+
     render() {
         let projects = this.state.projects.map((project, index) => (
             <Project_Card key={index} link={`/projects/${project.id}`} title={project.name} category={project.category}
@@ -92,7 +119,7 @@ class Projects extends React.Component {
                             <Page_Title title="Проекты" />
                         </div>
                         <hr className="project__strip" />
-                        <Link_Functional text="Создать проект" link="projects/create" />
+                        <this.CreateProjectButton />
                     </div>
 
                     <Search_Bar getFilteredData={this.fetchFilteredProjects} />

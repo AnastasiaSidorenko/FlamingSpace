@@ -45,6 +45,10 @@
     border-radius: 2.5px;
 }
 
+.form__item-field:focus {
+    outline:none;
+}
+
 .form__item-label{
     display:block;
     margin-bottom: 10px;
@@ -63,6 +67,10 @@
 
 .skill-group {
     margin-bottom:20px;
+}
+
+.skill-group:focus {
+    outline: none;
 }
 
 .select-list__skill {
