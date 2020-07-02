@@ -37,13 +37,18 @@ class Account_Edit extends React.Component {
         //sent results to API
     }
 
+    options = [
+        { value: 'в поиске проекта', label: 'в поиске проекта' },
+        { value: 'занят в проекте', label: 'занят в проекте' }
+    ];
+
     render() {
         //const { selectedOption } = this.state;
 
         let skills = this.state.skills.map((item, index) => (
             <div className="skill-group">
                 <select key={index} className="select-list__skill" value={item.skill} onChange={event => this.handleChange(event, index, "skill")}>
-                    <option className="option" value="" disabled selected>Выберете компетенцию</option>
+                    <option className="option" value="default" disabled selected>Выберете компетенцию</option>
                     <option className="option" value="C++ разработчик">C++ разработчик</option>
                     <option className="option" value="JS разработчик">JS разработчик</option>
                 </select>
@@ -71,12 +76,13 @@ class Account_Edit extends React.Component {
                         <form onSubmit={this.SubmitChanges} ref="form" className="form">
                             <div className="main-section section-content">
                                 <div className="form__item">
-                                    <label className="main-section__item-label form__item-label">Nickname</label>
+                                    <label className="main-section__item-label form__item-label nickname">Никнейм</label>
                                     <input className="main-section__item-field form__item-field" maxLength="30"></input>
                                 </div>
                                 <div className="form__item">
-                                    <label className="main-section__item-label form__item-label">Статус</label>
-
+                                    <label className="form__item-label">Статус</label>
+                                    <Select className="select-list__status" value={this.state.status} onChange={this.handleChangeStatus}
+                                        options={this.options} placeholder="Выберете статус" />
                                 </div>
                                 <div className="form__item">
                                     <label className="main-section__item-label form__item-label">Должность</label>

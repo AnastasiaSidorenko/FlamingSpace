@@ -21,11 +21,13 @@ export class Event_Card extends React.Component {
 
     render() {
         let date = new Date(this.props.date);
-        let dateFormatted = `${this.formattedNumber(date.getDate())}.${this.formattedNumber(date.getMonth())}.${date.getYear()}`
+        let dateFormatted = `${this.formattedNumber(date.getDate())}.${this.formattedNumber(date.getMonth())}.${date.getFullYear()}`
 
         return (
             < div className="event-card" >
-                <p className="event-card__title" title={this.props.title}>{this.props.title}</p>
+                <div className="event-card__title-container">
+                    <p className="event-card__title" title={this.props.title}>{this.props.title}</p>
+                </div>
                 <div className="event-card__img-container">
                     <img className="event-card__img" alt="Изображение мероприятия" src={this.props.img ? this.props.img : default_pic} />
                 </div>

@@ -135,10 +135,11 @@ app.get('/auth/logout', async (req, res) => {
 let _redirectURL = "http://localhost:3000/auth"
 
 app.get("/account/edit", async (req, res) => {
-    let token = await loggedUsers.get(req.cookies.userIdCookie)
+    let userID = req.cookies.userIdCookie;
+    let token = await loggedUsers.get(userID)
     console.log("TOKEN", token);
     if (token == req.cookies.userToken) {
-        fetch(`http://api.flamingspace.sevsu.ru/users/${ID}`)
+        fetch(`http://api.flamingspace.sevsu.ru/users/${userID}`)
             .then(response => response.json())
             .then(initialData => {
                 console.log(initialData);

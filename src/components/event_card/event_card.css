@@ -4,7 +4,7 @@
     margin: 15px;
     padding-bottom:8px;
     width:262px;
-    height:262px;
+    height:242px;
     font-size: 16px;
 
     text-align: center;
@@ -24,13 +24,13 @@
 
 .event-card__img-container {
     width: 262px;
-    height: 150px;
+    height: 140px;
     margin:0;
     padding:0;
 }
 
 .event-card__img {
-    object-fit: cover;
+    object-fit: contain;
     height:100%;
     width:100%
 }
@@ -39,11 +39,17 @@
     display:flex;
     justify-content:space-between;
     align-items: flex-end;
-    padding: 8px;
+    padding:0 8px;
 }
 
 .event-card__date{
     font-size: 14px;
+}
+
+.event-card__title-container {
+    height:42px; 
+    margin:0;
+    padding:0;
 }
 
 .event-card__title {

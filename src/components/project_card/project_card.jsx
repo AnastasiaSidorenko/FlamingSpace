@@ -30,9 +30,9 @@ export class Project_Card extends React.Component {
             <p key={index} className="project-card__block-vacancy">{elem.name}</p>
         ));
         let startDate = new Date(this.props.startDate);
-        let startDateFormatted = `${this.formattedNumber(startDate.getDate())}/${this.formattedNumber(startDate.getMonth())}/${startDate.getYear()}`
+        let startDateFormatted = `${this.formattedNumber(startDate.getDate())}/${this.formattedNumber(startDate.getMonth())}/${startDate.getFullYear()}`
         let finishDate = this.props.endDate ? new Date(this.props.endDate) : '';
-        let finishDateFormatted = finishDate ? `${this.formattedNumber(finishDate.getDate())}/${this.formattedNumber(finishDate.getMonth())}/${finishDate.getYear()}` : '';
+        let finishDateFormatted = finishDate ? `${this.formattedNumber(finishDate.getDate())}/${this.formattedNumber(finishDate.getMonth())}/${finishDate.getFullYear()}` : '';
 
         return (
             <div className="project-card">

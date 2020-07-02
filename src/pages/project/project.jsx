@@ -34,19 +34,33 @@ class Project extends React.Component {
         }
     }
 
-    redirectUrl = "http://localhost:3000/auth";
+    isUserParticipant = () => {
+        let userID = this.state.cookie_userID;
+        let isMember = false;
+        if (userID) {
+            this.state.project.participants.forEach((elem) => {
+                if (elem.id == userID) {
+                    isMember = true;
+                }
+            });
+            return isMember;
+        }
+        else {
+            return false;
+        }
+    };
 
-    isUserParticipant = (participantID) => {
+    /*isUserParticipant = (participantID) => {
         console.log("isUserParticipant", participantID);
         console.log("userID", this.state.cookie_userID);
-        if (participantID !== this.state.cookie_userID) {
-            return;
+        if (participantID != this.state.cookie_userID) {
+            return false;
         }
         else {
             this.setState({ isUserParticipant: true });
-            return;
+            return true;
         }
-    }
+    }*/
 
     sendLeaveRequest = () => {//Check if user logged in!!!!!!!!
         console.log("leaveRequestButton clicked")
@@ -63,7 +77,34 @@ class Project extends React.Component {
             }
         }
         else {
-            window.location.replace(redirectUrl);
+            window.location.replace("http://localhost:3000/auth");
+        }
+    }
+
+    JoinLeaveButton = () => {
+        if (this.state.project__info.status != "завершен") {
+            let isUserMember = this.isUserParticipant();
+            console.log("isUserMember", isUserMember)
+            if (!isUserMember) {
+                if (this.state.project.vacancies.length) {
+                    return <Button_Functional text="Подать заявку" onClick={this.showJoinRequestCard} />
+                }
+                else {
+                    return '';
+                }
+            }
+            else {
+                return <Button_Functional text="Покинуть проект" onClick={this.sendLeaveRequest} />
+            }
+            /*if (!this.state.isUserParticipant) {
+                return <Button_Functional text="Подать заявку" onClick={this.showJoinRequestCard} />
+            }
+            else {
+                return <Button_Functional text="Покинуть проект" onClick={this.sendLeaveRequest} />
+            }*/
+        }
+        else {
+            return '';
         }
     }
 
@@ -78,7 +119,6 @@ class Project extends React.Component {
         ));
 
         let participants = this.state.project.participants.map((elem, index) => {
-            this.isUserParticipant(elem.id);
             return (
                 <div className="member-card" key={index} >
                     <div className="member-card__img-container">
@@ -106,20 +146,24 @@ class Project extends React.Component {
             }
         }
 
-        let JoinLeaveButton = () => {
-            if (this.state.project__info.status != "завершен") { //!!!!!!&& this.state.project.vacancies.length) {
-                if (this.state.isUserParticipant === false) {
-                    return <Button_Functional text="Подать заявку" onClick={this.showJoinRequestCard} />
-                }
-                else {
-                    return <Button_Functional text="Покинуть проект" onClick={this.sendLeaveRequest} />
-                }
-            }
-
-            else {
-                return '';
-            }
+        /* let JoinLeaveButton = () => {
+             if (this.state.project__info.status != "завершен" && this.state.project.vacancies.length) {
+                 let result = this.isUserParticipant();
+                 if (result) {
+                     return <Button_Functional text="Подать заявку" onClick={this.showJoinRequestCard} />
+                 }
+                 /*if (!this.state.isUserParticipant) {
+                     return <Button_Functional text="Подать заявку" onClick={this.showJoinRequestCard} />
+                 }
+                 else {
+                     return <Button_Functional text="Покинуть проект" onClick={this.sendLeaveRequest} />
+                 }
         }
+        
+            else {
+        return '';
+        }
+        }*/
 
         let JoinRequestWindow = this.state.isJoinRequestCardOpened ?
             <JoinRequestCard onClose={this.closeJoinRequestCard} userID={this.state.cookie_userID}
@@ -138,7 +182,7 @@ class Project extends React.Component {
                             <p className="project__category">Категория: {this.state.project__info.category}</p>
                         </div>
                         <hr className="project__strip" />
-                        <JoinLeaveButton />
+                        <this.JoinLeaveButton />
                     </div>
 
                     <div className="flex__2-columns">
@@ -200,7 +244,7 @@ class JoinRequestCard extends React.Component {
 
         if (this.state.vacancy !== '') {
             this.setState({ error: "" });
-            if (this.state.message !== "") {
+            if (this.state.message == "") {
                 data = {
                     date: new Date()
                 };
@@ -215,12 +259,11 @@ class JoinRequestCard extends React.Component {
             console.log("forming fetch", data);
             console.log("json data", JSON.stringify(data));
 
-            fetch(`http://api.flamingspace.sevsu.ru/projects/edit/${this.props.projectID}/vacancies/${this.state.vacancy.value}/${this.props.userID}`, {
+            fetch(`https://api.flamingspace.sevsu.ru/projects/edit/${this.props.projectID}/vacancies/${this.state.vacancy.value}/${this.props.userID}/`, {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
+                    // 'Access': 'application/json',
                     'Content-Type': 'application/json',
-                    'charset': 'utf-8'
                 },
                 body: JSON.stringify(data)
             })
@@ -233,7 +276,7 @@ class JoinRequestCard extends React.Component {
                         //this.props.onClose();
                     }
                     else {
-                        this.setState({ error: "Ошибка данных" })
+                        this.setState({ error: "Заявку уже была отправлена" })
                     }
                 })
                 .catch(error => this.setState({ error: "Не удалось отправить заявку" }));
@@ -247,6 +290,7 @@ class JoinRequestCard extends React.Component {
     render() {
         let vacancies = this.props.vacancies.map((item, index) => (
             { value: item.id, label: item.name }
+            //{ value: "5", label: item.name }
         ))
         console.log(vacancies);
 
